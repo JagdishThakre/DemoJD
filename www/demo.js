@@ -1,4 +1,4 @@
-<div ng-app="app">
+ <div ng-app="app">
     <form name="theForm" ng-controller="FormCtrl" novalidate="novalidate" autocomplete="off">
         <input type="text" ng-model="form.tel" rpattern="/\d{3}[- ]?\d{3}[- ]?\d{4}/" ng-required="form.requireTel" /> 
          <!-- /\d{2}[- ]?\d{3}[- ]?\d{5}$/ -->
