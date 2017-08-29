@@ -1,0 +1,47 @@
+<ion-view ng-controller="HeaderStaffCtrl" style="background:#202020">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="tit0le" style="color:white;">Reservation Details</h1> -->
+        <ion-title style="color:white;">Reservation Details</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <ion-content class="feature_staff_center" ng-init="itemDetails()">
+<div ng-repeat="itemDetails in getItemDetails">
+    <div class="marginTop3">
+      <img  ng-if="itemDetails.is_available == true" class="itemBookedAvlbImg" ng-src="img/Available.png">
+      <img ng-if="itemDetails.is_available == false" class="itemBookedAvlbImg" ng-src="img/Booked.png">
+    </div>
+    <div class="marginTop3">
+            <img class="item_img" ng-src="{{host_url_global+'/'+itemDetails.image}}" ng-click="openModal(itemDetails.image)" onerror="this.src='img/no-image.jpg'">
+    </div>
+    <div class="resiItemDiv marginTop3">                
+                  <div class="color marginBottom">
+                    <span class="marginTop3 bold">{{itemDetails.name}}</span>
+                  </div>
+                
+                <div class="border-bottom" ng-if="itemDetails.max_time_reservation">
+                    <span class="color fontSize15">Maximum time allowed: </span> 
+                    <span class="itemFontColor">{{itemDetails.max_time_reservation}} {{itemDetails.max_time_reservation_type}}</span>
+                </div>
+                <div ng-if="itemDetails.description">
+                  <span class="color fontSize15">Description: </span>
+                  <span style="line-height:16px" class="itemFontColor">{{itemDetails.description}}</span>
+                </div>
+    </div>
+            
+    <div class="bookItemButton" ng-if="itemDetails.is_available == true">
+        <button class="button button-block itemBookBtn" ng-click="MoveTobook(itemDetails)" >
+                 Book Now
+        </button>
+    </div>
+    <div class="alreadyBooked" ng-if="itemDetails.is_available == false">
+                 Sorry,this item is already booked,please try after some time
+    </div>
+  </div>
+</ion-content>
+
+</ion-view>

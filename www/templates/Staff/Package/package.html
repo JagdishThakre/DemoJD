@@ -1,0 +1,64 @@
+<ion-view ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Package Delivery</h1> -->
+        <ion-title style="color:white;">Package Delivery</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+     <ion-header-bar ng-if="packagemethod" class="bar bar-subheader subheadercolor">
+        <h1 class="title buzzHeader">Scan Package</h1>
+       <!--  <button style="margin-top: -7px;" class="button white right button-icon ion-edit padding-none buzzIcon" ng-click="gotoeditpackage()"></button> -->
+    </ion-header-bar>
+    <ion-content ng-controller="searchCtrl">
+       
+        <div ng-if="packagemethod" class="scannerpadding">
+        <!-- <button class="button button-floatedit bookBtnColor" ng-click="gotoeditpackage()">
+    <i class="icon ion-edit" style="#58b9cc"></i>
+</button>
+ -->
+            <div class="list card">
+                <div class="item item-body">
+                    <img ng-if="!packageImage" class="full-image" src="img/Label.gif">
+                    <img ng-if="packageImage" data-ng-src="{{packageImage}}" data-err-src="img/no-image.jpg" />
+                    <p>
+                        Take a picture of the full package label. Make sure the text is in focus and clear. Once scanned, the details should auto-populate in the next screen, edit as necessary.
+                    </p>
+                    <button class="col button button-small buzzbutton staffbutton  buzz-tab0-button1" ng-click="takepackagephoto();">Scan Package</button>
+                </div>
+            </div>
+        </div>
+        <div ng-if="!packagemethod" class="buzzSelect">
+            <center>
+                <label style="font-size:18px;" class="white">Select {{rise_unit_singleton}} Number</label>
+                <div class="item-input-inset" style=" border-radius: 10px;margin-top: 10px;padding: 4.667px;width: 95%;">
+                    <i class="icon ion-ios-search-strong placeholder-icon" style="font-size: 20px; margin: -3px 0 0 -20px;">&nbsp</i>
+                    <label class="item-input-wrapper searchMargin">
+                        <input type="search" style="width:100%;margin-left:10%;float: left;height: 45px;boder-radius:" placeholder="Search {{rise_unit_singleton}} Id" ng-model="searchFilter.unit_number" ng-change="scrollTop(searchFilter.unit_number)">
+                    </label>
+                    <div class="dropdown-btn">
+                        <button class="button icon button-clear ion-chevron-down toggle-btn" ng-click="showToggle()">
+                        </button>
+                    </div>
+                </div>
+            </center>
+            <ion-scroll delegate-handle="locations-scroll" direction="y" class="wide-as-needed">
+                <div style="padding:3%;">
+                    <ion-list ng-show="data.show">
+                        <ion-item ng-repeat="item in items | filter:searchFilter:strict | orderBy:natural('unit_number')" item="item" ng-model="color" ng-click="clickedItem(item)">
+                            {{item.unit_number}}
+                        </ion-item>
+                    </ion-list>
+                </div>
+            </ion-scroll>
+            <div class="row " style="margin-top: 15px;">
+                <button class="col button button-small buzzbutton staffbutton buzz-tab0-button2" ng-click="leavePage()">Cancel</button>
+                <button class="col button button-small buzzbutton staffbutton  buzz-tab0-button1" ng-click="takePicture(2);">Next</button>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

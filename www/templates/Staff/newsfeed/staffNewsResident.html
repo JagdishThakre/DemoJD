@@ -1,0 +1,33 @@
+<ion-view view-title="Management" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goToResdntMngmnt()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <ion-title style="color:white;">News Feed</ion-title>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+  <ion-content scroll="false" class="" ng-init="staffDynamicFeature()">
+    <div ng-if="newsResiSub > 1" class="col col-100 text-center" ng-repeat="staffNewsSubFeatureData in staffNewsSubFeatureDatas"
+      style="padding:0 !important;" ng-show="staffNewsSubFeatureData.service_category_id._id==='5787389761f925afa18240c5' || 
+          staffNewsSubFeatureData.service_category_id._id==='578738bc61f925afa18240c6'">
+      <div ng-click="subNewsResi(staffNewsSubFeatureData)" class="bgCol">
+        <div class="{{staffNewsSubFeatureData.service_category_id.icon}} featurefont subDaynamicIcon">
+          <span class="staffUnReadCnt" ng-if="staffNewsSubFeatureData.notiCount">{{staffNewsSubFeatureData.notiCount}}</span>
+        </div>
+        <p class="subDaynamicFont">{{staffNewsSubFeatureData.service_category_id.name}}</p>
+      </div>
+    </div>
+    <div ng-if="newsResiSub == 1" class="col col-100 text-center" ng-repeat="staffNewsSubFeatureData in staffNewsSubFeatureDatas"
+      style="padding:0 !important;" ng-show="staffNewsSubFeatureData.service_category_id._id==='5787389761f925afa18240c5' || 
+          staffNewsSubFeatureData.service_category_id._id==='578738bc61f925afa18240c6'">
+      <div ng-click="subNewsResi(staffNewsSubFeatureData)" class="bgColForOneFet">
+        <div class="{{staffNewsSubFeatureData.service_category_id.icon}} featurefont subDaynamicIcon1">
+          <span class="staffUnReadCnt" ng-if="staffNewsSubFeatureData.notiCount">{{staffNewsSubFeatureData.notiCount}}</span>
+        </div>
+        <p class="subDaynamicFont1">{{staffNewsSubFeatureData.service_category_id.name}}</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

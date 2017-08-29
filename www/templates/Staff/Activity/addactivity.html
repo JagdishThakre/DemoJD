@@ -1,0 +1,75 @@
+<ion-view class="whiteoverlayforHome" cache-view="false" ng-controller="HeaderStaffCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback('1')"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">{{headerSpec}}</h1> -->
+        <ion-title style="color:white;">Add Activity</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content style="background:black";>
+        <form name="activityform" id="activityform" mobiscroll-form="activityformsettings" style="display:none" novalidate>
+            <div class="mbsc-form-group">
+
+                <div class="mbsc-form-group-title">Activity Information</div>
+
+                <label>Activity Type
+                    <select ng-model='activity.type' mobiscroll-select="selectsettings">
+                        <option value="1">Normal</option>
+                        <option value="2">Incident</option>
+                    </select>      
+                </label>
+                
+                <label ng-show="activity.type == 2">Category
+                    <select ng-model="activity.category" mobiscroll-select="selectsettings">
+                        <option value="">Select Category</option>
+                        <option value="1">Property Damage</option>
+                        <option value="2">General Liability</option>             
+                        <option value="3">Other</option>                        
+                    </select>          
+                </label>
+
+               <!--  <label ng-show="activity.type == 2">Location
+                    <input ng-model="activity.location"  mobiscroll-select="settingspredectiveText">
+                </label> -->
+                
+                <label ng-show="activity.type == 2">Location
+                    <input type="text" ng-model="activity.location" placeholder="Enter the location" name="location" ng-blur="popover.hide()" ng-change="compareText(activity.location)" ng-keyup="popover.show($event)">
+                </label>
+
+                <label ng-show="activity.type == 2">{{rise_unit_singleton}} Number
+                    <input ng-model="activity.unit_id"  mobiscroll-select="settings">
+                </label>
+                <label>Title
+                    <input type="text" ng-model="activity.title" placeholder="Enter a title" name="title" required>
+                </label>
+
+                <label>Description
+                    <textarea name="description" ng-model="activity.description" placeholder="Enter a description"></textarea>
+                </label>
+
+            </div>
+
+            <div class="mbsc-form-group">
+
+                <div class="mbsc-btn-group-justified">
+                    <button data-icon="camera" ng-click="getclicked()">Camera</button>
+                    <button data-icon="images" ng-click="getselect()">Gallery</button>
+                </div>
+
+                <div class="capture-img-section add-img-act" ng-repeat="gImg in addImages track by $index" ng-show="addImages !== undefined">
+                    <i class="icon ion-close-circled right capture-img-remove" ng-click="removeImg(gImg)">&nbsp</i>
+                    <img class="capture-img" ng-src="{{gImg}}" ng-click="openImageZoom1(addImages,$index)">
+                </div>
+
+            </div>
+
+            <div class="mbsc-form-group">
+                <button class="mbsc-btn-block md-sg-btn" ng-disabled="activityform.$invalid" ng-click="addActivity(true)">Submit</button>
+            </div>
+
+        </form>
+    </ion-content>
+</ion-view>

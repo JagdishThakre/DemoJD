@@ -1,0 +1,32 @@
+<ion-view class="whiteoverlayforHome" ng-controller="HeaderCtrl">
+        <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">Reservations</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <ion-content class="feature_staff_center" ng-init="getList()" style="background-color:#222326;">
+        <div class="list card" ng-repeat="list in list_amenity | orderBy:'name'" ng-if="list.status" ng-click="goSpecficRvst(list)">
+                <div class="item item-body reservationcard">
+                        <span class="reservationTitle">{{list.name}}</span>
+                        </br>
+                        <span class="reservationSubTitle" ng-if="list.is_calendar">Calendar Reservation</span>
+                        <span class="reservationSubTitle" ng-if="!list.is_calendar">Check-In/Check-Out Reservation</span>
+                        <img class="full-image" ng-show="list.backgroundImg !== undefined" ng-src="{{list.backgroundImg | thumb}}">
+                </div>
+        </div>
+
+
+<!--  <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right rvst-bckclr" style="border:1px solid" ng-click="goSpecficRvst(list)" ng-repeat=" list in list_amenity | orderBy:'name'" ng-if="list.status">
+                <i ng-if="list.is_calendar==true" class="ion-ios-calendar-outline rvst_icon1"></i>
+                <i ng-if="list.is_calendar==false" class="ion-grid rvst_icon1"></i>
+                <h6 class="rvst_heading">{{list.name}}</h6>
+                <i class="icon ion-chevron-right icon-accessory rvst_icon2"></i>
+      </ion-item>
+    </ion-list> -->
+  </ion-content>
+</ion-view>

@@ -1,0 +1,97 @@
+<center>
+    <div ng-if="profileimg" class="notiprofileimg" class="markStatus-resi">
+        <img class="Qrpopimg" ng-src="{{host_url_global+'/' + profileimg| small}}">
+    </div>
+    <div ng-if="!profileimg" class="notifiImgguest" class="markStatus-resi">
+        <ionic-letter-avatar data="{{firstname | limitTo:1}}{{lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{message.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+    </div>
+    <h5>{{firstname}} {{lastname}}</h5>
+</center>
+<div class="row guestlistpadding">
+    <div class="col col-100">
+        <span ng-if="phone_no"><i class="icon ion-ios-telephone phoneColor" ></i> &nbsp; <span class="phoneFontguestdeatils">{{ phone_no | tel}} </span>
+        </span>
+    </div>
+</div>
+<div class="row guestlistpadding">
+    <div class="col col-100">
+        <span ng-if="email"><i class="icon ion-email emergencyPhoneColor" ></i>&nbsp;   <span  class="phoneFontguestdeatils">{{email}} </span></span>
+    </div>
+</div>
+<div class="row guestlistpadding" ng-if="unitno">
+    <div class="col col-100">
+        <span>{{rise_unit_singleton}} Number: {{unitno}}</span>
+    </div>
+</div>
+<center>
+    <h6 class="validtext" ng-if="validtext">{{validtext}}</h6>
+    <span ng-if="starttime">{{starttime}}</span>&nbsp;<span ng-if="starttime && endtime"> - </span><span ng-if="endtime">{{endtime}}</span>
+    <span ng-if=" !red && !starttime && !endtime">All Day</span>
+</center>
+<style>
+.popup-container .popup .popup-head {
+    background-color: #fff;
+}
+
+.popup-title {
+    color: #000;
+    font-size: 16px;
+    padding: 0;
+}
+
+.popup-head {
+    border-bottom: 1px solid rgba(41, 36, 36, 0.52) !important;
+    padding: 15px 10px;
+    text-align: center;
+}
+
+.popup-body {
+    padding: 10px;
+    overflow: auto;
+    background: #fff;
+}
+
+.popup-buttons {
+    display: flex;
+    flex-direction: row;
+    min-height: 53px;
+    padding: 0px !important;
+}
+
+.popup-buttons button {
+    background-color: #fff !important;
+    /* border: solid rgba(0, 0, 0, 0.97) !important; */
+    color: #000 !important;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    width: 90% !important;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.popup-buttons {
+    display: flex;
+    flex-direction: row;
+    min-height: 40px;
+    padding: 10px;
+}
+
+.popup-buttons .button {
+    -moz-box-flex: 1;
+    border-radius: 2px;
+    display: block;
+    flex: 1 1 0;
+    line-height: 20px;
+    margin-right: 1px;
+    min-height: 45px;
+}
+
+.button.button-positive {
+    border-color: rgba(0, 0, 0, 0.16);
+    background-color: #387ef5;
+    color: #fff;
+}
+</style>

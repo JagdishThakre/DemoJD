@@ -1,0 +1,80 @@
+<ion-modal-view class="ion-nifty-modal" ng-controller="HeaderStaffCtrl">
+  <div class="ion-modal-content-custom">
+    <ion-content class="padding">
+      <h5 class="scolor">Search Activity</h5>
+      <!--   <button class="button button-full button-positive" ng-click="closeModal()">Close Modal</button> -->
+      <div class="row">
+        <div class="col col-100">
+          <div class="list">
+            <label style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;margin-top:2px;color:#fff;" class="item item-input item-select">
+              <div class="input-label" style="background: transparent;border-bottom: none !important; border-top: none; border-left: none;border-right: none;margin-top:2px;color:#fff;    color: #949292;    font-size: 15px;    margin-left: -25px;" >
+                Type
+              </div>
+              <span style="float: right;    position: absolute;right: 35px;z-index: 22;" ng-show="searchData.type == 1">Normal</span>
+              <span style="float: right;    position: absolute;right: 35px;z-index: 22;z-index: 22;" ng-show="searchData.type == 2">Incident</span>
+              <select name="category" ng-model="searchData.type" required style="background: transparent;border-bottom: none !important; border-top: none; border-left: none;border-right: none;margin-top:2px;color:#transparent;" >
+                <option value="1">Normal</option>
+                <option value="2">Incident</option>
+              </select>
+            </label>
+            <span ng-show="submitted && activityform.category.$error.required" style="color:red;padding:2px;">Please select category.</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-100">
+          <div style="    margin-top: 7px;">
+            <label class="item item-input" style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;margin-top:2px">
+             <input class="sinput" type="text" placeholder="Title" ng-model="searchData.title">
+           </label>
+         </div>
+       </div>
+     </div>
+     <div>
+      <label class="item item-input" style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;margin:0% 3% 0% 3%;" ion-datetime-picker date ng-model="searchData.startdate" ng-change="changeformat(searchData.startdate,'');">
+        <input class="sinput" type="text" placeholder="Start Date" ng-model="startdate" readonly value="{{searchData.startdate| date: 'yyyy-MM-dd'}}" style="background: none;">
+        <!-- <input class="sinput" type="text" ng-model="searchData.startdate" placeholder="Start Date" value="{{searchData.startdate | date: 'yyyy-MM-dd h:mm a'}}" readonly style="background: none;"> -->
+        <i class="icon mediumcal ion-calendar placeholder-icon"></i>
+      </label>
+    </div>
+    <br>
+    <div>
+      <label class="item item-input" style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;margin:0% 3% 0% 3%;" ion-datetime-picker date ng-model="searchData.enddate" ng-change="changeformat('',searchData.enddate);">
+        <input class="sinput" type="text" ng-model="enddate" placeholder="End Date" value="{{searchData.enddate| date: 'yyyy-MM-dd'}}" readonly style="background: none;">
+        <!-- <input class="sinput" type="text" ng-model="searchData.startdate" placeholder="End Date" value="{{searchData.startdate| date: 'yyyy-MM-dd h:mm a'}}" readonly style="background: none;""> -->
+        <i class="icon mediumcal ion-calendar placeholder-icon"></i>
+      </label>
+    </div>
+    <br ng-show="activityUser">
+    <div class="row" ng-show="activityUser">
+      <div class="col">
+        <div class="list">
+          <label style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;margin-top:2px;color:#fff;" class="item item-input item-select">
+            <div class="input-label" style="background: transparent;border-bottom: none !important; border-top: none; border-left: none;border-right: none;margin-top:2px;color:#fff;    color: #949292;font-size: 15px; margin-left: -18px;" >
+              Staff
+            </div>
+            <select name="category" ng-model="searchData.created_by" required style="background: transparent;border-bottom: none !important; border-top: none; border-left: none;border-right: none;margin-top:2px;color:#fff;" >
+              <!-- <option ng-value="1" >Normal</option> -->
+              <option ng-repeat="unit in stafflistData" value="{{unit._id}}">{{unit.firstname}} {{unit.lastname}}</option>
+            </select>
+          </label>
+          <span ng-show="submitted && activityform.category.$error.required" style="color:red;padding:2px;">Please select staff.</span>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col col-50"></div>
+      <div class="col col-50">
+      <button class="tasktype" ><span class="clearBtn"></span></button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="tasktype" ng-click="clearAllData()"><span class="clearBtn">Clear All</span></button>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <button class="cancelBtnReservsearch" ng-click="closeModal()">Cancel</button>&nbsp;
+      <button class="confirmBtnReserv" ng-click="searchdata(searchData);">Submit</button>
+    </div>
+  </ion-content>
+</div>
+</ion-modal-view>

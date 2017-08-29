@@ -1,0 +1,119 @@
+<ion-view view-title="Management" id="userMessagesView" class="whiteoverlayforHome" ng-controller="HeaderCtrl" ng-init="loadtaskView()">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <h1 class="title" style="color:white;">News Feed</h1>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+  <ion-content style="background: #000;" class="has-header has-footer" ng-init="LoadMarketPlaceDetails()">
+    <div class="detailsMainDiv">
+      <div class="detailsDateDiv">
+        <i class="ion-ios-time-outline" ng-if="newsDetails.created"></i>&nbsp
+        <span class="lightGreyColor">{{newsDetails.created | dateformatdetails}}</span>
+        <span class="right resident-text-color" style="font-style: italic;">{{category_name}}</span>
+      </div>
+      <div class="detailsDiv" style="padding-top:5px;border-bottom:1px solid #2E2E2E">
+        <span class="review-height" style="font-weight:500;font-size:17px;">{{newsDetails.title}}</span>
+        <br>
+        <span class="review-height" style="font-size:13px;">{{newsDetails.content}}</span>
+        <div class="text-center">
+          <img class="image-border1" ng-repeat="gImg in newsDetails.images track by $index" ng-show="gImg !== undefined" ng-src="{{gImg.url}}" ng-click="openimage($index)">
+        </div>
+      </div>
+      <div class="detailsNameDiv">
+        <span class="right detailsPadding" style="font-style: italic;">{{newsDetails.users_id.firstname}} {{newsDetails.users_id.lastname}}</span>
+      </div>
+    </div>
+    <div class="" ng-repeat="(key, value) in commentData | groupBy: 'createdDate'" ng-show="newsDetails.users_id._id == activeUser">
+      <div class="sortdate">
+        <label>{{key}}</label>
+      </div>
+      <ion-list class="list poll-section" style="border: 0 none;" can-swipe="true">
+        <ion-item ng-repeat="retreiveTxt in value track by $index" class="comment-item" ng-show="retreiveTxt.length!=0" ng-click="showConversation(retreiveTxt._id)">
+          <div class="row retrivedTextDetailsPg">
+            <div>
+              <div style="border-right: 2px solid #424242;padding: 5px !important;">
+                <img onerror="this.src='img/placeholderImg.png'" style="margin-top: 1px; border-radius: 50%; height: 60px; width: 60px;" ng-src="{{host_url_global+'/'+retreiveTxt.users_id.profile_img}}" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3 || retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4}">
+                <!-- <img src='img/placeholderImg.png' style="margin-top: 1px; border-radius: 50%; height: 60px; width: 60px;" class="markStatus-resi" ng-if="retreiveTxt.users_id.user_type_id == '4'"> -->
+              </div>
+            </div>
+            <div class="col col-75">
+              <div class="col pad0 text-right" style="margin-top: -3px;font-size: 10px;">
+                <i class="ion-clock"></i>
+                <span>{{retreiveTxt.created| date:"h:mma"}}</span>
+              </div>
+              <div class="col pad0" style="margin-left: 2px;">
+                <span class="retrivedtext_Name">Comment from {{retreiveTxt.users_id.firstname}} &nbsp{{retreiveTxt.users_id.lastname}}</span>
+                <!-- <span class="retrivedtext_Name" ng-if="retreiveTxt.users_id.user_type_id == '4'">Comment from {{retreiveTxt.units_id.unit_number}}</span> -->
+              </div>
+              <div class="col pad0 retrive-textmsg-section" style="margin-left: 2px;">
+                <span class="retrivedtext_Msg text-wrap" ng-bind-html="retreiveTxt.comment | htmlize"></span>
+                <div class="text-wrap" style="margin-top:10px">
+                  <img class="comment-image" ng-if="retreiveTxt.images.length > 0" ng-repeat="image in retreiveTxt.images track by $index" ng-src="{{host_url_global+'/'+image.url}}" ng-click="openImageZoom(retreiveTxt.images,$index)" />
+                </div>
+              </div>
+              <div class="">
+                <ion-option-button class="button-assertive" ng-click="deleteComment(retreiveTxt._id,false)">
+                  <i class="ion-ios-trash" style="font-size:26px;margin-left:6px;"></i>
+                </ion-option-button>
+              </div>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="" ng-repeat="(key, value) in commentData[0].group_comments | groupBy: 'createdDate'" ng-show="newsDetails.users_id._id != activeUser">
+      <div class="sortdate">
+        <label>{{key}}</label>
+      </div>
+      <ion-list class="list poll-section" style="border: 0 none;" can-swipe="true">
+        <ion-item ng-repeat="retreiveTxt in value track by $index" class="comment-item" ng-show="retreiveTxt.length!=0 && !retreiveTxt.is_deleted">
+          <div class="row retrivedTextDetailsPg">
+            <div>
+                <div style="border-right: 2px solid #424242;padding: 5px !important;">
+                  <img onerror="this.src='img/placeholderImg.png'" style="margin-top: 1px; border-radius: 50%; height: 60px; width: 60px;" ng-src="{{host_url_global+'/'+retreiveTxt.users_id.profile_img}}" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4}">
+                </div>
+            </div>
+            <div class="col col-75">
+              <div class="col pad0 text-right" style="margin-top: -3px;font-size: 10px;">
+                <i class="ion-clock"></i>
+                <span>{{retreiveTxt.created| date:"h:mma"}}</span>
+              </div>
+              <div class="col pad0" style="margin-left: 2px;margin-top: -13px;">
+                <span class="retrivedtext_Name">{{retreiveTxt.users_id.firstname}} &nbsp{{retreiveTxt.users_id.lastname}}</span>
+              </div>
+              <div class="col pad0 retrive-textmsg-section" style="margin-left: 2px;">
+                <span class="retrivedtext_Msg text-wrap" ng-bind-html="retreiveTxt.comment | htmlize"></span>
+                <div class="text-wrap" style="margin-top:10px">
+                  <img class="comment-image" ng-if="retreiveTxt.images.length > 0" ng-repeat="image in retreiveTxt.images track by $index" ng-src="{{host_url_global+'/'+image.url}}" ng-click="openImageZoom(retreiveTxt.images,$index)" />
+                </div>
+              </div>
+              <div class="" ng-if="activeUser == retreiveTxt.users_id._id">
+                <ion-option-button  class="edit-swipe-btn" ng-click="editPrivateComment(retreiveTxt._id,retreiveTxt.comment,1)">
+                 <i class="ion-edit" style="font-size:26px;margin-left:1px;"></i>
+                </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="deletePrivateComment(retreiveTxt._id,1)">
+                  <i class="ion-ios-trash" style="font-size:26px;margin-left:6px;"></i>
+                </ion-option-button>
+              </div>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+  <ion-footer-bar class="message-footer" keyboard-attach style="background:#000;">
+    <label class="item-input-wrapper" ng-show="newsDetails.users_id._id != activeUser">
+      <textarea id="cmt_content" class="replay-msg" type="text" placeholder="Type your message here" ng-model="replyObj.replytext" msd-elastic style="width:100%;" maxlength="1500"></textarea>
+    </label>
+    <div class="footer-btn-wrap" ng-show="newsDetails.users_id._id != activeUser">
+      <button class="button button-icon icon ion-android-send footer-btn resi-btn-color" ng-if="replyObj.replytext!=undefined" ng-show="replyObj.replytext.length!=0" ng-click="marketplaceUnitComment(1)">
+      </button>
+      <button class="button button-icon icon ion-camera footer-btn resi-btn-color" ng-show="replyObj.replytext.length == 0" ng-click="openAttachmentmarketPlace(1)">
+      </button>
+    </div>
+  </ion-footer-bar>
+</ion-view>

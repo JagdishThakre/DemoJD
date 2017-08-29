@@ -1,0 +1,61 @@
+<ion-view cache-view="false" class="whiteoverlayforHome" ng-controller="HeaderCtrl" >
+    <ion-nav-buttons side="left">
+        <div ng-click="goback('1')">
+            <button class="button button-icon ion-chevron-left headerbuttonmenu"></button>
+        </div>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">Existing Reservation</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content ng-init="getNotifyList()">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        <div class="list reservation-section padding-none" style="border: 0 none;">
+            <div class="list reservation-section padding-none" style="border: 0 none;">
+                <!-- <div class="item reservation-item rsvtNotifiDiv1" ng-repeat="reserv in existingNotify | orderBy:sortComment:true" ng-class="{'pending':reserv.service_id.is_booked == 1 || reserv.service_id.is_booked == 4,'booked':reserv.service_id.is_booked == 2 || reserv.item_id.is_available==false,'denied':reserv.service_id.is_booked == 3 || reserv.service_id.is_booked == 5 ,'height93':reserv.service_id.total_price==null,'height95':reserv.service_id.total_price!=null}" ng-if="reserv.property_reservation_id" style="margin-top: 0 !important;"> -->
+                <div class="item reservation-item rsvtNotifiDiv1" ng-repeat="reserv in existingNotify | orderBy:sortComment:true" ng-class="{'pending':reserv.service_id.is_booked == 1 || reserv.service_id.is_booked == 4,'booked':reserv.service_id.is_booked == 2 || reserv.item_id.is_available==false,'denied':reserv.service_id.is_booked == 3 || reserv.service_id.is_booked == 5 }" ng-if="reserv.property_reservation_id" style="margin-top: 0 !important;">
+                    <div>
+                        <span style="" class="col notifiDate">{{reserv.created | dateformatnotifcation}}</span>
+                    </div>
+                    <div class="row nopadding" ng-click="getNotificationthread(reserv)">
+                        <div class="col col-20 item-image rsvtIcon" style="margin-top: -10px;">
+                            <i ng-class="{'ion-ios-calendar-outline': reserv.property_reservation_id.is_calendar,'ion-grid' : !reserv.property_reservation_id.is_calendar}" style="font-size:65px"></i>
+                        </div>
+                        <div class="col col-80 rsvtNotifiMsgDiv">
+                            <span class="col notifiMsgSpan">
+                                          <span class="left">{{reserv.property_reservation_id.name | truncate:15}}</span>
+                            <span class="right book-statusBooked" ng-if="reserv.service_id.is_booked == 2 || reserv.item_id.is_available==false">Booked</span>
+                            <span class="right  book-statusPending" ng-if="reserv.service_id.is_booked == 1">Pending Approval</span>
+                            <span class="right book-statusDenied" ng-if="reserv.service_id.is_booked == 3">Rejected</span>
+                            <span class="right book-statusCancle" ng-if="reserv.service_id.is_booked == 4">Cancellation Pending</span>
+                            <span class="right book-statusDenied" ng-if="reserv.service_id.is_booked == 5">Canceled</span>
+                            </span>
+                            <!-- <span class="left" ng-if="reserv.item_id.name">{{reserv.item_id.name}}</span> -->
+                            <!-- <span class="col text-wrap notifiMsgTextSpanRvst" style=" margin-top: -5px !important;
+                                      font-size: 13px;">Item1</span> -->
+                            <span class="col text-wrap notifiMsgTextSpanRvst" ng-if="reserv.item_id.name" style=" margin-top: -5px !important; font-size: 13px;">{{reserv.item_id.name}}</span>
+                            <span class="col text-wrap notifiMsgTextSpanRvst" ng-if="reserv.service_id.timefrom" style="margin-top: 0px !important;">Date : {{reserv.timeFromFormatted  }}</span>
+                            <span class="col text-wrap notifiMsgTextSpan" ng-if="reserv.service_id.item_start_time">Date : {{reserv.service_id.item_start_time | dateformat1 }}</span>
+                            <div>
+                                <span class="col text-wrap notifiMsgTextSpanRvst" ng-if="reserv.service_id.timefrom && reserv.service_id.timeto">Time  : {{reserv.timefromCal}} <i class="ion-arrow-right-c"></i> {{reserv.timetoCal}}</span>
+                                <span class="col text-wrap notifiMsgTextSpanRvst" ng-if="reserv.service_id.item_start_time && reserv.service_id.item_estimated_time">Time  : {{reserv.service_id.item_start_time | date:"h:mma" }} <i class="ion-arrow-right-c"></i> {{reserv.service_id.item_estimated_time | date:"h:mma" }}</span>
+                                <span style="margin-top: -30px;" class="notifiCircle right" ng-if="reserv.unreadthreadVal > 0">{{reserv.unreadthreadVal}}</span>
+                            </div>
+                            <span ng-if="reserv.service_id.total_price >= 0" class="col text-wrap notifiMsgTextSpanRvst book-statusDenied">Price : &#36; {{reserv.service_id.total_price}} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div ng-if="gotresponse">
+       <h4 class="noti" ng-if="msgLength==0"> No results found!</h4>
+       </div>
+        <div class="text-center" ng-show="noMoreItemsAvailable && (page_number != '01' || page_number == '0')">
+            <span> No more notifications to load</span>
+        </div>
+        <ion-infinite-scroll  ng-if="!noMoreItemsAvailable" immediate-check="false"  on-infinite="loadMore()" distance="3%"></ion-infinite-scroll>
+        <p class="NoReservation" ng-if="noNotiText">{{noNotiText}}</p>
+    </ion-content>
+</ion-view>

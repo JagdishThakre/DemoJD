@@ -1,0 +1,51 @@
+<ion-view view-title="Management" class="whiteoverlayforHome" ng-controller="HeaderCtrl">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <ion-title style="color:white;">News Feed</ion-title>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+
+  <ion-content style="background:black" ;>
+    <div ng-init="featureNote()">
+      <form name="newsform" mobiscroll-form="newsformsettings" style="display:none">
+
+        <div class="mbsc-form-group">
+
+          <div ng-if="newsfeedcategoryforpost == 1" class="mbsc-form-group-title">New General Post</div>
+          <div ng-if="newsfeedcategoryforpost == 2" class="mbsc-form-group-title">New Marketplace Post</div>
+
+          <label>Title
+            <input type="text" ng-model="topic.title" placeholder="Enter a title" name="title" required>
+          </label>
+
+          <label>Description
+            <textarea name="description" ng-model="topic.description" placeholder="Enter a description"></textarea>
+          </label>
+
+        </div>
+
+        <div class="mbsc-form-group">
+          <div class="mbsc-btn-group-justified">
+            <button data-icon="empty icon ion-ios-camera" ng-click="getclicked()">Camera</button>
+            <button data-icon="empty icon ion-image" ng-click="getselect()">Gallery</button>
+          </div>
+
+          <div class="capture-img-section" ng-repeat="gImg in topic.photos track by $index" ng-show="gImg !== undefined">
+            <i class="icon ion-close-circled right capture-img-remove" ng-click="removeImg($index)">&nbsp</i>
+            <img class="capture-img" ng-src="{{gImg}}" ng-click="openImageZoom1(topic.photos,$index)">
+          </div>
+          
+        </div>
+
+        <div class="mbsc-form-group">
+          <button class="mbsc-btn-block md-sg-btn" ng-click="submitNews(newsfeedcategoryforpost)" ng-disabled="newsform.$invalid">Submit</button>
+        </div>
+
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

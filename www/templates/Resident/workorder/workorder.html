@@ -1,0 +1,33 @@
+<ion-view class="whiteoverlayforHome" ng-controller="HeaderCtrl" class="whiteoverlayforHome">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">Workorders</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content class="feature_staff_center" ng-init="featureNote()" scroll="false">
+        <!-- <div ng-repeat="subWorkorderFeature in subWorkorderFeatures" ng-show="subWorkorderFeature.service_category_id._id==='5629c4a03949c780667d5c5d' || 
+         subWorkorderFeature.service_category_id._id==='5629c4763949c780667d5c5c'">
+            <div class="col col-100 wopage hoverResiclass" ng-click="changeworkorder(subWorkorderFeature.service_category_id)">
+                <div class="{{subWorkorderFeature.service_category_id.icon}} featurefont"><span class="featurePgCunt" ng-if="subWorkorderFeature.notiCount">{{subWorkorderFeature.notiCount}}</span>
+                </div>
+                <p class="featureNameFont">{{subWorkorderFeature.service_category_id.name}}</p>
+            </div>
+        </div> -->
+        <div class="boxRe">
+            <div  class="col col-100" ng-repeat="subWorkorderFeature in subWorkorderFeatures" style="padding:0 !important;" ng-show="subWorkorderFeature.service_category_id._id==='5629c4a03949c780667d5c5d' || 
+         subWorkorderFeature.service_category_id._id==='5629c4763949c780667d5c5c'">
+                <div ng-click="changeworkorder(subWorkorderFeature.service_category_id)" class="bgColResi">
+                    <div class="{{subWorkorderFeature.service_category_id.icon}} featurefont subDaynamicIcon">
+                        <span class="resiUnReadCnt" ng-if="subWorkorderFeature.notiCount">{{subWorkorderFeature.notiCount}}</span>
+                    </div>
+                    <p class="subDaynamicFont">{{subWorkorderFeature.service_category_id.name}}</p>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<!-- class="wo  staff-featurepgpading workorderMargin" -->

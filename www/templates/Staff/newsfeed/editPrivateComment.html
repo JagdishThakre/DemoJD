@@ -1,0 +1,13 @@
+<div class="modal image-modal editCommentPopup">
+  <form class="" name="commentEdit" novalidate>
+    <textarea elastic id="cmt_content" class="comment-textArea" type="text" placeholder="Type your message here" ng-model="editComment.text" style="width:80%;" required></textarea>
+    <div class="edit-popup-bottom row">
+      <div class="col col-50">
+        <button class="button button-full comment-edit-btn" ng-click="closePrivateEditModal()">Cancel</button>
+      </div>
+      <div class="col col-50">
+        <button class="button button-full comment-edit-btn" ng-disabled="commentEdit.$invalid" ng-click="sendEditPrivateComment(editComment.text,editComment.id,editComment.oldText)">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

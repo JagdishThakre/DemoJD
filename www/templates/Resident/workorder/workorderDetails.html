@@ -1,0 +1,287 @@
+<ion-view cache-view="false" ng-controller="HeaderCtrl" id="userMessagesView" ng-init="loadtaskView()">
+                  <ion-nav-buttons side="left">
+                      <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+                  </ion-nav-buttons>
+                  <ion-nav-title>
+                      <ion-title style="color:white;">Workorder Details</ion-title>
+                  </ion-nav-title>
+                  <ion-nav-buttons side="right">
+                      <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+                  </ion-nav-buttons>
+  <ion-content  style="background: #000;" class="has-header has-footer" ng-init="workOrderDetails()">
+  <div class="detailsMainDiv">
+        <div class="detailsDateDiv">
+          <i class="ion-ios-time-outline" ng-if="notifythread.created"></i>&nbsp
+          <span class="lightGreyColor">{{serviceCreatedDate}}</span>
+          <span class="right detailsPadding" style="margin-top:-3px">{{notifythread.units_id.unit_number}}</span>
+        </div>
+        <div class="detailsDiv">
+          <span ng-if="notifythread.subject" class="review-height" style="font-weight:500">{{notifythread.subject}}</span>
+            <span class="review-height">{{notifythread.message}}</span>
+            <span class="review-height" ng-if="(notifythread.cab_light_min)">{{notifythread.cab_light_min}}  min</span>
+            <ul class="review-height">
+              <li class="classLi" ng-if="notifythread._id">
+                <span class="bold">Workorder ID:&nbsp</span>
+                <span class="serviceDtlsTextColor"> {{notifythread._id | substring:-7 | uppercase}}</span>
+              </li>
+              <li class="classLi" ng-if="notifythread.work_order_status">
+                <span class="bold">Status:&nbsp</span>
+                <span class="serviceDtlsTextColor " ng-if="notifythread.work_order_status==1">Pending</span>
+                <span  class="serviceDtlsTextColor" ng-if="notifythread.work_order_status==2">In Progress</span>
+                <span class="serviceDtlsTextColor"  ng-if="notifythread.work_order_status==3">Closed</span>
+              </li>
+              <li class="classLi" ng-if="notifythread.location">
+                <span class="bold">Location:&nbsp</span>
+                <span class="serviceDtlsTextColor"> {{notifythread.location}}</span>
+              </li>
+              <li class="classLi" ng-if="notifythread.problem">
+                <span class="bold">Problem:&nbsp</span>
+                <span class="serviceDtlsTextColor"> {{notifythread.problem}}</span>
+              </li>
+                <li class="classLi" ng-if="notifythread.description">
+                    <span class="bold">Description:&nbsp</span>
+                    <span class="serviceDtlsTextColor"> {{notifythread.description}}</span>
+                </li>
+              <li class="classLi" ng-show="notifythread.have_pet==true || notifythread.have_pet==false" >
+                <span class="bold">Pet:&nbsp</span>
+                <span class="serviceDtlsTextColor" ng-if="notifythread.have_pet==true">Yes</span>
+                <span class="serviceDtlsTextColor" ng-if="notifythread.have_pet==false">No</span>
+              </li>
+              <li class="classLi" ng-show="notifythread.permission_to_enter==true || notifythread.permission_to_enter==false" >
+                <span class="bold">Permission to Enter:&nbsp</span>
+                <span ng-if="notifythread.permission_to_enter==true" class="serviceDtlsTextColor">Yes</span>
+                <span ng-if="notifythread.permission_to_enter==false" class="serviceDtlsTextColor">No</span>
+              </li>
+              <li class="classLi" ng-if="notifythread.entry_note">
+                <span class="bold">Entry Note: &nbsp</span>
+                <span class="serviceDtlsTextColor">  {{notifythread.entry_note}}</span>
+              </li>
+              <li class="classLi"  ng-show="notifythread.estimate_needed==true || notifythread.estimate_needed==false">
+                <span class="bold">Need Estimate:&nbsp</span>
+                <span class="serviceDtlsTextColor" ng-if="notifythread.estimate_needed==true"> Yes</span>
+                <span class="serviceDtlsTextColor"  ng-if="notifythread.estimate_needed==false"> No</span>
+              </li>
+              <li class="classLi" ng-if="notifythread.Started_By">
+                  <span class="bold">Started By:&nbsp;</span>
+                  <span class="serviceDtlsTextColor">{{notifythread.Started_By.firstname}} {{notifythread.Started_By.lastname}}</span>                        
+              </li>
+              <li class="classLi" ng-if="notifythread.Started_Date">
+                  <span class="bold">Start Date:&nbsp;</span>
+                  <span class="serviceDtlsTextColor">{{Started_Date}}</span>
+              </li>
+              <li class="classLi" ng-if="notifythread.Closed_By">
+                  <span class="bold">Closed By:&nbsp;</span>
+                  <span class="serviceDtlsTextColor">{{notifythread.Closed_By.firstname}} {{notifythread.Closed_By.lastname}}</span>                        
+              </li>
+              <li class="classLi" ng-if="notifythread.service_close_date">
+                  <span class="bold">Closed Date:&nbsp;</span>
+                  <span class="serviceDtlsTextColor">{{service_close_date}}</span>
+              </li>
+              <li class="classLi" ng-if="notifythread.Re_Opened_By">
+                  <span class="bold">Re-Opened By:&nbsp;</span>
+                  <span class="serviceDtlsTextColor">{{notifythread.Re_Opened_By.firstname}} {{notifythread.Re_Opened_By.lastname}}</span>                        
+              </li>
+              <li class="classLi" ng-if="notifythread.Re_Opened_Date">
+                  <span class="bold">Re-Opened Date:&nbsp;</span>
+                  <span class="serviceDtlsTextColor">{{Re_Opened_Date}}</span>
+              </li>
+              <li class="classLi" ng-if="notifythread.amount_due">
+                <span class="amountClass ">Amount Due:&nbsp</span>
+                <span class="amountClass "> <i class="icon ion-social-usd dollorSymbol fontSize15 amountClass"></i> {{notifythread.amount_due}}</span>
+              </li>
+               <li class="classLi" ng-if="notifythread.amount_paid">
+                <span class="amountClassPaid" >Amount Paid:&nbsp</span>
+                <span class="amountClassPaid"> <i class="icon ion-social-usd dollorSymbol fontSize15 amountClassPaid"></i> {{notifythread.amount_paid}}</span>
+              </li>
+              <li class="classLi" ng-if="notifythread.closure_note">
+                <span class="bold">Closing Notes:&nbsp</span>
+                <span class="serviceDtlsTextColor"> {{notifythread.closure_note}}</span>
+              </li>
+              <li class="classLi" ng-if="notifythread.work_order_status==3">
+                <span class="bold" ng-if="!showRatingMessage">Please rate service on this workorder:&nbsp</span>
+                <span class="bold" ng-if="showRatingMessage">Thank you for the rating!&nbsp</span>
+                <br>
+                <div style="text-align:center;"> 
+                  <a href="javascript:" ng-repeat="r in ratingArr" class="ratingicon">
+                   <i class="icon {{r.icon}}" ng-click="setRating(r.value,notifythread)"></i>
+                  </a>
+                </div>
+              </li>
+            </ul>
+           <img class="image-border1" ng-repeat="gImg in notifythread.images" ng-show="gImg !== undefined" ng-src="{{gImg.url}}" ng-click="openimage($index)">
+        </div>
+        <div class="detailsNameDiv " style="padding: 8px;border-top: 1px solid #2e2e2e;">   
+          <span class="right " style="font-style: italic;">{{notifythread.users_id.firstname}} {{notifythread.users_id.lastname}}</span>
+        </div>
+    </div>
+  <div class="sortdate woHeadings " ng-if="notifythread.estimation.length>0"><label class="bold">Estimate</label></div>
+    <div ng-repeat="taskDetail in notifythread.estimation" class="detailsMainDiv review-height full-width" ng-class="{'cmpltdTask':taskDetail.accepted == 1 || accepted.status == 'yes','inPrgsTask':taskDetail.accepted == 2 || accepted.status == 'no'}" ng-if="notifythread.estimation.length>0">          
+              <ul class=" full-width">
+                  <li class="classLi full-width">
+                      <span class="half-width"><span class="bold">Hours:</span> <span class="serviceDtlsTextColor"> {{taskDetail.hours}} hrs</span></span>
+                      <span class="half-width text-right right"><span class="bold">Cost:</span> <span class="serviceDtlsTextColor"> <i class="icon ion-social-usd dollorSymbol fontSize15"></i> {{taskDetail.cost}}</span></span>
+                  </li>
+                  <li class="classLi full-width">
+                      <span class="bold">Parts:</span> 
+                      <span class="serviceDtlsTextColor">{{taskDetail.parts}}</span>
+                  </li>
+                  <li class="classLi full-width">
+                    <span class="bold">Task Details:</span> 
+                    <span class="serviceDtlsTextColor">{{taskDetail.notes}}</span>
+                  </li>
+                  <li class="classLi" ng-show="taskDetail.accepted==1 || accepted.status == 'yes'"><span>Estimation Accepted</span></li>  
+                  <li class="classLi" ng-show="taskDetail.accepted==2 || accepted.status == 'no'"><span>Estimation Rejected</span></li>  
+  
+              </ul>      
+    </div>
+
+    <div class="row" ng-show="notifythread.estimation[0].accepted == 0 && accepted.ishide == false" >   
+              <button class="  approveEstimateBtn" ng-click="approveEstimate(notifythread)">Approve</button>
+               <button class="  rejectEstimateBtn" ng-click="denyEstimate(notifythread)">Reject</button>         
+    </div>
+  <div class="sortdate woHeadings bold" ng-if="taskdata.length > 0"><label class="bold">Tasks</label></div>
+   <div class="detailsMainDiv inPrgsTask review-height" ng-repeat="taskdatas in taskdata" style="line-height: 18px;" ng-class="{'cmpltdTask':taskdatas.is_closed==true,'inPrgsTask2':taskdatas.is_closed==false}">
+       <ul class="review-height">
+            <li class="classLi full-width">
+                <span class="bold half-width">{{taskdatas.title}}</span>
+                <span class=" right inPrgsTxtClr" ng-if="taskdatas.is_closed==false">In Progress</span>
+                <span class=" right CmpltdTxtClr" ng-if="taskdatas.is_closed==true">Completed</span>        
+                </li> 
+            <li class="classLi"><span><span class="bold">Task Details:&nbsp </span><span class="serviceDtlsTextColor">{{taskdatas.description}}</span></span></li>            
+            <li>    
+                <ul class="full-width" ng-repeat="closure in taskdatas.closure" ng-if="taskdatas.is_closed==true">
+                    <li class="classLi full-width">
+                        <span class="half-width"><span class="bold">Hours:&nbsp</span> <span class="serviceDtlsTextColor">{{closure.hours}} hrs</span></span>
+                        <span class="half-width text-right right"><span class="bold">Cost: </span><span class="serviceDtlsTextColor"><i class="icon ion-social-usd dollorSymbol fontSize15"></i> {{closure.cost}}</span></span>
+                    </li>
+                    <li class="classLi"><span><span class="bold">Parts:&nbsp </span><span class="serviceDtlsTextColor">{{closure.parts}}</span></span></li>
+                    <li class="classLi"><span><span class="bold">Closing Notes:&nbsp </span><span class="serviceDtlsTextColor">{{closure.notes}}</span></span></li>
+                    <img class="image-border1" ng-repeat="gImg in closure.images" ng-show="gImg !== undefined" ng-src="{{host_url_global+'/'+gImg.url}}" ng-click="openImageZoom(closure.images,$index)">
+                </ul>
+            </li>
+            <li>    
+                <ul class="full-width" ng-repeat="closure in taskdatas.estimation" ng-if="taskdatas.is_closed==true">
+                    <li class="classLi full-width">
+                        <span class="half-width"><span class="bold">Hours:&nbsp</span> <span class="serviceDtlsTextColor">{{closure.hours}} hrs</span></span>
+                        <span class="half-width text-right right"><span class="bold">Cost: </span><span class="serviceDtlsTextColor"><i class="icon ion-social-usd dollorSymbol fontSize15"></i> {{closure.cost}}</span></span>
+                    </li>
+                    <li class="classLi"><span><span class="bold">Parts:&nbsp </span><span class="serviceDtlsTextColor">{{closure.parts}}</span></span></li>
+                    <li class="classLi"><span><span class="bold">Estimate Notes:&nbsp </span><span class="serviceDtlsTextColor">{{closure.notes}}</span></span></li>
+                    <img class="image-border1" ng-repeat="gImg in closure.images" ng-show="gImg !== undefined" ng-src="{{host_url_global+'/'+gImg.url}}" ng-click="openImageZoom(closure.images,$index)">
+                </ul>
+            </li>
+            <li class="classLi" style="border-bottom: none;width:100%">
+                <div class="row padding-none italic-class">
+                    <div class="col col-50 padding-none">
+                        <span>Assigned to {{taskdatas.assigned_to.firstname}} {{taskdatas.assigned_to.lastname}}</span>
+                    </div>
+                    <div class="col col-50 padding-none text-right">
+                        <span>By {{taskdatas.assigned_by.firstname}} {{taskdatas.assigned_by.lastname}}</span>
+                    </div>
+                </div>
+            </li>
+       </ul>
+    </div>
+
+
+    <div class="" ng-repeat="(key, value) in threadData | groupBy: 'createdDate'">
+    <div class="sortdate"><label>{{key}}</label></div>
+      <ion-list class="list poll-section" style="border: 0 none;" can-swipe="true">
+        <ion-item ng-repeat="retreiveTxt in value track by $index" class="comment-item" ng-show="retreiveTxt.length!=0">
+          <div class="row retrivedTextDetailsPg">
+            <div>
+                <!-- <div style="border-right: 2px solid #424242;padding: 5px !important;">
+                  <img onerror="this.src='img/placeholderImg.png'" style="margin-top: 1px; border-radius: 50%; height: 60px; width: 60px;" ng-src="{{host_url_global+'/'+retreiveTxt.users_id.profile_img}}" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3|| retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4}">
+                </div> -->
+                <div ng-if="retreiveTxt.users_id.profile_img" style="border-right: 2px solid #424242;padding: 5px !important;">
+                  <img  ng-if="!showErrorImg" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3||retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4,}" ng-src="{{host_url_global+'/'+retreiveTxt.users_id.profile_img}}" imageonload="generateAvtarOnimageLoadError()">
+
+                  <div ng-if="showErrorImg" class="noProfileImg" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3||retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4,}" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;">
+                      <ionic-letter-avatar data="{{ retreiveTxt.users_id.firstname | limitTo:1}}{{ retreiveTxt.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{retreiveTxt.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                  </div>
+                </div>
+                <div ng-if="retreiveTxt.users_id.profile_img == ''" style="border-right: 2px solid #424242;padding: 5px !important;">
+                  <div class="noProfileImg" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3||retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4,}" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;">
+                      <ionic-letter-avatar data="{{ retreiveTxt.users_id.firstname | limitTo:1}}{{ retreiveTxt.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{retreiveTxt.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                  </div>
+                </div>
+            </div>
+            <div class="col col-75">
+              <div class="col pad0 text-right" style="margin-top: -3px;font-size: 10px;">
+                <i class="ion-clock"></i>
+                <span>{{retreiveTxt.created | date:"h:mma"}}</span>
+              </div>
+              <div class="col pad0" style="margin-left: 2px;margin-top: -13px;">
+                <span class="retrivedtext_Name">{{retreiveTxt.users_id.firstname}} &nbsp{{retreiveTxt.users_id.lastname}}</span>
+              </div>
+              <div class="col pad0 retrive-textmsg-section" style="margin-left: 2px;text-align: justify;">
+                <span class="retrivedtext_Msg text-wrap" ng-bind-html="retreiveTxt.message | htmlize | convertLinks"></span>
+                <div class="text-wrap" style="margin-top:10px">
+                  <img class="singImg2" ng-show="retreiveTxt.resident_signature!=undefined" ng-src="{{host_url_global+'/'+retreiveTxt.resident_signature}}" />
+                  <img class="comment-image" ng-if="retreiveTxt.images.length > 0" ng-repeat="image in retreiveTxt.images track by $index" ng-src="{{host_url_global+'/'+image.url}}" ng-click="openImageZoom(retreiveTxt.images,$index)"/>
+                </div>
+              </div>
+              <!-- <div class="" ng-if="activeUser == retreiveTxt.users_id._id"> -->
+               <!--  <ion-option-button  class="edit-swipe-btn" ng-click="editComment(retreiveTxt._id,retreiveTxt.message)">
+                 <i class="ion-edit" style="font-size:26px;margin-left:1px;"></i>
+                </ion-option-button> -->
+                <!-- <ion-option-button class="button-assertive" ng-click="deleteComment(retreiveTxt._id)">
+                  <i class="ion-ios-trash" style="font-size:26px;margin-left:6px;"></i>
+                </ion-option-button> -->
+              <!-- </div> -->
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+     </div> 
+    <div ng-repeat="sentTxt in sentText track by $index" ng-if="sentText.length > 0">
+      <div class="row retrivedTextDetailsPg">
+        <div>
+            <div ng-if="prflImg" style="border-right: 2px solid #424242;padding: 5px !important;">
+                <img ng-if="!showErrorImg" ng-class="{'markStatus-staff':user_type_id == 3||user_type_id == 2,'markStatus-resi':user_type_id == 4,}" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;"  ng-src="{{host_url_global+'/'+prflImg}}" imageonload="generateAvtarOnimageLoadError()">
+
+                <div ng-if="showErrorImg" class="noProfileImg" ng-class="{'markStatus-staff':user_type_id == 3||user_type_id == 2,'markStatus-resi':user_type_id == 4,}" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;">
+                  <ionic-letter-avatar data="{{ staffName | limitTo:1}}{{ staffLastName.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{bgColor}}" shape="round" charcount="2"></ionic-letter-avatar>
+              </div>
+            </div>
+            <div ng-if="prflImg == ''" style="border-right: 2px solid #424242;padding: 5px !important;">
+              <div class="noProfileImg" ng-class="{'markStatus-staff':user_type_id == 3||user_type_id == 2,'markStatus-resi':user_type_id == 4,}" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;">
+                  <ionic-letter-avatar data="{{ staffName | limitTo:1}}{{ staffLastName.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{bgColor}}" shape="round" charcount="2"></ionic-letter-avatar>
+              </div>
+            </div>
+         </div>
+        <div class="col col-75">
+          <div class="col pad0 text-right" style="margin-top: -3px;font-size: 10px;">
+            <i class="ion-clock"></i>
+            <span>{{sentTxt.sendingDate | date:"h:mma"}}</span>
+          </div>
+          <div class="col pad0" style="margin-left: 10px;margin-top: -13px;">
+            <span ng-model="staffName" class="retrivedtext_Name">{{staffName}} {{staffLastName}}</span>
+          </div>
+          <div class="col pad0 retrive-textmsg-section" style="margin-left: 10px;">
+            <span ng-bind-html="sentTxt.text | htmlize | convertLinks" class="retrivedtext_Msg text-wrap"></span>
+            <div class="" style="margin-top:10px">
+              <img class="comment-image" ng-if="sentTxt.images.length > 0" ng-repeat="image in sentTxt.images track by $index" ng-src="{{image}}" ng-click="openImageZoom1(sentTxt.images,$index)" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+    <ion-footer-bar class="message-footer" keyboard-attach style="background:#000;">
+  <label class="item-input-wrapper">
+    <textarea id="cmt_content" class="replay-msg" type="text" placeholder="Type your message here" ng-model="replyObj.replytext" msd-elastic style="width:100%;" maxlength="1500"></textarea>
+  </label>
+  <div class="footer-btn-wrap">
+    <button class="button button-icon icon ion-android-send footer-btn" ng-show="replyObj.replytext.length > 0"
+      ng-click="reply(replyObj.replytext,sentText.length)" ng-class="{'resi-btn-color':replyObj.replytext.length > 0}">
+    </button>
+    <button class="button button-icon icon ion-camera footer-btn resi-btn-color" ng-show="replyObj.replytext.length == 0 || replyObj.replytext ==undefined"
+      ng-click="openAttachment()">
+    </button>
+  </div>
+  </ion-footer-bar>
+</ion-view>
+
+ 

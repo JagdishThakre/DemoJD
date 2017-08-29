@@ -1,0 +1,59 @@
+<ion-view view-title="Management" class="whiteoverlayforHome" ng-controller="HeaderCtrl">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <ion-title style="color:white;">News Feed</ion-title>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+
+  <ion-content style="background:black" ;>
+    <div ng-init="loadNewsEdit()">
+      <form name="newsform" mobiscroll-form="newsformsettings" style="display:none">
+
+        <div class="mbsc-form-group">
+
+          <div class="mbsc-form-group-title">Edit Post</div>
+
+          <label>Title
+            <input type="text" ng-model="topic.title" placeholder="Enter a title" name="title" required>
+          </label>
+
+          <label>Description
+            <textarea name="description" ng-model="topic.description" placeholder="Enter a description"></textarea>
+          </label>
+
+        </div>
+
+        <div class="mbsc-form-group">
+          <div class="mbsc-btn-group-justified">
+            <button data-icon="empty icon ion-ios-camera" ng-click="getclicked()">Camera</button>
+            <button data-icon="empty icon ion-image" ng-click="getselect()">Gallery</button>
+          </div>
+
+          <!-- Delete Existing Images -->
+
+          <div class="capture-img-section" ng-repeat="gImg in topic.existinImages track by $index" ng-show="gImg !== undefined">
+              <i class="icon ion-close-circled right capture-img-remove"ng-click="deleteImg($index,gImg._id)">&nbsp</i>
+              <img class="capture-img" ng-src="{{gImg.url}}" ng-click="openImageZoom1(topic.photos,$index)">
+          </div> 
+
+          <!-- Add More Images -->
+          <div class="capture-img-section" ng-repeat="image in topic.photos track by $index" ng-show="image !== undefined">
+              <i class="icon ion-close-circled right capture-img-remove" ng-click="removeImg($index)">&nbsp</i>
+              <img class="capture-img" ng-src="{{image}}" ng-click="openImageZoom1(topic.photos,$index)">
+          </div>
+          
+        </div>
+
+        <div class="mbsc-form-group">
+          <button class="mbsc-btn-block md-sg-btn" ng-click="UpdateNews()" ng-disabled="newsform.$invalid">Submit</button>
+        </div>
+
+      </form>
+    </div>
+  </ion-content>
+
+</ion-view>

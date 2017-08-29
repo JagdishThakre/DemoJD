@@ -1,0 +1,261 @@
+<ion-view cache-view="false" ng-controller="HeaderCtrl" class="whiteoverlayforHome" ng-init="loadauthdetail()">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Package Delivery</h1> -->
+        <ion-title style="color:white;">Guest Details</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <form class="" name="guestform" novalidate>
+        <ion-content class="addWoBg bot-120px" style="padding:1%;">
+            <br>
+            <div class="row" style="text-align:center;">
+                <div class="col col-33">
+                    <button class="authtype" ng-click="toggletypeedit(1)">
+                        <i ng-show="showchecktoday" class="icon authtype ion-checkmark"></i>&nbsp;<span>Today</span></button>
+                </div>
+                <div class="col col-33">
+                    <button class="authtype" ng-click="toggletypeedit(2)"><i ng-show="showcheckother" class="icon authtype ion-checkmark"></i>&nbsp;<span>Other Options</span>
+                    </button>
+                </div>
+                <div class="col col-33">
+                    <button class="authtype" ng-click="toggletypeedit(3)"><i ng-show="showcheckindefinite" class="icon authtype ion-checkmark"></i>&nbsp;<span>Indefinitely</span>
+                    </button>
+                </div>
+            </div>
+            <div ng-show="showchecktoday">
+                <div class="row topspace">
+                    <div class="col col-100">
+                        <label class="item item-input preauthlabel">
+                            <span>Start Time</span>
+                            <span class="editlabel">{{guest.starttime}}</span>
+                            <!-- <input class="sinput" type="time" placeholder="Start Time" ng-model="starttime_take" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallback(starttime_take);"> -->
+                            <input class="sinput" mobiscroll-time="datesettings" ng-model="guest.starttime" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallback(guest.starttime);">
+                            <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-100">
+                        <label class="item item-input preauthlabel">
+                            <span>End Time</span>
+                            <span class="editlabel">{{guest.endtime}}</span>
+                            <!-- <input class="sinput" type="time" placeholder="End Time" ng-model="endtime_take" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallbackend(endtime_take);"> -->
+                            <input class="sinput" mobiscroll-time="datesettings" ng-model="guest.endtime" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallbackend(guest.endtime);">
+                            <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="showcheckother">
+                <div class="row" style="text-align:center;">
+                    <div class="col col-33">
+                        <button ng-click="sheduletypeedit(1)" ng-class="{'button button-outline button-assertive retype': showtypedaily, 'button button-outline button-assertive retypedeselected': !showtypedaily}">
+                            Daily
+                        </button>
+                    </div>
+                    <div class="col col-33">
+                        <button ng-click="sheduletypeedit(2)" ng-class="{'button button-outline button-assertive retype': showtypeweekly, 'button button-outline button-assertive retypedeselected': !showtypeweekly}">
+                            Weekly </button>
+                    </div>
+                    <div class="col col-33">
+                        <button ng-click="sheduletypeedit(3)" ng-class="{'button button-outline button-assertive retype': showtypemonthly, 'button button-outline button-assertive retypedeselected': !showtypemonthly}">
+                            Monthly
+                        </button>
+                    </div>
+                </div>
+                <div ng-show="showtypedaily">
+                    <div class="row" style="padding-top:5%;">
+                        <div class="col col-100">
+                            <label class="item item-input preauthlabel">
+                                <span> Start Date <span class="editlabel" ng-hide="startdate1 == 'Invalid date'">{{startdate1}}</span></span>
+                              <!--  <input style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" class="sinput trans-input" type="date" placeholder="Start Date" ng-model="startdate" ng-change="changeformat(startdate,'');"> -->
+                                <input style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" class="sinput trans-input" ng-model="startdate" ng-change="changeformat(startdate,'');" mobiscroll-calendar="datesettings">
+                                <i class="icon mediumcalresi ion-calendar placeholder-icon"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-100">
+                            <label class="item item-input preauthlabel">
+                                <span>End Date <span class="editlabel" ng-hide="startdate1 == 'Invalid date'">{{enddate1}}</span></span>
+                               <!-- <input style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" class="sinput trans-input" type="date" placeholder="End Date" ng-model="enddate" ng-change="changeformat('',enddate);"> -->
+                                <input style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" class="sinput trans-input" ng-model="enddate" ng-change="changeformat('',enddate);" mobiscroll-calendar="datesettings">
+                                <i class="icon mediumcalresi ion-calendar placeholder-icon"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-100">
+                            <label class="item item-input preauthlabel">
+                                <span>Start Time</span>
+                                <span class="editlabel">{{guest.starttime}}</span>
+                              <!--  <input class="sinput" type="time" placeholder="Start Time" ng-model="starttime_take" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallback(starttime_take);"> -->
+                                <input class="sinput" ng-model="guest.starttime" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallback(guest.starttime);" mobiscroll-time="datesettings">
+                                <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-100">
+                            <label class="item item-input preauthlabel">
+                                <span>End Time</span>
+                                <span class="editlabel">{{guest.endtime}}</span>
+                                <!-- <input class="sinput" type="time" placeholder="End Time" ng-model="endtime_take" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallbackend(endtime_take);"> -->
+                                <input class="sinput" ng-model="guest.endtime" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallbackend(guest.endtime);" mobiscroll-time="datesettings">
+                                <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="showtypeweekly">
+                <div class="row" style="padding-top:5%;">
+                    <div class="col col-100">
+                        <label class="item item-input preauthlabel">
+                            <span> Start Date <span class="editlabel" ng-hide="startdate1 == 'Invalid date'">{{startdate1}}</span></span>
+                            <!-- <input style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none;background: none;" class="sinput trans-input" type="date" placeholder="Start Date" ng-model="startdate" ng-change="changeformat(startdate,'');"> -->
+                            <input style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none;background: none;" class="sinput trans-input" ng-model="startdate" mobiscroll-calendar="datesettings" ng-change="changeformat(startdate,'');">
+                            <i class="icon mediumcalresi ion-calendar placeholder-icon"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-100">
+                        <label class="item item-input preauthlabel">
+                            <span>End Date <span class="editlabel" ng-hide="enddate1 == 'Invalid date'">{{enddate1}}</span></span>
+                            <!-- <input style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none;background: none;" class="sinput" type="date" placeholder="End Date" ng-model="enddate" ng-change="changeformat('',enddate);"> -->
+                            <input style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none;background: none;" class="sinput" mobiscroll-calendar="datesettings" ng-model="enddate" ng-change="changeformat('',enddate);">
+                            <i class="icon mediumcalresi ion-calendar placeholder-icon"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-50">
+                        <label class="item item-input preauthlabelweekly">
+                            <span>Start Time</span>
+                            <span class="editlabel">{{guest.starttime}}</span>
+                            <!-- <input class="sinput" type="time" placeholder="Start Time" ng-model="starttime_take" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallback(starttime_take);"> -->
+                            <input class="sinput" mobiscroll-time="datesettings" ng-model="guest.starttime" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallback(guest.starttime);">
+                            <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+                        </label>
+                    </div>
+                    <div class="col col-50">
+                        <label class="item item-input preauthlabelweekly">
+                            <span>End Time</span>
+                            <span class="editlabel">{{guest.endtime}}</span>
+                            <!-- <input class="sinput" type="time" placeholder="End Time" ng-model="endtime_take" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallbackend(endtime_take);"> -->
+                            <input class="sinput" mobiscroll-time="datesettings" ng-model="guest.endtime" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallbackend(guest.endtime);">
+                            <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+                        </label>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col col-100">
+                        <span class="weeklabel">Day Of Week</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="margin-auto">
+                        <div class="button-bar text-center">
+                            <a class="days" ng-hide="mon" ng-click="selectday(1)">M</a>
+                            <a class="daysselect" ng-show="mon" ng-click="selectday(-1)">M</a>
+                            <a class="days" ng-hide="tue" ng-click="selectday(2)">T</a>
+                            <a class="daysselect" ng-show="tue" ng-click="selectday(-2)">T</a>
+                            <a class="days" ng-hide="wed" ng-click="selectday(3)">W</a>
+                            <a class="daysselect" ng-show="wed" ng-click="selectday(-3)">W</a>
+                            <a class="days" ng-hide="thi" ng-click="selectday(4)">T</a>
+                            <a class="daysselect" ng-show="thi" ng-click="selectday(-4)">T</a>
+                            <a class="days" ng-hide="fri" ng-click="selectday(5)">F</a>
+                            <a class="daysselect" ng-show="fri" ng-click="selectday(-5)">F</a>
+                            <a class="days" ng-hide="sat" ng-click="selectday(6)">S</a>
+                            <a class="daysselect" ng-show="sat" ng-click="selectday(-6)">S</a>
+                            <a class="days" ng-hide="sund" ng-click="selectday(7)">S</a>
+                            <a class="daysselect" ng-show="sund" ng-click="selectday(-7)">S</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="showtypemonthly">
+                <div class="row">
+                    <div class="col col-100">
+                        <label class="item item-input preauthlabel">
+                            <span> Start Date <span class="editlabel" ng-hide="startdate1 == 'Invalid date'">{{startdate1}}</span></span>
+                            <!-- <input class="sinput" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" type="date" placeholder="Start Date" ng-model="startdate" ng-change="changeformat(startdate,'');"> -->
+                            <input class="sinput" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" mobiscroll-calendar="datesettings" ng-model="startdate" ng-change="changeformat(startdate,'');">
+                            <i class="icon mediumcalresi ion-calendar placeholder-icon"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-100">
+                        <label class="item item-input preauthlabel">
+                            <span>End Date <span class="editlabel" ng-hide="enddate1 == 'Invalid date'">{{enddate1}}</span></span>
+                           <!-- <input class="sinput" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none;background: none;" type="date" placeholder="End Date" ng-model="enddate" ng-change="changeformat('',enddate);"> -->
+                            <input class="sinput" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none;background: none;" mobiscroll-calendar="datesettings" ng-model="enddate" ng-change="changeformat('',enddate);">
+                            <i class="icon mediumcalresi ion-calendar placeholder-icon"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-100">
+                        <label class="item item-input preauthlabel">
+                            <span>Day Of Month</span>
+                            <!-- <input class="sinput" style="background-color: rgba(0, 0, 0, 0.1);visibility: hidden; color: rgba(0, 0, 0, 0.1); border: none;background: none;    margin: 0px;" type="text" placeholder="End Date" ng-model="guest.day_of_month"> -->
+                            <select id="monthSelect" ng-model="guest.day_of_month" mobiscroll-select="datesettings" mobiscroll-data="monthdataold" class="sinput" style="background-color: rgba(0, 0, 0, 0.1);visibility: hidden; color: rgba(0, 0, 0, 0.1); border: none;background: none; margin-left: 10px;" >
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-100">
+                        <label class="item item-input preauthlabel">
+                            <span>Start Time</span>
+                            <span class="editlabel">{{guest.starttime}}</span>
+                            <!-- <input class="sinput" type="time" placeholder="Start Time" ng-model="starttime_take" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallback(starttime_take);"> -->
+                            <input class="sinput" mobiscroll-time="datesettings" ng-model="guest.starttime" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallback(guest.starttime);">
+                            <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-100">
+                        <label class="item item-input preauthlabel">
+                            <span>End Time</span>
+                            <span class="editlabel">{{guest.endtime}}</span>
+                            <!-- <input class="sinput" type="time" placeholder="End Time" ng-model="endtime_take" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallbackend(endtime_take);"> -->
+                            <input class="sinput" mobiscroll-time="datesettings" ng-model="guest.endtime" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallbackend(guest.endtime);">
+                            <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="showcheckindefinite">
+            </div>
+        </ion-content>
+    </form>
+    <div class="row notes" style="background:#1D1D1D;">
+        <div class="col col-100">
+            <p ng-show="showchecktoday" class="footernotes">Note: Please enter either start time, end time or both. If none are added, pass will be valid for all day</p>
+            <p ng-show="showcheckother && showtypedaily" class="footernotes">Note: Please enter data for respective fields. If none are added, pass will be valid indefinitely</p>
+            <p ng-show="showcheckother && showtypeweekly" class="footernotes">Note: Please enter data for respective fields. If none are added, pass will repeat indefinitely for the day of the week selected</p>
+            <p ng-show="showcheckother && showtypemonthly" class="footernotes">Note: Please enter data for respective fields. If none are added, pass will repeat indefinitely for the day of the month selected</p>
+            <p ng-show="showcheckindefinite" class="footernotes">Note: Pass will be valid all the time indefinitely</p>
+            <p ng-show="showchecknotes" class="footernotes">Note: Add any special instructions to front desk for this guest</p>
+        </div>
+    </div>
+    <ion-footer-bar style="padding: 0px;background-color: transparent;">
+        <div class="row" style="padding: 0;">
+            <div class="col col-50" style="padding: 0;">
+                <button style="padding: 0;margin: 0;height: 44px;" class="button button-full editBtnCategory" ui-sref="editcategory">Edit Category</button>
+            </div>
+             <div class="col col-50" style="padding: 0;">
+                <button style="padding: 0;margin: 0;height: 44px;" class="button button-full confirmBtnReserv" ng-click="editauthorization(guest.schedule_id)">Save</button>
+            </div>
+        </div>
+    </ion-footer-bar>
+</ion-view>

@@ -1,0 +1,14 @@
+<div class="modal image-modal editCommentPopup">
+  <div class="attachmentButton-section">
+    <img  class="preview-img" ng-repeat="img in commentImages" src="{{img}}"/>
+    <textarea  elastic class="replay-msg" type="text" placeholder="Add a caption" ng-model="commentimg.caption" style="width:100%;"></textarea>
+    <div class="edit-popup-bottom row">
+      <div class="col col-50">
+        <button class="button button-full comment-edit-btn" ng-click="closecommentGallery()">Cancel</button>
+      </div>
+      <div class="col col-50">
+        <button class="button button-full comment-edit-btn" ng-click="replaycommentImages()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>

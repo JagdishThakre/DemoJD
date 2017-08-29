@@ -1,0 +1,54 @@
+<ion-view cache-view="false" ng-controller="HeaderCtrl" class="whiteoverlayforHome" ng-init="loadauthdetail();">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Package Delivery</h1> -->
+        <ion-title style="color:white;">Guest Details</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <form class="" name="guestform" novalidate>
+        <ion-content class="addWoBg" style="padding:1%;">
+            <div class="button-bar">
+                <a ng-click="togglecategory(1);" class="button button-assertive contde">Select Category</a>&nbsp:
+                <a ng-click="togglecategory(2);" class="button button-assertive contde">Add Notes</a>
+            </div>
+            <div ng-show="shownotes" style="padding-top:5%;">
+                <div class="inputbox addWoLabel">
+                    <!--                     <label>Notes:</label>
+ -->
+                    <textarea elastic class="inputtext workorder-desc" type="text" name="firstname" ng-model="guest.notes" id="cmt_content" placeholder="Type something..."></textarea>
+                </div>
+            </div>
+            <div ng-show="showcat" style="padding-top:5%;">
+                <div class="list">
+                    <a class="item item-divider custm" ng-repeat="cat in categories" ng-click="changecategory(cat.name,1)" style="padding:5%;background:transparent;">
+                        <span style="color:#fff"> <i ng-if="cat.name != guest.category" class="icon cat ion-ios-circle-outline"></i>
+                    <i ng-if="cat.name == guest.category" class="icon catselected ion-checkmark-circled"></i>
+                    &nbsp;&nbsp;{{cat.name}}
+                   </span>
+                    </a>
+                </div>
+            </div>
+        </ion-content>
+    </form>
+    <div class="row longnotes" style="background:#1D1D1D;">
+        <div class="col col-100">
+            <p ng-show="showcat" class="footernotes">Note: If you have work getting done in your Unit by this guest, please select "Contractor"
+                and confirm insurance information is with Property Management, failure of which may result in fines</p>
+            <p ng-show="shownotes" class="footernotes">Note: Add any special instructions to front desk for this guest</p>
+        </div>
+    </div>
+    <ion-footer-bar style="padding: 0px;background-color: transparent;">
+        <div class="row" style="padding: 0;">
+            <div class="col col-50" style="padding: 0;">
+                <button style="padding: 0;margin: 0;height: 44px;" class="button button-full cancelBtnReservsearch" ng-click="goback()">Back</button>
+            </div>
+            <div class="col col-50" style="padding: 0;border-left: 1px solid #fff;">
+                <button ng-disabled="saveddata" style="padding: 0;margin: 0;height: 44px;" class="button button-full confirmBtnReserv" ng-click="editcatnotes(guest.notes,guest.schedule_id)">Confirm</button>
+            </div>
+        </div>
+    </ion-footer-bar>
+</ion-view>

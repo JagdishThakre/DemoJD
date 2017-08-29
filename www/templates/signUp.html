@@ -1,0 +1,57 @@
+<ion-view class="loginDiv signUpBG" hide-nav-bar="true">
+    <!-- <ion-content scroll="scroll" class="full-height" class="signUpBG"> -->
+    <ion-content scroll="false" class="full-height" class="signUpBG">
+
+            <div class="video-container">
+                <video webkit-playsinline autoplay playsinline muted loop preload="auto">
+                    <source type="video/mp4" src="video/videointro.mp4">
+                </video>
+            </div>
+
+           <div class="login-logo-section" align="center">
+                <img class="leftImg2 login-logo" ng-src="img/placeholderImg.png">
+            </div>
+            <div class="login_div" align="center">
+                <div class="FinalsignUpPage-bars">
+                    <div class="list list-inset" align="center">
+                        <label class="item item-input login-field">
+                            <i class="icon ion-edit placeholder-icon login-icon">&nbsp</i>
+                            <input class="input-color login-input" type="text"  ng-model="signUpdata.firstname" placeholder="First Name" ng-focus="preventKeyboard(event)" ng-pattern="/^[a-zA-Z]*$/">
+                        </label>
+                    </div>
+                </div>
+                <div class="FinalsignUpPage-bars">
+                    <div class="list list-inset" align="center">
+                        <label class="item item-input login-field">
+                            <i class="icon ion-edit placeholder-icon login-icon">&nbsp</i>
+                            <input class="input-color login-input" type="text"  ng-model="signUpdata.lastname" placeholder="Last Name" ng-focus="preventKeyboard(event)" ng-pattern="/^[a-zA-Z]*$/">
+                        </label>
+                    </div>
+                </div>
+                <div class="FinalsignUpPage-bars">
+                    <div class="list list-inset" align="center">
+                        <label class="item item-input login-field">
+                            <i class="icon ion-ios-email placeholder-icon login-icon">&nbsp</i>
+                            <input class="input-color login-input" type="email" ng-model="signUpdata.email" placeholder="Email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" ng-focus="preventKeyboard(event)">
+                        </label>
+                    </div>
+                </div>
+                <div class="FinalsignUpPage-bars">
+                    <div class="list list-inset" align="center">
+                        <label class="item item-input login-field">
+                            <i class="icon ion-ios-telephone placeholder-icon login-icon">&nbsp</i>
+                            <input class="input-color login-input" phone-input type="tel" ng-model="signUpdata.mobile" placeholder="Mobile number" ng-focus="preventKeyboard(event)">
+                        </label>
+                    </div>
+                </div>
+                
+                 
+                <div style="text-align:center;padding: 0 20%;margin-top: 6%;">
+                    <input type="button"  class="button button-block loginbutton" value="Signup" ng-click="signUp(signUpdata)"/>
+                    <a ng-click="toProperyUnit()">
+                        <span class="login" style="color:white;font-size: 16px;">Back</span>
+                    </a>
+                </div>
+            </div>
+    </ion-content>
+</ion-view>

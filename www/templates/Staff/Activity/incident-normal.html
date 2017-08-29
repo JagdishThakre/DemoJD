@@ -1,0 +1,31 @@
+<ion-view view-title="Management" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff"  ng-click="goback('1')"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">Activities</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content scroll="false" class="">
+        <div class="boxRe">
+            <div class="col col-100 text-center" style="padding:0 !important;">
+                <div ng-click="goToActivityList(1)" class="bgCol">
+                    <div class="ion-android-chat featurefont subDaynamicIcon">
+                        <!-- <span class="staffUnReadCnt" ng-if="staffNewsSubFeatureData.notiCount">{{staffNewsSubFeatureData.notiCount}}</span> -->
+                    </div>
+                    <p class="subDaynamicFont">Normal</p>
+                </div>
+            </div>
+            <div class="col col-100 text-center" style="padding:0 !important;">
+                <div ng-click="goToActivityList(2)" class="bgCol">
+                    <div class="ion-android-chat featurefont subDaynamicIcon">
+                        <!-- <span class="staffUnReadCnt" ng-if="staffNewsSubFeatureData.notiCount">{{staffNewsSubFeatureData.notiCount}}</span> -->
+                    </div>
+                    <p class="subDaynamicFont">Incident Reports</p>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ioni-view>

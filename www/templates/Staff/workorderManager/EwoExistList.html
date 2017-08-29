@@ -1,0 +1,75 @@
+<ion-view class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl" ng-init="reserve('2')">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">{{headerSpec}}</h1> -->
+        <ion-title style="color:white;">{{headerSpec}}</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-header-bar class="bar bar-subheader subheadercolor">
+        <h1 ng-if="!searching" class="title white right">Notifications</h1>
+        <h1 ng-if="searching" class="title white right">Total Records : {{totalrecords}}</h1>
+        <h1 ng-show="show" class="searchBarDiv">
+    <div style="width: 100%;">
+      <div class="left" style="display: inline-block;width: 90%;">
+      <!--   <input class="searchBarInput" type="text"   ng-model="search1.unit_number" placeholder="Search" ng-change="scrollopt(search1.unit_number)"> -->
+      </div>
+      <div style=" display: inline-block;width: 10%;">
+       <!--  <button style="color: #fff;" class="button button-icon ion-ios-close"  type="submit" ng-click="showIt(0)"></button> -->
+      </div>
+    </div>
+    </h1>
+        <button class="right button button-icon ion-android-search white padding-none" ng-click="showIt(1)"></button>
+    </ion-header-bar>
+    <ion-content delegate-handle="mainScroll" on-scroll="getscollposition()">
+        <div class="padding-none">
+            <ion-list ng-show="data.show">
+                <ion-item ng-repeat="item in items | filter:search1:strict | orderBy:natural('unit_number')" item="item" ng-click="searchUsingService(item)" class="unit">
+                    {{item.unit_number}}
+                </ion-item>
+                <ion-item ng-show="(items | filter:search1).length == 0" item="item" class="unit">
+                    No results found
+                </ion-item>
+            </ion-list>
+        </div>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        <div ng-class="{'list poll-section': blur== false ,'list poll-sectionblur': blur == true}" style="border: 0 none;">
+            <div ng-class="{'border-rm':$index==0,staffWoPending:message.service_id.work_order_status==1,staffWoProgress:message.service_id.work_order_status==2,staffCompleted:message.service_id.work_order_status==3}" class="item poll-item row notifiDiv1" ng-repeat="message in messages | orderBy:sortComment:true" ng-class="{pckgClosed:message.is_closed}" ng-click="StaffNotificationthread(message);">
+                <!-- <div class="col col-20 item-image notifiImgDiv">
+                    <img class="notifiImg" ng-class="{'markStatus-staff':message.service_id.users_id.user_type_id == 3 || message.service_id.users_id.user_type_id == 2,'markStatus-resi':message.service_id.users_id.user_type_id == 4}" src="{{host_url_global+'/' + message.service_id.users_id.profile_img}}" onerror="this.src='img/placeholderImg.png'">
+                </div> -->
+                <div ng-if="message.service_id.users_id.profile_img" class="col col-20 item-image notifiImgDivTaskMngr">
+                    <img ng-if="!showErrorImg" class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-resi':message.users_id.user_type_id == 4}" src="{{host_url_global+'/' + message.service_id.users_id.profile_img | small}}" imageonload="generateAvtarOnimageLoadError()">
+                    <div ng-if="showErrorImg" class="notifiImg" ng-class="{'markStatus-staff':message.service_id.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-resi':message.service_id.users_id.user_type_id == 4}">
+                        <ionic-letter-avatar data="{{ message.service_id.users_id.firstname | limitTo:1}}{{ message.service_id.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{message.service_id.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                    </div>
+                </div>
+                <div ng-if="message.service_id.users_id.profile_img == ''" class="col col-20 item-image notifiImgDivTaskMngr">
+                    <div class="notifiImg" ng-class="{'markStatus-staff':message.service_id.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-resi':message.service_id.users_id.user_type_id == 4}">
+                        <ionic-letter-avatar data="{{ message.service_id.users_id.firstname | limitTo:1}}{{ message.service_id.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{message.service_id.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                    </div>
+                </div>
+                <div class="col col-60 notifiMsgDiv">
+                    <span style="" class="col notifiDate">{{message.created | dateformatnotifcation}}  <span style="float: right;">{{message.units_id.unit_number}}</span></span>
+                    <span class="col notifiMsgSpan">
+                          <span ng-if="message.service_id.work_order_status==1" class="right woPendingText" style="float: right;">Pending</span>
+                    <span ng-if="message.service_id.work_order_status==2" class="right woProgressText" style="float: right;">In progress</span>
+                    <span class="right woCompletedText" ng-if="message.service_id.work_order_status==3" style="float: right;">Completed</span>
+                    </span>
+                    <span class="col text-wrap notifiMsgTextSpan">Created By: {{message.service_id.users_id.firstname}} {{message.service_id.users_id.lastname}} </span>
+                    <span class="right notifiCircleWoList" style="float: right;" ng-if="message.unreadthreadVal > 0">{{message.unreadthreadVal}}</span>
+                    <span class="col text-wrap notifiMsgTextSpan">Message: {{message.service_id.message |truncate:18}}</span>
+                    <span class="col text-wrap notifiMsgTextSpan amountClass" ng-if="message.service_id.amount_due">Amount Due: <i class="icon ion-social-usd dollorSymbol fontSize10 amountClass"></i> {{message.service_id.amount_due}}  
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" ng-show="noMoreItemsAvailable">
+            <span> <i class="icon ion-ios-information-outline"></i>No more notifications to load</span>
+        </div>
+        <ion-infinite-scroll immediate-check="false" ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="5%"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

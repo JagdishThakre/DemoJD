@@ -1,0 +1,73 @@
+<ion-view cache-view="false" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">Add Task</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content style="background:black" ;>
+        <div ng-init="listAllStaffs()">
+
+            <form name="taskform" mobiscroll-form="taskformsettings" style="display:none">
+
+                <div class="mbsc-form-group">
+
+                    <div class="mbsc-form-group-title">Task Information</div>
+
+                    <label>Task Type
+                        <select ng-model="addTaskData.task_type" mobiscroll-select="taskselectsettings" required>
+                            <option value="">Select Task Type</option>
+                            <option value="1">Work Task</option>
+                            <option value="2">Estimate Task</option>
+                        </select>
+                    </label>
+
+                    <label>Title
+                        <input type="text" ng-model="addTaskData.title" placeholder="Enter the title" name="title" required>
+                    </label>
+
+                    <label>Priority
+                        <select ng-model="addTaskData.priority" mobiscroll-select="taskselectsettings" required>
+                            <option value="">Select Priority</option>
+                            <option value="1">High</option>
+                            <option value="2">Low</option>
+                            <option value="3">PM</option>
+                        </select>
+                    </label>
+
+                    <label>Assign to Staff
+                        <select ng-model="addTaskData.assigned_to_staff_id" mobiscroll-select="taskselectsettings" required>
+                            <option value="">Select Staff</option>
+                            <option value="{{listStaffsData._id}}" ng-repeat="listStaffsData in listStaffsDatas">{{listStaffsData.firstname}} {{listStaffsData.lastname}} <hr class="style10"></option>
+                        </select>
+                    </label>
+
+
+                    <label>Description
+                        <textarea name="description" ng-model="addTaskData.description" placeholder="Enter the description"></textarea>
+                    </label>
+
+                    <label>Finish Before
+                        <input mobiscroll-datetime="taskdatetimesettings" placeholder="Select date/time" ng-model="datetimeValue" defaultValue="datetimeValueDefault" required>
+                    </label>
+
+
+                    <label>Private Note
+                        <input type="text" ng-model="addTaskData.private_note" placeholder="Enter a private note" name="privatenote">
+                    </label>
+
+                </div>
+
+                <div class="mbsc-form-group">
+                    <button class="mbsc-btn-block md-sg-btn" ng-click="addTask(addTaskData,datetimeValue)" ng-disabled="taskform.$invalid">Add Task</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </ion-content>
+</ion-view>

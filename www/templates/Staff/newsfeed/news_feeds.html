@@ -1,0 +1,41 @@
+<ion-view view-title="Management" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goHome()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">News Feed</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content scroll="false" class="" ng-init="staffDynamicFeature()">
+        <!-- <div class="text-center staffNewFeed" ng-repeat="staffNewsSubFeatureData in staffNewsSubFeatureDatas" ng-show="staffNewsSubFeatureData.service_category_id._id==='578737d961f925afa18240c3' || 
+          staffNewsSubFeatureData.service_category_id._id==='578737b261f925afa18240c2'">
+            <div class="col col-100 wopage hoverclass staff-featurepgpading" ng-click="goTab(staffNewsSubFeatureData)">
+                <div class="{{staffNewsSubFeatureData.service_category_id.icon}} featurefont "><span class="staff_feturPgCunt " ng-if="staffNewsSubFeatureData.notiCount ">{{staffNewsSubFeatureData.notiCount}}</span>
+                </div>
+                <p class="featureNameFont ">{{staffNewsSubFeatureData.service_category_id.name}}</p>
+            </div>
+        </div> -->
+        <div class="boxRe">
+            <div ng-if="newsHome > 1" class="col col-100 text-center" ng-repeat="staffNewsSubFeatureData in staffNewsSubFeatureDatas" style="padding:0 !important;" ng-show="staffNewsSubFeatureData.service_category_id._id==='578737d961f925afa18240c3' || 
+          staffNewsSubFeatureData.service_category_id._id==='578737b261f925afa18240c2'">
+                <div ng-click="goTab(staffNewsSubFeatureData)" class="bgCol">
+                    <div class="{{staffNewsSubFeatureData.service_category_id.icon}} featurefont subDaynamicIcon">
+                        <span class="staffUnReadCnt" ng-if="staffNewsSubFeatureData.notiCount">{{staffNewsSubFeatureData.notiCount}}</span>
+                    </div>
+                    <p class="subDaynamicFont">{{staffNewsSubFeatureData.service_category_id.name}}</p>
+                </div>
+            </div>
+            <div ng-if="newsHome == 1" class="col col-100 text-center" ng-repeat="staffNewsSubFeatureData in staffNewsSubFeatureDatas" style="padding:0 !important;" ng-show="staffNewsSubFeatureData.service_category_id._id==='578737d961f925afa18240c3' || 
+          staffNewsSubFeatureData.service_category_id._id==='578737b261f925afa18240c2'">
+                <div ng-click="goTab(staffNewsSubFeatureData)" class="bgColForOneFet">
+                    <div class="{{staffNewsSubFeatureData.service_category_id.icon}} featurefont subDaynamicIcon1">
+                        <span class="staffUnReadCnt" ng-if="staffNewsSubFeatureData.notiCount">{{staffNewsSubFeatureData.notiCount}}</span>
+                    </div>
+                    <p class="subDaynamicFont1">{{staffNewsSubFeatureData.service_category_id.name}}</p>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ioni-view>

@@ -1,0 +1,56 @@
+<ion-view class="whiteoverlayforHome" ng-controller="HeaderCtrl">
+
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+    <!-- <img ng-src="img/logo2.png"  ng-click="gofeature()"> -->
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <h1 class="title" style="color:white;">New Booking</h1>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+  <ion-header-bar class="bar bar-subheader rvstHeaderDate">
+    <h3 style="text-align:center">
+      <span class="rvstSelDate"><i class="ion-android-calendar"></i> {{selectedDate1}}</span>
+    </h3>
+  </ion-header-bar>
+  <ion-content ng-init="card = false" scroll="false">
+    <ion-scroll delegate-handle="small" class="ion_scroll" style="height:100%">
+      <div class="row blackoverlayBooking" ng-show="availDay">
+        <div class="col col-100 rvstRevstimimg">
+          <h4 class="reservationFont">Availability</h4>
+          <span class="reservationFont">{{timingsFrom}} <i class="ion-arrow-right-c"></i> {{timingsTo}}</span>
+        </div>
+      </div>
+      <div class="row blackoverlayBooking padder-t-normal" ng-if="availDay">
+        <table style="width:100%;">
+          <tr>
+            <td class="bookedStatusHeader">
+            </td>
+            <td class="bookedStatusHeader">
+
+            </td>
+          </tr>
+          <tr ng-repeat="slot in slots" class="bookedList_item">
+            <td class="bookedList_item_timeSlot reservationFont">
+              {{slot.hourSlot}}
+            </td>
+            <td class="bookedStatus {{slot.addClass}}" ng-if="slot.bookSlots" rowspan="{{slot.rowspan}}" ng-click="showDetails(slot)">
+              Booked
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="row closedMainDiv" ng-if="!(availDay)">
+        <!-- <img ng-src="img/closed.png" style="width:100%"> -->
+        <div class="closed1stdiv">
+          <span class="closedSpan">"I’m sorry, the amenity you are trying to book is not available for this day, please try another day”</span>
+        </div>
+      </div>
+    </ion-scroll>
+    <button ng-if="availDay" class="button button-float" ng-click="showBookingSheet()">
+        <i class="icon ion-plus"></i>
+    </button>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,22 @@
+<ion-view cache-view="false" ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+  <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Reservations</h1> -->
+        <ion-title style="color:white;">Reservations</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <ion-content class="feature_staff_center" ng-init="getList()">  
+  <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right rvst-bckclr" style="border:1px solid" ng-click="goSpecficRvst(list)" ng-repeat=" list in list_amenity | orderBy:'name'" ng-if="list.status">
+                <i ng-if="list.is_calendar==true" class="ion-ios-calendar-outline rvst_icon1"></i>
+                <i ng-if="list.is_calendar==false" class="ion-grid rvst_icon1"></i>
+                <h6 class="rvst_heading">{{list.name}}</h6>
+                <i class="icon ion-chevron-right icon-accessory rvst_icon2"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

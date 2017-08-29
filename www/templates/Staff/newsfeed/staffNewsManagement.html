@@ -1,0 +1,49 @@
+<ion-view view-title="Management" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+  <!--  <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="gobackStaffFeature()"></button>
+    </ion-nav-buttons> -->
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goToResdntMngmnt()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <ion-title style="color:white;">News Feed</ion-title>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+  <ion-content scroll="false" class="" ng-init="staffDynamicFeature()">
+    <div ng-if="newsMangSub == 3" class="col col-100 text-center" ng-repeat="staffNewsSubFeatureData in staffNewsSubFeatureDatas"
+      style="padding:0 !important;" ng-show="staffNewsSubFeatureData.service_category_id._id==='5787386661f925afa18240c4' || 
+          staffNewsSubFeatureData.service_category_id._id==='56ab40b8d42aba0fd731b1e4' ||
+          staffNewsSubFeatureData.service_category_id._id==='56a9e78bd42aba0fd731b1df'">
+      <div ng-click="subNewsMangmt(staffNewsSubFeatureData)" class="bgColForThreeFet">
+        <div class="{{staffNewsSubFeatureData.service_category_id.icon}} featurefont subDaynamicIconNews3">
+          <span class="staffUnReadCnt" ng-if="staffNewsSubFeatureData.notiCount">{{staffNewsSubFeatureData.notiCount}}</span>
+        </div>
+        <p class="subDaynamicFontNews3">{{staffNewsSubFeatureData.service_category_id.name}}</p>
+      </div>
+    </div>
+    <div ng-if="newsMangSub == 1" class="col col-100 text-center" ng-repeat="staffNewsSubFeatureData in staffNewsSubFeatureDatas"
+      style="padding:0 !important;" ng-show="staffNewsSubFeatureData.service_category_id._id==='5787386661f925afa18240c4' || 
+          staffNewsSubFeatureData.service_category_id._id==='56ab40b8d42aba0fd731b1e4' ||
+          staffNewsSubFeatureData.service_category_id._id==='56a9e78bd42aba0fd731b1df'">
+      <div ng-click="subNewsMangmt(staffNewsSubFeatureData)" class="bgColForOneFet">
+        <div class="{{staffNewsSubFeatureData.service_category_id.icon}} featurefont subDaynamicIcon1">
+          <span class="staffUnReadCnt" ng-if="staffNewsSubFeatureData.notiCount">{{staffNewsSubFeatureData.notiCount}}</span>
+        </div>
+        <p class="subDaynamicFont1">{{staffNewsSubFeatureData.service_category_id.name}}</p>
+      </div>
+    </div>
+    <div ng-if="newsMangSub == 2" class="col col-100 text-center" ng-repeat="staffNewsSubFeatureData in staffNewsSubFeatureDatas"
+      style="padding:0 !important;" ng-show="staffNewsSubFeatureData.service_category_id._id==='5787386661f925afa18240c4' || 
+          staffNewsSubFeatureData.service_category_id._id==='56ab40b8d42aba0fd731b1e4' ||
+          staffNewsSubFeatureData.service_category_id._id==='56a9e78bd42aba0fd731b1df'">
+      <div ng-click="subNewsMangmt(staffNewsSubFeatureData)" class="bgCol">
+        <div class="{{staffNewsSubFeatureData.service_category_id.icon}} featurefont subDaynamicIcon">
+          <span class="staffUnReadCnt" ng-if="staffNewsSubFeatureData.notiCount">{{staffNewsSubFeatureData.notiCount}}</span>
+        </div>
+        <p class="subDaynamicFont">{{staffNewsSubFeatureData.service_category_id.name}}</p>
+      </div>
+    </div>
+  </ion-content>
+  </ioni-view>

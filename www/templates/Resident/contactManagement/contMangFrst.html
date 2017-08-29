@@ -1,0 +1,26 @@
+<ion-view cache-view="false" ng-controller="HeaderCtrl" class="whiteoverlayforHome">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <h1 class="title" style="color:white;">Contacts</h1>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content ng-init="headerPage()">
+        <div class="subPageStaff1">
+            <div class="newRequestResi1" ng-click="emailToManagment()" style="height: 31vh;">
+                <i class="icon medium ion-email textSub1"></i>
+                <h4 class="iconhead">Email Management Office</h4>
+            </div>
+            <div class="newRequestResi1" ng-click="callRequestToManagement()" style="height: 31vh;">
+                <i class="icon ion-ios-telephone textSub1"></i>
+                <h4 class="iconhead">Call Management Office</h4> </div>
+            <div class="newRequestResi1" ng-click="callRequestToDoorman()" style="height: 31vh;">
+                <i class="icon ion-ios-telephone textSub1"></i>
+                <h4 class="iconhead">Call Doorman</h4>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

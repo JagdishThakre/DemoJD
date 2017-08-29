@@ -1,0 +1,50 @@
+<ion-modal-view class="ion-nifty-modalshort" ng-controller="HeaderStaffCtrl">
+    <div class="ion-modal-content-custom">
+        <ion-content class="padding" scroll="true">
+            <h5 class="scolor">Search Criteria</h5>
+            <!--   <button class="button button-full button-positive" ng-click="closeModal()">Close Modal</button> -->
+            <form>
+                <div class="row">
+                    <div class="col col-100">
+                        <div>
+                            <label class="item item-input" style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;">
+                                <input class="sinput" type="search" placeholder="{{rise_unit_singleton}} Number" ng-model="searchFilter.unit_number" ng-change="scrollTop(searchFilter.unit_number)" ng-click="showToggle()">
+                                <button class="tasktype">
+                                    <i class="icon mediumcal ion-ios-arrow-down placeholder-icon"></i>
+                                </button>
+                            </label>
+                            <div class="card-wrapper" ng-if="data.show" style="height:190px">
+                                <div class="card custom-card">
+                                    <ion-list class="darklist">
+                                        <ion-item ng-repeat="item in items | filter:searchFilter:strict | orderBy:natural('unit_number')" item="item" ng-click="clickedItem1(item)">
+                                            {{item.unit_number}}
+                                        </ion-item>
+                                    </ion-list>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="item item-input" style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;margin:0% 3% 0% 3%;">
+                        <input class="sinput" type="text" placeholder="Guest Name" ng-model="guestname"  style="background: none;
+">
+                    </label>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col col-50"></div>
+                    <div class="col col-50">
+                        <!--  <button class="tasktype" ng-click="reset('package')"><span class="clearBtn">Reset</span></button> -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="tasktype" ng-click="clearAll(searchFilter);"><span class="clearBtn">Clear All</span></button>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <button class="cancelBtnReservsearch" ng-click="closeModal()">Cancel</button>&nbsp;
+                    <button class="confirmBtnReserv" ng-click="searchdata(searchFilter,guestname)">Submit</button>
+                </div>
+        </ion-content>
+    </div>
+</ion-modal-view>

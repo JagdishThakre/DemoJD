@@ -1,0 +1,31 @@
+<ion-modal-view  ng-init="validate()">
+    <ion-header-bar class="bar-dark">
+        <button class="button button-dark button-icon ion-ios-close-outline" ng-click="hideItems()" />
+        <h1 class="title">{{headerText}}</h1>
+        <button class="button button-dark button-icon ion-checkmark" ng-click="validate()" />
+    </ion-header-bar>
+    <ion-content>
+        <div class="bar bar-header item-input-inset" style="background-color: #9E9A9A;
+">
+            <label class="item-input-wrapper" style="background:#fff">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="search" placeholder="Search" ng-model="searchText">
+            </label>
+           
+        </div>
+        <ion-list>
+            <ion-item class="item-checkbox" ng-repeat="item in items | filter:searchText">
+                <label class="checkbox ">
+                    <input type="checkbox" class="ClrmultiCheck" ng-checked="item.checked" ng-model="item.checked">
+                </label>
+                <div style="margin-left:5%" ng-if="isTranslate">
+                    {{ item | translateItem:this }}
+                </div>
+                <div style="margin-left:5%" ng-if="!isTranslate">
+                    {{ $eval('item.' + textProperty) }}
+                </div>
+            </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>

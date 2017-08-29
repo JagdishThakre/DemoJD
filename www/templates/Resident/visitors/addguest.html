@@ -1,0 +1,52 @@
+<ion-view cache-view="false" ng-controller="HeaderCtrl" class="whiteoverlayforHome" ng-init="showresponsedata();">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Package Delivery</h1> -->
+        <ion-title style="color:white;">Guest Details</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <form class="" name="guestform" novalidate>
+        <ion-content class="addWoBg" style="padding:1%;">
+            <div class="row">
+                <div class="col col-100">
+                    <label class="item item-input lightline">
+                        <input class="sinput" type="text" placeholder=" First Name" name="first_name" ng-model="guest.firstname" required>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-100">
+                    <label class="{{(guest.firstname)?'item item-input lightline':'item item-input lightlinedisable'}}">
+                        <input class="sinput" type="text" ng-disabled="!guest.firstname" placeholder=" Last Name" name="last_name" ng-model="guest.lastname" required>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-100">
+                    <label class="{{(guest.firstname && guest.lastname)?'item item-input lightline':'item item-input lightlinedisable'}}">
+                        <input class="sinput" type="email" ng-disabled="
+                        !(guest.firstname && guest.lastname)" placeholder="Email" ng-model="guest.email" name="email" required>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-100">
+                    <label class="{{(guest.firstname && guest.lastname)?'item item-input lightline':'item item-input lightlinedisable'}}">
+                        <input class="sinput" phone-input type="tel" ng-disabled="!(guest.firstname && guest.lastname)" placeholder=" Phone Number" name="phonenumber" ng-model="guest.phonenumber" required>
+                    </label>
+                </div>
+            </div>
+        </ion-content>
+    </form>
+    <ion-footer-bar style="padding: 0px;background-color: transparent;">
+        <div class="row" style="padding: 0;">
+            <div class="col col-100" style="padding: 0;border-left: 1px solid #fff;">
+                <button ng-disabled="(guestform.first_name.$invalid || guestform.last_name.$invalid || guestform.email.$invalid) && (guestform.first_name.$invalid || guestform.last_name.$invalid || guestform.phonenumber.$invalid)" style="padding: 0;margin: 0;height: 44px;" class="button button-full confirmBtnReserv" ng-click="addguest()">Save</button>
+            </div>
+        </div>
+    </ion-footer-bar>
+</ion-view>

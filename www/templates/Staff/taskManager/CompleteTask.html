@@ -1,0 +1,58 @@
+<ion-view cache-view="false" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">Complete Task</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content style="background:black";>
+
+        <form name="cldwkform" mobiscroll-form="taskformsettings" style="display:none">
+
+            <div class="mbsc-form-group">
+
+                <div class="mbsc-form-group-title">Task Complete Entry</div>
+
+                <label>Hours/Effort
+                      <input ng-model="editTaskDetails1.hours" mobiscroll-timespan="tasktimespansettings" placeholder="Enter Time" name="time">
+                </label>
+
+                <label>Task Details
+                      <textarea name="details" ng-model="editTaskDetails1.details" placeholder="Enter details" required></textarea>
+                </label>
+
+                <label>Parts Used
+                        <textarea name="parts" ng-model="editTaskDetails1.tools" placeholder="Enter any parts used"></textarea>
+                </label>
+
+                <label>Amount
+                     <input ng-model="editTaskDetails1.cost" mobiscroll-numpad="taskcurrencysettings" placeholder="Enter amount" name="amount">
+                </label>
+
+            </div>
+
+            <div class="mbsc-form-group">
+
+                <div class="mbsc-btn-group-justified">
+                    <button data-icon="empty icon ion-ios-camera" ng-click="getclicked()">Camera</button>
+                    <button data-icon="empty icon ion-image" ng-click="getselect()">Gallery</button>
+                </div>
+
+                <div class="capture-img-section" ng-repeat="gImg in topic.photos track by $index" ng-show="gImg !== undefined">
+                    <i class="icon ion-close-circled right capture-img-remove" ng-click="removeImg($index)">&nbsp</i>
+                    <img class="capture-img" ng-src="{{gImg}}" ng-click="openImageZoom1(topic.photos,$index)">
+                </div>
+
+            </div>
+
+            <div class="mbsc-form-group">
+                <button class="mbsc-btn-block md-sg-btn" ng-click="sendclsreq(editTaskDetails1)" ng-disabled="cldwkform.$invalid">Submit</button>
+            </div>
+
+        </form>
+
+    </ion-content>
+</ion-view>

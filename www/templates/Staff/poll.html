@@ -1,0 +1,29 @@
+<ion-view class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+  <ion-nav-buttons side="left">
+    <img ng-src="img/logo2.png" ng-click="featurePage()">
+  </ion-nav-buttons>
+  <ion-nav-title>
+      <ion-title style="color:white;">Rise</ion-title>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-arrow-return-left headerbuttonStaff" ng-click="goback()"></button>
+  </ion-nav-buttons>
+  <ion-content ng-init="loadPollList();">
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+    <div class="list poll-section" style="border: 0 none;">
+      <div ng-class="{'border-rm':$index==0}" class="item poll-item row notifiDiv1"  ng-repeat="poll in polls_list" ng-click="showPollDetails(poll._id)" >
+          <div class="col col-20 item-image notifiImgDiv">
+            <img class="notifiImg" ng-class="{'markStatus-staff':news.users_id.user_type_id == 3,'markStatus-resi':news.users_id.user_type_id == 4}" src="{{host_url+poll.users_id.profile_img | thumb}}" onerror="this.src='img/placeholderImg.png'">
+          </div>
+          <div class="col col-67 notifiMsgDiv">
+              <span style="" class="col notifiDate">{{poll.created|  date:"h:mma - MMM dd yyyy"}}</span>
+              <span class="col notifiMsgSpan">
+                  <span style="float: left; ">{{poll.users_id.firstname}} {{poll.users_id.lastname}}</span>
+              </span>
+              <span class="col text-wrap notifiMsgTextSpan">{{poll.questions | truncate:65}}</span>
+          </div>
+      </div>
+    </div>
+    <ion-infinite-scroll immediate-check="false" ng-if="!noMoreItemsAvailable" on-infinite="loadMore()"  distance="5%"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,9 @@
+<ion-popover-view   ng-show="showpredictivePropery" style="left: 19% !important;height: 20% !important;right:10% !important">
+        <ion-content>
+          <div class="list">
+            <a class="item text-wrap" ng-repeat="pText in filteredText" ng-click="setPromptText(pText)" >
+              {{pText.text_name}}
+            </a>
+          </div>
+        </ion-content>
+</ion-popover-view>

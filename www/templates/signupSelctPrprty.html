@@ -1,0 +1,31 @@
+<ion-view class="loginDiv signUpBG" hide-nav-bar="true">
+    <ion-content scroll="false" ng-init="predectiveCall()">
+        <div class="row">
+            <button ng-click="changeBaseURl()" class="dynamicUrlBtn">{{urlChangeBtnName}}</button>
+        </div>
+
+        <div class="video-container">
+            <video webkit-playsinline autoplay playsinline muted loop preload="auto">
+                <source type="video/mp4" src="video/videointro.mp4">
+            </video>
+        </div>
+
+        <div class="login-logo-section" align="center">
+            <img class="leftImg2 login-logo" ng-src="img/placeholderImg.png">
+        </div>
+        <div class="signUp-barsSelectPrpryName">
+            <div class="list list-inset" align="center">
+                <label class="item item-input login-field">
+                    <input class="input-color login-input rmPadngRight" type="text" ng-model="data.signUpProperyName" placeholder="Please enter your Property Name" name="signUpProperyName" ng-blur="popover.hide()" ng-change="compareText(data.signUpProperyName)" ng-keyup="popover.show($event)">
+                </label>
+            </div>
+        </div>
+        <div class="signupFooter">
+            <input type="button" class="button button-block loginbutton" value="Next" ng-click="goToproperyList()" />
+            <a ng-click="Loginstate()">
+                <span class="login" style="color:white;font-size: 16px;">Back</span>
+            </a>
+        </div>
+        </div>
+    </ion-content>
+</ion-view>

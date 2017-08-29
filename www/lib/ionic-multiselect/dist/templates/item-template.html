@@ -1,0 +1,19 @@
+<ion-list>
+    <ion-item ng-click="showItems($event)" style="background-color: rgba(37, 36, 36, 0.06);
+width: 132%;
+color: #fff;
+border-top: none;
+border-left: none;
+border-right: none;
+color: rgba(255, 255, 255, 0.77);
+margin-left:-10%;
+">
+        <div style="font-size:14px;text-align: left;margin-left: -10%;
+
+
+" ng-repeat="item in text | showTextData:this track by $index" ng-model="item">
+            {{ item }}
+        </div>
+        <span class="item-note">{{noteText}}</span>
+    </ion-item>
+</ion-list>

@@ -1,0 +1,43 @@
+<ion-view cache-view="false" ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <ion-title style="color:white;">Work Orders</ion-title>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+  <ion-content scroll="false" class="feature_staff_center" ng-init="getWoManagerList()">          
+    <!-- <div class="col col-100 wopage" ng-repeat="featuresdata in featuresData1" ng-init="featureNote1()">
+      <div ng-click="changestate(featuresdata.slug,featuresdata._id,featuresdata.notiCount)" class="hoverclass staff-featurepgpading workorderMargin">
+        <div class="{{featuresdata.icon}} featurefont">
+          <span class="staff_feturPgCunt" ng-show ="featuresdata.notiCount != undefined">{{featuresdata.notiCount}}</span>
+        </div>
+        <p class="featureNameFont">{{featuresdata.name}}</p>
+      </div>
+    </div> -->
+    <div class="boxRe">
+      <div  class="col col-100" ng-repeat="featuresdata in featuresData1" ng-init="featureNote1()" style="padding:0 !important;">
+        <div ng-click="changestate(featuresdata.slug,featuresdata._id,featuresdata.notiCount)" class="bgCol">
+          <div class="{{featuresdata.icon}} featurefont subDaynamicIcon">
+            <span class="staffUnReadCnt" ng-show ="featuresdata.notiCount != undefined">{{featuresdata.notiCount}}</span>
+          </div>
+          <p class="subDaynamicFont">{{featuresdata.name}}</p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="boxRe">
+      <div class="row" ng-repeat="featuresdata in featuresData1" class="features4" style="padding:0px !important; margin-top:0px !important;">
+        <div class="col featurePage3 hoverStaff" style="background:rgba(0,0,0,0.7); position: relative;">
+          <div class='customeCls'>
+            <div ng-click="changestate(featuresdata.slug,featuresdata._id,featuresdata.notiCount)" class="{{featuresdata.icon}} f-size">
+              <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined">{{featuresdata.notiCount}}</span>
+            </div>
+            <p class="featureNameFont1">{{featuresdata.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </ion-content>
+</ion-view>

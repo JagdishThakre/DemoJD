@@ -1,0 +1,115 @@
+<ion-view view-title="Management" id="userMessagesView" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl" ng-init="loadtaskView()">
+ <ion-nav-buttons side="left">
+  <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+</ion-nav-buttons>
+<ion-nav-title>
+  <ion-title style="color:white;">Activity Details</ion-title>
+</ion-nav-title>
+<ion-nav-buttons side="right">
+  <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+</ion-nav-buttons>
+<ion-content style="background: #000;" class="has-header has-footer">
+  <ion-refresher pulling-text="Pull to refresh..." on-refresh="getDetails()"></ion-refresher>
+  <div class="detailsMainDiv" ng-show="!loading">
+    <div class="detailsDateDiv">
+      <i class="ion-ios-time-outline lightGreyColor"></i>&nbsp
+      <span class="lightGreyColor">{{activityDetail.created | dateformatdetails}}</span>
+      <span class="lightGreyColor right" ng-show="activityDetail.type == 2" style="color: #58b9cc;">Incident Activity</span>
+      <span class="lightGreyColor right" ng-show="activityDetail.type == 1" style="color: #58b9cc;">Normal Activity</span>
+      <!-- <span class="right staff-text-color" style="font-style: italic;">category_name</span> -->
+    </div>
+
+    <!-- <span ng-show="activityDetail.location">Location : {{activityDetail.location}}</span> -->
+    <div class="detailsDiv">
+      <ul class="review-height">
+        <li class="classLi" ng-show="activityDetail.title">
+          <span class="bold">Title : &nbsp</span>
+          <span class="serviceDtlsTextColor"> {{activityDetail.title}}</span>
+        </li>
+        <li class="classLi" ng-if="activityDetail.content">
+            <span class="bold ">Description :&nbsp</span>
+            <span class="serviceDtlsTextColor"> {{activityDetail.content}}</span>
+        </li>
+        <li class="classLi" ng-show="activityDetail.created_by.firstname">
+          <span class="bold">Posted By : &nbsp</span>
+          <span class="serviceDtlsTextColor capitalize">{{activityDetail.created_by.firstname}}  {{activityDetail.created_by.lastname}}</span>
+        </li>
+        <li class="classLi" ng-show="activityDetail.unit_number && activityDetail.type == 2">
+          <span class="bold">{{rise_unit_singleton}} Number : &nbsp</span>
+          <span class="serviceDtlsTextColor"> {{activityDetail.unit_number}}</span>
+        </li>
+        <li class="classLi"  ng-show="activityDetail.type == 2">
+          <span class="bold">Category :&nbsp</span>
+          <span  class="serviceDtlsTextColor" ng-show="activityDetail.category == 1">Property Damage</span>
+          <span  class="serviceDtlsTextColor" ng-show="activityDetail.category == 2">General Liability</span>
+          <span  class="serviceDtlsTextColor" ng-show="activityDetail.category == null || activityDetail.category == 3">Other</span></span>
+        </li>
+        <li class="classLi" ng-show="activityDetail.location && activityDetail.type == 2">
+          <span class="bold">Location :&nbsp</span>
+          <span class="serviceDtlsTextColor"> {{activityDetail.location}}</span>
+        </li>
+      </ul>
+      <div ng-show="activityDetail.images && activityDetail.images.length > 0" style="margin-top: 5px;padding-top: 5px">
+          <div class="img-section" style="float: none!important;pointer-events: all;" ng-repeat="gImg in activityDetail.images track by $index" ng-click="openImageZoom1ss(activityDetail.images,$index)">
+            <img class="capture-img" showonload="{{host_url_global+'/'+gImg.url}}" src="img/image-loading.gif">
+          </div>
+      </div>
+<!--
+      <div class="capture-img-section" ng-repeat="gImg in topic.photos track by $index" ng-show="gImg !== undefined">
+          <i class="icon ion-close-circled right capture-img-remove" ng-click="removeImg(gImg)">&nbsp</i>
+          <img class="capture-img" ng-src="{{gImg}}" ng-click="openImageZoom1(GuestNameObject,$index)">
+      </div> -->
+
+      <!--
+      <div ng-show="activityDetail.images && activityDetail.images.length > 0"  class="transformable" ng-class="{'small':!isSmall, 'big':isSmall}" style="margin-top: 5px;padding-top: 5px;">
+          <div class="capture-img-section add-img-act" style="float: none!important;pointer-events: all;" ng-repeat="gImg in activityDetail.images track by $index" ng-click="openImageZoom1ss(activityDetail.images,$index)">
+            <img class="capture-img" showonload="{{host_url_global+'/'+gImg.url}}" src="img/image-loading.gif">
+          </div>
+      </div>
+      <div class="text-center" ng-show="activityDetail.images && activityDetail.images.length > 3 && !isSmall" ng-click="isSmall = !isSmall">Show All Images</div>
+      <div class="text-center" ng-show="activityDetail.images && activityDetail.images.length > 3 && isSmall" ng-click="isSmall = !isSmall">Hide Images</div>
+    -->
+    </div>
+  </div>
+  <div ng-show="!loading">
+        <ion-list class="list poll-section" style="border: 0 none;" can-swipe="true">
+          <ion-item ng-repeat="acti in activityDetail.group_comments" class="comment-item">
+            <div class="row retrivedTextDetailsPg">
+              <div>
+                  <div  style="width: 50px;" ng-if="acti.commented_by.profile_img == undefined || acti.commented_by.profile_img == null">
+                    <div class="markStatus-resi"  style="border-radius:50%;width:55px;height:55px;">
+                      <ionic-letter-avatar data="{{acti.commented_by.firstname | limitTo :1}}{{acti.commented_by.lastname | limitTo :1}}" bkcolor="#2c3e50" shape="round" charcount="2"></ionic-letter-avatar>
+                    </div>
+                  </div>
+                  <div  style="width: 50px;" ng-if="acti.commented_by.profile_img != undefined && acti.commented_by.profile_img != null">
+                    <img ng-src="{{srcImage || host_url_global+'/'+acti.commented_by.profile_img }}" onerror="this.src='img/placeholderImg.png'" class="markStatus-resi"  style="border-radius:50%;width:55px;height:55px;">
+                  </div>
+                </div>
+                <div class="col col-75">
+                  <div class="col pad0 text-right" style="margin-top: -3px;font-size: 10px;">
+                    <i class="ion-clock"></i>
+                    <span>{{acti.created| date:"h:mma"}}</span>
+                  </div>
+                  <div class="col pad0" style="margin-left: 5px;margin-top: -13px;">
+                    <span class="retrivedtext_Name" style=" text-transform: capitalize;">{{acti.commented_by.firstname}} {{acti.commented_by.lastname}}</span>
+                  </div>
+                  <div class="col pad0 retrive-textmsg-section" style="margin-left: 5px;">
+                    <span class="retrivedtext_Msg text-wrap" ng-bind-html="acti.comment | htmlize | convertLinks"></span>
+                </div>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>  
+    </ion-content>
+    <ion-footer-bar class="message-footer" keyboard-attach style="background:#000;">
+      <label class="item-input-wrapper">
+        <textarea id="cmt_content" class="replay-msg" type="text" placeholder="Type your comment here" ng-model="commentObj.comment" msd-elastic style="width:100%;" maxlength="1500"></textarea>
+      </label>
+      <div class="footer-btn-wrap">
+        <button class="button button-icon icon ion-android-send footer-btn staff-btn-color" ng-if="commentObj.comment!=undefined" ng-show="commentObj.comment.length!=0"
+        ng-click="addComment(sentText.length)">
+      </button>
+    </div>
+  </ion-footer-bar>
+</ion-view>

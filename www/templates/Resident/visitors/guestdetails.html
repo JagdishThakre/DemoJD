@@ -1,0 +1,104 @@
+<ion-view cache-view="false" ng-controller="HeaderCtrl">
+    <ion-nav-buttons side="left">
+        <div ng-click="goback()">
+            <button class="button button-icon ion-chevron-left headerbuttonmenu" nav-direction="enter"></button>
+        </div>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Workorder Details</h1> -->
+        <ion-title style="color:white;">Guest Details</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content style="background: #000;" class="has-header" ng-init="showguestdetails()">
+        <div class="detailsMainDiv">
+            <i class="icon ion-clock lightGreyColor" ng-show="guestdetail.created"></i>&nbsp
+            <span class="lightGreyColor">{{guestdetail.created | dateformatnotifcation}}</span>
+            <div class="row">
+                <div class="col col-100" style="text-align:center">
+                    <div ng-show="guestdetail.profile_img">
+                        <img class="guestdetail" ng-src="{{host_url_global+'/' + guestdetail.profile_img}}">
+                    </div>
+                    <div ng-if="!guestdetail.profile_img && guestdetail.initials" class="col col-20 item-image notifiImgDiv guestdetailsAvatar">
+                        <div ng-class="markStatus-resi" class="ng-cloak">
+                            <ionic-letter-avatar class="ng-cloak" data="{{guestdetail.initials}}" charcount="2" shape="round"></ionic-letter-avatar>
+                        </div>
+                    </div>
+                    <!--   <div ng-show="!guestdetail.profile_img">
+                        <ionic-letter-avatar data="guestdetail.firstname" shape="round"></ionic-letter-avatar>
+                    </div> -->
+                    <h5 class="guestdeatils">{{guestdetail.firstname}} {{guestdetail.lastname}}</h5>
+                    <span ng-show="guestdetail.phone_no"><i class="icon ion-ios-telephone phoneColor" ></i> &nbsp; <span  class="phoneFontguestdeatils" ng-click="callphone(guestdetail.phone_no)">{{guestdetail.phone_no | tel}} </span>
+                    </span>
+                    <div class="usepadding">
+                        <span ng-show="guestdetail.email"><i class="icon ion-email emergencyPhoneColor" ></i>&nbsp;   <span  class="phoneFontguestdeatils" ng-click="emailContact(guestdetail.email)">{{guestdetail.email}} </span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row " style="text-align:center">
+                <div class="col col-100">
+                    <div class="usepadding">
+                        <span ng-if="guestdetail.scheduling_type"><b>Type:</b> <span ng-if="guestdetail.scheduling_type==1" class="lightGreyColortime">Day Pass</span>
+                        <span ng-if="guestdetail.scheduling_type==2 && guestdetail.option==1 " class="lightGreyColortime">Daily Pass</span>
+                        <span ng-if="guestdetail.scheduling_type==2 && guestdetail.option==2 " class="lightGreyColortime">Weekly Pass</span>
+                        <span ng-if="guestdetail.scheduling_type==2 && guestdetail.option==3 " class="lightGreyColortime">Monthly Pass</span>
+                        <span ng-if="guestdetail.scheduling_type==3" class="lightGreyColortime">Indefinitely</span>
+                        </span>
+                    </div>
+                     <div class="usepadding" ng-if="guestdetail.category">
+                        <span><b>Category:</b> <span class="lightGreyColortime">{{guestdetail.category}}</span></span>
+                    </div>
+                    <div class="usepadding" ng-if="guestdetail.scheduling_type==1">
+                        <span ng-if="guestdetail.scheduling_type==1"><b>Valid Date:</b> <span class="lightGreyColortime">{{guestdetail.pass_valid_start_date | dateformatnotifcationguest}}</span></span>
+                    </div>
+                    <div class="usepadding" ng-if="guestdetail.scheduling_type!=1 && guestdetail.pass_valid_start_date">
+                        <span ng-if="guestdetail.scheduling_type!=1 && guestdetail.pass_valid_start_date"><b>Start Date:</b> <span class="lightGreyColortime">{{guestdetail.pass_valid_start_date | dateformatnotifcationguest}}</span></span>
+                    </div>
+                    <div class="usepadding" ng-if="guestdetail.scheduling_type!=1 && guestdetail.pass_valid_end_date">
+                        <span ng-if="guestdetail.scheduling_type!=1 && guestdetail.pass_valid_end_date"><b>End Date:</b> <span class="lightGreyColortime">{{guestdetail.pass_valid_end_date | dateformatnotifcationguest}}</span></span>
+                    </div>
+                    <div class="usepadding" ng-if="guestdetail.days.length" style="text-align:center">
+                        <span><b>Days:</b></span>
+                        <span class="lightGreyColortime" ng-if="guestdetail.days.length < 2" ng-repeat="day in guestdetail.days" style="text-align:center">{{day}}</span>
+                        <span class="lightGreyColortime" ng-if="guestdetail.days.length >= 2" ng-repeat="day in guestdetail.days" style="text-align:center">{{day.substring(0,3)}} </span>
+                    </div>
+                    <div class="usepadding" ng-if="guestdetail.day_of_month">
+                        <span ng-if="guestdetail.day_of_month"><b>Day Of Month:</b> <span class="lightGreyColortime">{{guestdetail.day_of_month}}</span></span>
+                    </div>
+                    <div class="usepadding" ng-if="!guestdetail.pass_valid_start_time && !guestdetail.pass_valid_end_time && guestdetail.scheduling_type!=3">
+                        <span ng-if="!guestdetail.pass_valid_start_time && !guestdetail.pass_valid_end_time"><b>Time Valid:</b> <span class="lightGreyColortime">All Day</span></span>
+                    </div>
+                    <div class="usepadding">
+                        <span ng-if="guestdetail.pass_valid_start_time && guestdetail.pass_valid_end_time"><b>Time From:</b> <span class="lightGreyColortime">{{guestdetail.pass_valid_start_time}}</span></span>
+                        <span ng-if="!guestdetail.pass_valid_start_time && guestdetail.pass_valid_end_time"><b>Time From:</b> <span class="lightGreyColortime">12:00 AM</span></span>
+                    </div>
+                    <div class="usepadding">
+                        <span ng-if="guestdetail.pass_valid_start_time && guestdetail.pass_valid_end_time"><b>Time To:</b> <span class="lightGreyColortime">{{guestdetail.pass_valid_end_time}}</span></span>
+                        <span ng-if="guestdetail.pass_valid_start_time && !guestdetail.pass_valid_end_time"><b>Time To:</b> <span class="lightGreyColortime">11:59 PM</span></span>
+                    </div>
+                    <div class="usepadding">
+                        <span ng-if="guestdetail.notes"><b>Special Instructions:</b></span>
+                        <span ng-if="guestdetail.notes" class="lightGreyColortime">{{guestdetail.notes}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="taskManagerBtnActions" ng-show="guestdetail">
+                <ul class="review-height">
+                    <li class="classLi">
+                        <button class="button button-small button-positive editTaskBtn" ng-click="gotoedit(guestdetail.schedule_id)">Edit</button>
+                    </li>
+                    <li>
+                        <button class="button button-small button-positive deleteguestBtn" ng-click="deleteguest(guestdetail.schedule_id)">Delete </button>
+                    </li>
+                    <li ng-show="guestdetail.email">
+                        <button class="button button-small button-positive sendemailguestBtn" ng-click="getsmsdata(guestdetail.schedule_id,2)">Send Email</button>
+                    </li>
+                    <li ng-show="guestdetail.phone_no">
+                        <button class="button button-small button-positive sendphoneguestBtn" ng-click="getsmsdata(guestdetail.schedule_id,1)">Send Message</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

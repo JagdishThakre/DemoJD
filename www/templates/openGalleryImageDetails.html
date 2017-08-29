@@ -1,0 +1,11 @@
+<div class="modal image-modal editCommentPopup">
+  <button class="button button-clear ion-close-round pull-right zoom-close" ng-click="closeGaleryModal()" style="margin-top: 10%;margin-right: 0;"></button>
+  <ion-slide-box show-pager="false" style="position:absolute;" active-slide="activeImageSlide">
+    <ion-slide ng-repeat="oImage in previewImages track by $index">
+      <ion-scroll zooming="true" direction="xy" delegate-handle="zoom-pane" class="zoom-pane" min-zoom="1" scrollbar-x="false" scrollbar-y="false" style="text-align:center;position: absolute;left: 0; top: 0;right: 0;bottom: 0;">
+      <!-- <h1>{{$index}}</h1> -->
+        <img showonload="{{host_url_global+'/'+oImage.url}}" src="img/image-loading.gif" class="fullscreen-image"/ >
+      </ion-scroll>
+    </ion-slide>
+  </ion-slide-box>
+</div>

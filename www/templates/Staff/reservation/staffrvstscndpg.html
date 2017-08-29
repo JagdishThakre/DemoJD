@@ -1,0 +1,17 @@
+<ion-view class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl" ng-style="{'background': 'url('+ backgroundImg +') no-repeat scroll center top / cover'}">
+ <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Reservations</h1> -->
+         <ion-title style="color:white;">Reservations</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <ion-content ng-controller="StaffRvstCtrl">
+    <div>
+      <flex-calendar options="options" events="events"></flex-calendar>
+    </div>
+  </ion-content>
+</ion-view>

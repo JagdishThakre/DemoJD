@@ -1,0 +1,71 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+      <ion-nav-buttons side="right">
+        <button class="button" menu-toggle="right" ng-click="addWidth()"><img ng-src="img/logo2.png"></button>
+      </ion-nav-buttons>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="right" make-width-zero="{{datazero}}">
+    <ion-content class="sidemenuColor">
+      <ion-list>
+      <div  style="margin-top: 10px; text-align: center;">
+        <a href="#/editProfile" class="white">
+          <div ng-if="profileImg == ''" class="markStatus-resi sideMenuImage imgCircleResi" style="    margin-left: 32%;">
+          <ionic-letter-avatar data="{{ firstName | limitTo:1}}{{ lastName.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{bgColor}}" shape="round" charcount="2"></ionic-letter-avatar>
+          </div>
+          <img ng-if="profileImg" class="markStatus-resi sideMenuImage" ng-src="{{srcImage || host_url_global+'/'+profileImg }}" onerror="this.src='img/placeholderImg.png'"> 
+        </a>
+      </div>
+      <!-- <div ng-if="profileImg == ''" style="margin-top: 10px; text-align: center;margin-left: 32%;">
+        <a href="#/editProfile" class="white">
+          <div class="markStatus-staff sideMenuImage sideMenuImage1">
+            <ionic-letter-avatar data="{{ firstName | limitTo:1}}{{ lastName | limitTo:1 }}" shape="round" charcount="2"></ionic-letter-avatar>
+          </div>
+        </a>
+      </div> -->
+      <div style=" padding-bottom: 13px;padding-top: 10px;color: #bcbcbc;text-align: center;">
+            <span class="bold">{{greet}}</span><br>
+           <a href="#/editProfile" class="white"> <span class="bold">{{firstName}} </span><span class="bold">{{lastName}}</span> </a>
+      </div>
+        <ion-item menu-toggel href="#/changePassword" class="transparent sideMenuColor">
+          <i class="icon ion-key sideMenuIcon"></i><span class="sideMenuText">Change Password</span>
+        </ion-item>
+        <!-- <ion-item menu-toggel href="" class="transparent sideMenuColor" ng-click="opendocumentvault()">
+          <i class="icon ion-filing sideMenuIcon"></i><span class="sideMenuText">Document Vault</span>
+        </ion-item> -->
+         <ion-item menu-close href="" class="transparent sideMenuColor" ng-click="managementoffice()">
+          <i class="icon ion-briefcase sideMenuIcon"></i><span class="sideMenuText">Management Office </span>
+        </ion-item>
+         <ion-item menu-close  href="#/resident_changeBG" class="transparent sideMenuColor">
+         <i class="icon ion-edit sideMenuIcon"></i><span class="sideMenuText">Change Background </span>
+        </ion-item>
+         <ion-item menu-close href="" class="transparent sideMenuColor" ng-click="openfaq()">
+         <i class="icon ion-help sideMenuIcon"></i><span class="sideMenuText">FAQ </span>
+        </ion-item>
+        <!-- <ion-toggle ng-model="notiSound" class="transparent sideMenuColor resiDingToggle" ng-change="notiSoundStatus(notiSound)" toggle-class="toggle-balanced"><i class="icon  ion-volume-low sideMenuIcon"></i>     <span class="sideMenuText">In-App Sounds</span></ion-toggle> -->
+         <ion-item menu-close  href="" class="transparent sideMenuColor" ng-click="sendfeedback()">
+          <i class="icon ion-compose sideMenuIcon"></i><span class="sideMenuText">Get Support</span>
+        </ion-item>
+        <!-- <ion-item menu-toggel href="#/resiClearNoti" class="transparent sideMenuColor">
+          <i class="ion-ios-trash sideMenuIcon"></i><span class="sideMenuText">Clear Notifications</span>
+        </ion-item> -->
+        <ion-item menu-close href="" class="transparent sideMenuColor" ng-click="submityouridea()">
+         <i class="icon ion-ios-lightbulb sideMenuIcon"></i><span class="sideMenuText">Submit Your Idea!</span>
+        </ion-item>  
+        <ion-item menu-close href="" class="transparent sideMenuColor" ng-click="ppolicy()">
+          <i class="icon ion-ios-locked sideMenuIcon"></i><span class="sideMenuText">Privacy Policy</span>
+        </ion-item>
+        <ion-item menu-close href="" class="transparent sideMenuColor" ng-click="termscondtn()">
+          <i class="icon ion-clipboard sideMenuIcon"></i><span class="sideMenuText">Terms & Conditions</span>
+        </ion-item>
+        <ion-item menu-close href="" class="transparent sideMenuColor">
+          <i class="">3.0.0</i><span class="sideMenuText">Version</span>
+        </ion-item>
+        <ion-item menu-close href=""  ng-click="logoutByUser()"class="transparent sideMenuColor">
+         <i class="icon ion-power sideMenuIcon"></i><span class="sideMenuText">  Logout</span>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

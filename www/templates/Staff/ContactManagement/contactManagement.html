@@ -1,0 +1,10 @@
+<ion-view class="whiteoverlayforResident" ng-controller="HeaderStaffCtrl">
+    <ion-tabs class="tabs-positive StaffTab tabs-top tabs-icon-top">
+        <ion-tab title="{{rise_property}}" icon-on="ion-ios-home" icon-off="ion-ios-home-outline" href="#/staffcmng/resiContacts" on-select="passUserType(4)">
+            <ion-nav-view name="resiContacts-contact"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Staff" icon-on="ion-ios-people" icon-off="ion-ios-people-outline" href="#/staffcmng/staffContacts" on-select="passUserType(3)">
+            <ion-nav-view name="staffContacts-contact"></ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

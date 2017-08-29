@@ -1,0 +1,41 @@
+<ion-view class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+  <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Reservations</h1> -->
+        <ion-title style="color:white;">Reservations</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <ion-content class="feature_staff_center" ng-init="rvstItem()">
+   <!-- <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right rvst-bckclr" style="border:1px solid" ng-click="goItemRvst(itemlist)" ng-repeat=" itemlist in rvstItem | orderBy:'name'">
+                <i class="ion-grid rvst_icon1"></i>
+                <h6 class="rvst_heading">{{itemlist.name}} </h6>
+                <i class="ion-record booked_itemtrue bookedItemCircle" style="color:#00ff00 ;" ng-if="itemlist.is_available == true"></i>
+                <i class="ion-record booked_itemFalse bookedItemCircle" style=" color:#ff4500 ;"ng-if="itemlist.is_available == false"></i>
+                <i class="icon ion-chevron-right icon-accessory rvst_icon2"></i>
+      </ion-item>
+    </ion-list> -->
+    <ion-list>
+      <ion-item class="row item-remove-animate item-avatar item-icon-right rvst-bckclr" style="border:1px solid" ng-click="goItemRvst(itemlist)" ng-repeat=" itemlist in rvstItem">
+               <div class="col col-20 padding13px"> 
+                   <i class="ion-grid rvst_icon_item"></i>
+                </div>
+                <div class="col col-50 padding13px"> 
+                 <h6 class="rvst_heading">{{itemlist.name}} </h6>
+                              </div>
+                <div class="col col-20 "> 
+                 <i class="ion-record booked_itemtrue bookedItemCircle " style="color:#00ff00;" ng-if="itemlist.is_available == true"></i>
+                 <i class="ion-record booked_itemFalse bookedItemCircle" style=" color:#ff4500;"ng-if="itemlist.is_available == false"></i>
+                              </div>
+                <div class="col col-20"> 
+                 <i class="icon ion-chevron-right icon-accessory rvst_icon2"></i>
+                              </div>
+      </ion-item>
+    </ion-list>
+  
+  </ion-content>
+</ion-view>

@@ -1,0 +1,293 @@
+<ion-view cache-view="false" id="userMessagesView" ng-controller="staffnotificationCtrl" class="thread-border" ng-init="loadtaskView()">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="gobackStafNotificationList12(notifythread.cat_slug)"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">{{stafnotiHead}}</h1> -->
+        <ion-title style="color:white;">{{stafnotiHead}}</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header has-footer" ng-init="callthread()" ng-class="{'rsvtBackgroundColor':notifythread.services_category_id.slug=='rsvt','detailsPgBckColor':notifythread.services_category_id.slug!='rsvt'}">
+        <div class="detailsMainDiv" ng-if="notifythread.services_category_id.slug!='rsvt'">
+            <div class="detailsDateDiv">
+                <i class="icon ion-clock lightGreyColor" ng-if="notifythread.created"></i>&nbsp
+                <span class="lightGreyColor">{{serviceCreatedDate}}</span>
+                <span class="right detailsPadding" style="margin-top:-3px">{{notifythread.units_id.unit_number}}</span>
+            </div>
+            <div class="detailsDateDiv" ng-if="notifythread.services_category_id.slug=='pckg' && notifythread.carrier!='General'">
+                <i class="icon ion-cube lightGreyColor"></i>&nbsp
+                <span class="lightGreyColor">Carrier</span>
+                <span ng-if="notifythread.carrier=='Amazon'" class="right detailsPadding" style="margin-top:-3px"> <img class=
+                "carrierimg" src="img/amazon.jpg"></span>
+                <span ng-if="notifythread.carrier=='UPS'" class="right detailsPadding" style="margin-top:-3px"> <img class=
+                "carrierimg" src="img/ups.png"></span>
+                <span ng-if="notifythread.carrier=='USPS'" class="right detailsPadding" style="margin-top:-3px"> <img class=
+                "carrierimg" src="img/USPS.png"></span>
+                <span ng-if="notifythread.carrier=='FedEx'" class="right detailsPadding" style="margin-top:-3px"> <img class=
+                "carrierimg" src="img/FedEx.jpg"></span>
+                <span ng-if="notifythread.carrier=='General'" class="right detailsPadding" style="margin-top:-3px"> <img class=
+                "carrierimg" src="img/General.jpg"></span>
+                <span ng-if="!notifythread.carrier" class="right detailsPadding" style="margin-top:-3px"> <img class=
+                "carrierimg" src="img/General.jpg"></span>
+            </div>
+            <div class="detailsDiv">
+                <span class="review-height" ng-if="notifythread.cat_slug != 'cl'">{{notifythread.message}}</span>
+                <br>
+                <span class="review-height" ng-if="notifythread.staff_id &&  notifythread.is_signed == true && notifythread.services_category_id.slug == 'pckg'">Signed off By : {{notifythread.staff_id.firstname}} {{notifythread.staff_id.lastname}}</span>
+                <!-- <span class="review-height" ng-if="notifythread.cat_slug == 'cl' && notifythread.cab_light_min=='Now'">Hello, please turn on the cab light, I’m coming down</span> -->
+                <span class="review-height" ng-if="notifythread.cat_slug == 'cl' && notifythread.cab_light_min=='Now'">Hello, please bring out my car, I'm coming down</span>
+                <span class="review-height" ng-if="notifythread.cat_slug == 'cl' && notifythread.cab_light_min!='Now'">{{notifythread.message}}</span>
+                <span class="review-height" ng-if="(notifythread.cab_light_min)">{{notifythread.cab_light_min}}  <span ng-if="notifythread.cab_light_min==5 || notifythread.cab_light_min==10 || notifythread.cab_light_min==15 || notifythread.cab_light_min==30 ">mins</span></span>
+                <ul class="review-height">
+                    <li class="classLi" ng-if=" notifythread.guest_names" ng-repeat="name in notifythread.guest_names track by $index">
+                        <i ng-if="notifythread.guest_names" class="icon ion-record bulletOnName"></i> &nbsp{{name}}</li>
+                </ul>
+                <ul class="review-height">
+                    <li class="classLi" ng-if="notifythread.resident_name">
+                        <i ng-if="notifythread.resident_name" class="icon ion-record bulletOnName"></i> &nbsp{{notifythread.resident_name}}</li>
+                </ul>
+                <img class="image-border1" ng-if="packimg" showonload="{{packimg}}" src="img/image-loading.gif" ng-click="openimage()">
+                <img class="image-border1" ng-repeat="gImg in notifythread.images" ng-show="gImg !== undefined" showonload="{{gImg.url}}" src="img/image-loading.gif" ng-click="openimage($index)">
+            </div>
+            <div class="detailsNameDiv" style="border-top: 1px solid #2E2E2E;">
+                <span class="pull-left pckDelv" ng-if="notifythread.is_signed == true && notifythread.services_category_id.slug == 'pckg'">Picked Up</span>
+                <span class="pull-left pckNotDelv" ng-if="notifythread.is_signed == false && notifythread.services_category_id.slug == 'pckg'">Not Picked Up</span>
+                <span class="right detailsPadding" style="font-style: italic;padding-top: 6px;">{{notifythread.users_id.firstname}} {{notifythread.users_id.lastname}}</span>
+            </div>
+        </div>
+        <!-- Section Starts for rescervation Details -->
+        <div ng-if="notifythread.services_category_id.slug=='rsvt'">
+            <div class="paddingTop3 text-center" ng-if="notifythread.item_id.is_available == false">
+                <img ng-if="notifythread.item_id.is_available == false" class="itemBookedAvlbImg marginTop3" ng-src="img/Booked.png">
+            </div>
+            <div class="text-center paddingTop3">
+                <img ng-if="notifythread.property_reservation_id.amenity_img" class="item_img" ng-src="{{host_url_global+'/'+notifythread.property_reservation_id.amenity_img}}" ng-click="openModal(notifythread.property_reservation_id.amenity_img)" onerror="this.src='img/no-image.jpg'">
+                <img ng-if="!notifythread.property_reservation_id.amenity_img" class="item_img" ng-src="img/no-image.jpg">
+            </div>
+            <div class="resiItemDiv marginTop3">
+                <div class="color border-bottom">
+                    <span class="color fontSize15">Reservation ID:</span><span class="marginTop3"> {{notifythread._id | substring:-7 | uppercase}}</span>
+                </div>
+                <div class="color border-bottom" ng-if="notifythread.property_reservation_id.name">
+                    <span class="color fontSize15">Amenity Name:</span><span class="marginTop3"> {{notifythread.property_reservation_id.name}}</span>
+                </div>
+                <div class="color border-bottom" ng-if="notifythread.item_id.name">
+                    <span class="color fontSize15">Item Name:</span><span class="marginTop3"> {{notifythread.item_id.name}}</span>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.users_id.firstname || notifythread.units_id.unit_number ">
+                    <span class="color fontSize15">Booked By: </span>
+                    <span class="itemFontColor">{{notifythread.users_id.firstname}} {{notifythread.users_id.lastname}}</span>
+                    <span class="itemFontColor right">{{notifythread.units_id.unit_number}}</span>
+                </div>
+                <div class="color border-bottom" ng-if="notifythread.reservation_note">
+                    <span class="color fontSize15">Booking Notes:</span><span class="marginTop3"> {{notifythread.reservation_note}}</span>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.is_booked">
+                    <span class="color fontSize15">Reservation Status: </span>
+                    <span class="itemFontColor book-statusPending" ng-if="notifythread.is_booked==1">Pending</span>
+                    <span class="itemFontColor book-statusBooked" ng-if="notifythread.is_booked==2">Confirmed</span>
+                    <span class="itemFontColor book-statusDenied" ng-if="notifythread.is_booked==3">Rejected</span>
+                    <span class="itemFontColor book-statusDenied" ng-if="notifythread.is_booked==4">Cancellation Pending</span>
+                    <span class="itemFontColor book-statusDenied" ng-if="notifythread.is_booked==5">Canceled</span>
+                </div>
+                <div class="color border-bottom" ng-if="notifythread.confirm_date">
+                    <span class="color fontSize15">Confirm Date:</span><span class="marginTop3"> {{notifythread.confirm_date| date:"EEE, MMM d"}}{{notifythread.confirm_date| dateSuffix }},{{notifythread.confirm_date|date:" y 'at' h:mm a" }}</span>
+                </div>
+                <div class="color border-bottom" ng-if="notifythread.confirmed_by.firstname">
+                    <span class="color fontSize15">Confirm By:</span><span class="marginTop3"> {{notifythread.confirmed_by.firstname}} {{notifythread.confirmed_by.lastname}}</span>
+                </div>
+                <div class="color border-bottom" ng-if="notifythread.cancelled_date">
+                    <span class="color fontSize15">Canceled Date:</span><span class="marginTop3"> {{notifythread.cancelled_date| date:"EEE, MMM d"}}{{notifythread.cancelled_date| dateSuffix }},{{notifythread.cancelled_date|date:" y 'at' h:mm a" }}</span>
+                </div>
+                <div class="color border-bottom" ng-if="notifythread.cancelled_by.firstname">
+                    <span class="color fontSize15">Canceled By:</span><span class="marginTop3"> {{notifythread.cancelled_by.firstname}} {{notifythread.cancelled_by.lastname}}</span>
+                </div>
+                <div class="color border-bottom" ng-if="notifythread.rejected_date">
+                    <span class="color fontSize15">Rejected Date:</span><span class="marginTop3"> {{notifythread.rejected_date| date:"EEE, MMM d"}}{{notifythread.rejected_date| dateSuffix }},{{notifythread.rejected_date|date:" y 'at' h:mm a" }}</span>
+                </div>
+                <div class="color border-bottom" ng-if="notifythread.rejected_by.firstname">
+                    <span class="color fontSize15">Rejected By:</span><span class="marginTop3"> {{notifythread.rejected_by.firstname}} {{notifythread.rejected_by.lastname}}</span>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.reject_reason">
+                    <span class="color fontSize15">Rejected Reason : </span>
+                    <span class="itemFontColor">{{notifythread.reject_reason}}</span>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.timefrom">
+                    <span class="color fontSize15">Date : </span>
+                    <span class="itemFontColor">{{timeFromFormatted}}</span>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.item_start_time">
+                    <span class="color fontSize15">Date : </span>
+                    <span class="itemFontColor">{{notifythread.item_start_time | dateformat1 }}</span>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.item_start_time">
+                    <div class="half-width left border-bottom">
+                        <span class="color fontSize15">Start Time: </span>
+                        <span class="itemFontColor">{{notifythread.item_start_time | date:"h:mm a" }}</span>
+                    </div>
+                    <div class="half-width right text-right border-bottom">
+                        <span class="color fontSize15" style="color:#EF3F41">Return Time: </span>
+                        <span class="itemFontColor" style="color:#EF3F41">{{notifythread.item_estimated_time | date:"h:mm a"}}</span>
+                    </div>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.timefrom">
+                    <span class="color fontSize15">Time :</span>
+                    <span class="itemFontColor">{{timefromCal }} 
+                    <i class="ion-arrow-right-c itemFontColor"></i> {{timetoCal}}
+                    </span>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.total_price >= 0">
+                    <span class="color fontSize15">Price :</span>
+                    <span class="itemFontColor book-statusDenied"><i class="icon ion-social-usd"></i> {{notifythread.total_price}}</span>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.amount_due < 0">
+                    <span class=" fontSize15 amountClass">Amount Due:</span>
+                    <span class="itemFontColor amountClass"><i class="icon ion-social-usd"></i> 0</span>
+                    <i class="ion-compose editWoReport pull-right" ng-click="editReservationDetails(notifythread, true)" style="color: white;"></i>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.amount_due >= 0">
+                    <span class=" fontSize15 amountClass">Amount Due:</span>
+                    <span class="itemFontColor amountClass"><i class="icon ion-social-usd"></i> {{notifythread.amount_due}}</span>
+                    <i class="ion-compose editWoReport pull-right" ng-click="editReservationDetails(notifythread, true)" style="color: white;"></i>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.amount_paid  >= 0">
+                    <span class=" fontSize15 amountClassPaid">Amount Paid:</span>
+                    <span class="itemFontColor amountClassPaid"><i class="icon ion-social-usd"></i> {{notifythread.amount_paid}}</span>
+                </div>
+                <div class="border-bottom" ng-if="notifythread.amount_paid  >= 0">
+                    <span class="color fontSize15">Notes to Resident: </span>
+                    <span class="itemFontColor">{{notifythread.closure_note}}</span>
+                </div>
+                <!-- <div class="row" ng-hide="notifythread.is_booked == 5 || notifythread.is_booked == 3">   -->
+                <ul class="review-height" ng-show="notifythread.is_booked == 1 || notifythread.is_booked == 2 || notifythread.is_booked == 4 || notifythread.item_id == ''">
+                    <br>
+                    <li class="classLi">
+                        <button class="button button-small enableCloseWO " ng-hide="notifythread.is_booked == 1 || notifythread.is_booked == 3 || notifythread.is_booked == 5" class="btn btn-danger com-btn" ng-hide="notifythread.is_booked == 5" ng-click="cancelReservationByStaff(notifythread)">
+                            <span style="color:#fff;">Cancel</span>
+                        </button>
+                    </li>
+                </ul>
+                <div class="row" ng-show="notifythread.is_booked == 1 || notifythread.is_booked == 2 || notifythread.is_booked == 4 || notifythread.item_id == ''">
+                    <button class="confirmBtnReserv" ng-hide="notifythread.is_booked == 3 || notifythread.is_booked == 2 || notifythread.is_booked == 5 || notifythread.is_booked == 4" ng-click="confirmReservationByStaff(notifythread)">Confirm</button>&nbsp;
+                    <button class="cancelBtnReserv" ng-hide="notifythread.is_booked == 2 || notifythread.is_booked == 3 || notifythread.is_booked == 5 || notifythread.is_booked == 4" ng-click="rejectReservationByStaff(notifythread)">Reject</button>&nbsp;
+                    <!-- <button class="cancelBtnReserv" ng-hide="notifythread.is_booked == 1 || notifythread.is_booked == 3 || notifythread.is_booked == 5" class="btn btn-danger com-btn" ng-hide="notifythread.is_booked == 5" ng-click="cancelReservationByStaff(notifythread)">Cancel</button>
+ -->
+                </div>
+            </div>
+            <div class="row" ng-if="notifythread.item_id.is_available == false">
+                <div class="col col-50 padding-none">
+                    <button class="button button-block itemBookBtn border-radius-none" ng-click="notifyResident(notifythread)">Notify Resident </button>
+                </div>
+                <div class="col col-50 padding-none">
+                    <button class="button button-block itemReturnBtn border-radius-none" ng-click="markedReturn(notifythread)">Return</button>
+                </div>
+            </div>
+        </div>
+        <!-- Section Ends for rescervation Details -->
+        <!-- Chat Section Start -->
+        <div class="" ng-repeat="(key, value) in threadData | groupBy: 'createdDate'">
+            <div class="sortdate">
+                <label>{{key}}</label>
+            </div>
+            <ion-list class="list poll-section" style="border: 0 none;" can-swipe="true">
+                <ion-item ng-repeat="retreiveTxt in value track by $index" class="comment-item" ng-show="retreiveTxt.length!=0">
+                    <div class="row retrivedTextDetailsPg">
+                        <div>
+                            <div class="retrivedImageThrdPg">
+                                <div ng-if="retreiveTxt.users_id.profile_img">
+                                    <img ng-if="!showErrorImg" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3||retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4,}" ng-src="{{host_url_global+'/'+retreiveTxt.users_id.profile_img}}" imageonload="generateAvtarOnimageLoadError()">
+                                    <!-- code start for generating Avatar on image load error(shivanash) -->
+                                    <div ng-if="showErrorImg" class="noProfileImg" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3||retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4,}" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;">
+                                        <ionic-letter-avatar data="{{ retreiveTxt.users_id.firstname | limitTo:1}}{{ retreiveTxt.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{retreiveTxt.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                                    </div>
+                                    <!-- code END for generating Avatar on image load error (shivanash) -->
+                                </div>
+                                <div ng-if="retreiveTxt.users_id.profile_img == ''">
+                                    <div class="noProfileImg" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3||retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4,}" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;">
+                                        <ionic-letter-avatar data="{{ retreiveTxt.users_id.firstname | limitTo:1}}{{ retreiveTxt.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{retreiveTxt.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                                    </div>
+                                </div>
+                                <!-- <img onerror="this.src='img/placeholderImg.png'" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;" ng-src="{{host_url_global+'/'+retreiveTxt.users_id.profile_img}}" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3 || retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4}"> -->
+                            </div>
+                        </div>
+                        <div class="col col-75">
+                            <div class="col pad0 text-right retrivedTimeThrdPg">
+                                <i class="ion-clock"></i>
+                                <span>{{retreiveTxt.created | date:"h:mma"}}</span>
+                            </div>
+                            <div class="col pad0 retrivedNameThrdPg">
+                                <span class="retrivedtext_Name">{{retreiveTxt.users_id.firstname}} {{retreiveTxt.users_id.lastname}}</span>
+                            </div>
+                            <div class="col pad0 retrive-textmsg-section" style="margin-left: 2px;">
+                                <span class="retrivedtext_Msg text-wrap" ng-bind-html="retreiveTxt.message | htmlize | convertLinks"></span>
+                                <div class="text-wrap" style="margin-top:10px">
+                                    <img class="singImg2" ng-show="retreiveTxt.resident_signature!=undefined" ng-src="{{host_url_global+'/'+retreiveTxt.resident_signature}}" />
+                                    <img class="comment-image" ng-if="retreiveTxt.images.length > 0" ng-repeat="image in retreiveTxt.images track by $index" ng-src="{{host_url_global+'/'+image.url}}" ng-click="openImageZoom(retreiveTxt.images,$index)" />
+                                </div>
+                            </div>
+                            <!-- <div class="" ng-if="activeUser == retreiveTxt.users_id._id">
+                <ion-option-button  class="edit-swipe-btn" ng-click="editComment(retreiveTxt._id,retreiveTxt.message)">
+                 <i class="ion-edit" style="font-size:26px;margin-left:1px;"></i>
+                </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="deleteComment(retreiveTxt._id)">
+                  <i class="ion-ios-trash" style="font-size:26px;margin-left:6px;"></i>
+                </ion-option-button>
+              </div> -->
+                        </div>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </div>
+        <div ng-repeat="sentTxt in sentText track by $index" ng-if="sentText.length > 0">
+            <div class="row retrivedTextDetailsPg">
+                <div>
+                    <div ng-if="prflImg" style="border-right: 2px solid #424242;padding: 5px !important;">
+                        <img ng-if="!showErrorImg" style="margin-top: 1px; border-radius: 50%; height: 60px; width: 60px;" ng-src="{{host_url_global+'/'+prflImg}}" imageonload="generateAvtarOnimageLoadError()" class="markStatus-staff">
+                        <div ng-if="showErrorImg" class="noProfileImg" ng-class="{'markStatus-staff':user_type_id == 3||user_type_id == 2,'markStatus-resi':user_type_id == 4,}" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;">
+                            <ionic-letter-avatar data="{{ staffName | limitTo:1}}{{ staffLastName.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{bgColor}}" shape="round" charcount="2"></ionic-letter-avatar>
+                        </div>
+                    </div>
+                    <div ng-if="prflImg == ''" style="border-right: 2px solid #424242;padding: 5px !important;">
+                        <div class="noProfileImg" ng-class="{'markStatus-staff':user_type_id == 3||user_type_id == 2,'markStatus-resi':user_type_id == 4,}" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;">
+                            <ionic-letter-avatar data="{{ staffName | limitTo:1}}{{ staffLastName.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{bgColor}}" shape="round" charcount="2"></ionic-letter-avatar>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-75">
+                    <div class="col pad0 text-right" style="margin-top: -3px;font-size: 10px;">
+                        <i class="ion-clock"></i>
+                        <span>{{sentTxt.sendingDate | date:"h:mma"}}</span>
+                    </div>
+                    <div class="col pad0" style="margin-left: 10px;margin-top: -13px;">
+                        <span ng-model="staffName" class="retrivedtext_Name">{{staffName}} {{staffLastName}}</span>
+                    </div>
+                    <div class="col pad0 retrive-textmsg-section" style="margin-left: 10px;">
+                        <span ng-bind-html="sentTxt.text | htmlize | convertLinks" class="retrivedtext_Msg"></span>
+                        <div class="" style="margin-top:10px">
+                            <img class="comment-image" ng-if="sentTxt.images.length > 0" ng-repeat="image in sentTxt.images track by $index"  showonload="{{image}}" src="img/image-loading.gif" ng-click="openImageZoom1(sentTxt.images,$index)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Chat Section Ends -->
+    </ion-content>
+    <ion-footer-bar class="message-footer" keyboard-attach style="background:#000;">
+        <div ng-if="showSignBtn" class="footer-btn-wrap" style="width:30px;">
+            <button class="button button-icon footer-btn" ng-click="goSignature()">
+                <img style="width: 30px;margin-left: -5px;margin-top: 5px;" ng-src="img/signature.png">
+            </button>
+        </div>
+        <label class="item-input-wrapper">
+            <textarea id="cmt_content" class="replay-msg" type="text" placeholder="Type your message here" ng-model="replyObj.replytext" msd-elastic style="width:100%;" maxlength="1500"></textarea>
+        </label>
+        <div class="footer-btn-wrap">
+            <button class="button button-icon icon ion-android-send footer-btn" ng-show="replyObj.replytext.length > 0" ng-click="reply(replyObj.replytext,sentText.length)" ng-class="{'staff-btn-color':replyObj.replytext.length > 0}">
+            </button>
+            <button class="button button-icon icon ion-camera footer-btn staff-btn-color" ng-show="replyObj.replytext.length == 0 || replyObj.replytext ==undefined" ng-click="openAttachment()">
+            </button>
+        </div>
+    </ion-footer-bar>
+</ion-view>

@@ -1,0 +1,189 @@
+<ion-view class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+    <ion-nav-title>
+        <!-- <h2 class="title white" ng-if="property_name" style="color:white;">{{property_name}}</h2> -->
+        <ion-title style="color:white;" ng-if="property_name" >{{property_name}}</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <img ng-if="!showErrorImg" ng-src="{{host_url_global+'/'+profileImg | thumb}}" class="sideMenuImageava" menu-toggle="right" ng-click="addWidth()" imageonload="generateAvtarOnimageLoadError()">
+        <!--img ng-if="showErrorImg" ng-src="img/logo2.png" menu-toggle="right" ng-click="addWidth()"-->
+        <div ng-if="showErrorImg" class="sideMenuImageava" ng-click="addWidth()">
+            <ionic-letter-avatar data="{{ firstName | limitTo:1}}{{ lastName.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{bgColour}}" shape="round" charcount="2"></ionic-letter-avatar>
+        </div>
+    </ion-nav-buttons>
+    <ion-content class="staffDashBoard" ng-init="features();linkFunction();linkfunctionpm();" ng-click="closeSideMenu()">
+        <ion-refresher pulling-text="Pull to refresh..." ng-if="featuresList.length != 0" on-refresh="doRefresh()"></ion-refresher>
+        <!-- Old Code
+        <div ng-if="featuresList" ng-repeat="featuresdata in featuresList">
+            <div class="col col-50 featurePage" ng-hide="featuresdata.service_category_id._id==='5629c4763949c780667d5c5c' || featuresdata.service_category_id._id==='5629c4a03949c780667d5c5d' ||  featuresdata.service_category_id._id==='56a9e78bd42aba0fd731b1df' || 
+            featuresdata.service_category_id._id==='5787389761f925afa18240c5' ||
+            featuresdata.service_category_id._id==='578738bc61f925afa18240c6' ||
+            featuresdata.service_category_id._id==='56ab40b8d42aba0fd731b1e4' ||
+            featuresdata.service_category_id._id==='5787386661f925afa18240c4' ||
+            featuresdata.service_category_id._id==='578737d961f925afa18240c3' ||
+             featuresdata.service_category_id._id==='578737b261f925afa18240c2' ||
+             featuresdata.service_category_id._id==='566fdf5d3949c780667d72d5'
+            ">
+                <div ng-click="changestate(featuresdata)" class="hoverclass staff-featurepgpading">
+                    <div class="{{featuresdata.service_category_id.icon}} featurefont">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont">{{featuresdata.service_category_id.name}}</p>
+                </div>
+            </div>
+        </div> -->
+<div class="boxRe">
+        <!-- For Only 1 Ferature -->
+        <div scroll="false" class="row" ng-if="featuresList && featuresCnt == 1" ng-repeat="featuresdata in featuresListarr" style="padding:0px !important;">
+            <div  class="col featurePage4 hoverStaff" style="background:rgba(0,0,0,0.6); position: relative;" ng-hide="featuresdata.service_category_id._id==='5629c4763949c780667d5c5c' || featuresdata.service_category_id._id==='5629c4a03949c780667d5c5d' ||  featuresdata.service_category_id._id==='56a9e78bd42aba0fd731b1df' ||
+            featuresdata.service_category_id._id==='5787389761f925afa18240c5' ||
+            featuresdata.service_category_id._id==='578738bc61f925afa18240c6' ||
+            featuresdata.service_category_id._id==='56ab40b8d42aba0fd731b1e4' ||
+            featuresdata.service_category_id._id==='5787386661f925afa18240c4' ||
+            featuresdata.service_category_id._id==='578737d961f925afa18240c3' ||
+             featuresdata.service_category_id._id==='578737b261f925afa18240c2' ||
+             featuresdata.service_category_id._id==='566fdf5d3949c780667d72d5'
+            ">
+                <!-- <div ng-click="changestate(featuresdata)" class="hoverclassOne staff-featurepgpading">
+                    <div class="{{featuresdata.service_category_id.icon}} featurefont featureCntOne">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont1">{{featuresdata.service_category_id.name}}</p>
+                </div> -->
+                <div class='customeCls1'>
+                    <div ng-click="changestate(featuresdata)" class="{{featuresdata.service_category_id.icon}} f-size">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont1">{{featuresdata.service_category_id.name}}</p>
+                </div>
+            </div>
+        </div> 
+
+        <!-- For 2 Features -->
+        <div class="row" ng-if="featuresList && featuresCnt == 2" ng-repeat="featuresdata in featuresListarr" class="features4" style="padding:0px !important; margin-top:0px !important;">
+            <div  class="col featurePage3 hoverStaff" style="background:rgba(0,0,0,0.6); position: relative;" ng-hide="featuresdata.service_category_id._id==='5629c4763949c780667d5c5c' || featuresdata.service_category_id._id==='5629c4a03949c780667d5c5d' ||  featuresdata.service_category_id._id==='56a9e78bd42aba0fd731b1df' || 
+            featuresdata.service_category_id._id==='5787389761f925afa18240c5' ||
+            featuresdata.service_category_id._id==='578738bc61f925afa18240c6' ||
+            featuresdata.service_category_id._id==='56ab40b8d42aba0fd731b1e4' ||
+            featuresdata.service_category_id._id==='5787386661f925afa18240c4' ||
+            featuresdata.service_category_id._id==='578737d961f925afa18240c3' ||
+             featuresdata.service_category_id._id==='578737b261f925afa18240c2' ||
+             featuresdata.service_category_id._id==='566fdf5d3949c780667d72d5'
+            ">
+                <!-- <div ng-click="changestate(featuresdata)" class="hoverclassTwo staff-featurepgpading">
+                    <div class="{{featuresdata.service_category_id.icon}} featurefont featureCntTwo">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont1">{{featuresdata.service_category_id.name}}</p>
+                </div> -->
+                <div class='customeCls'>
+                    <div ng-click="changestate(featuresdata)" class="{{featuresdata.service_category_id.icon}} f-size">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont1">{{featuresdata.service_category_id.name}}</p>
+                </div>
+            </div>
+        </div> 
+
+        <!-- For 3 Features -->
+        <div class="row" ng-if="featuresList && featuresCnt == 3" ng-repeat="featuresdata in featuresListarr" class="features4" style="padding:0px !important; margin-top:0px !important;">
+            <div  class="col featurePage2 hoverStaff" style="background:rgba(0,0,0,0.6); position: relative;" ng-hide="featuresdata.service_category_id._id==='5629c4763949c780667d5c5c' || featuresdata.service_category_id._id==='5629c4a03949c780667d5c5d' ||  featuresdata.service_category_id._id==='56a9e78bd42aba0fd731b1df' || 
+            featuresdata.service_category_id._id==='5787389761f925afa18240c5' ||
+            featuresdata.service_category_id._id==='578738bc61f925afa18240c6' ||
+            featuresdata.service_category_id._id==='56ab40b8d42aba0fd731b1e4' ||
+            featuresdata.service_category_id._id==='5787386661f925afa18240c4' ||
+            featuresdata.service_category_id._id==='578737d961f925afa18240c3' ||
+             featuresdata.service_category_id._id==='578737b261f925afa18240c2' ||
+             featuresdata.service_category_id._id==='566fdf5d3949c780667d72d5'
+            ">
+                <!-- <div ng-click="changestate(featuresdata)" class="hoverclassThree staff-featurepgpading">
+                    <div class="{{featuresdata.service_category_id.icon}} featurefont featureCntThree">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont1">{{featuresdata.service_category_id.name}}</p>
+                </div> -->
+                <div class='customeCls3'>
+                    <div ng-click="changestate(featuresdata)" class="{{featuresdata.service_category_id.icon}} f-size">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont1">{{featuresdata.service_category_id.name}}</p>
+                </div>
+            </div>
+        </div> 
+
+        <!-- For 4 Features  -->
+        <div ng-if="featuresList && featuresCnt == 4" ng-repeat="featuresdata in featuresListarr" class="features4">
+            <div class="col col-100 featurePage1 hoverStaff" style="background:rgba(0,0,0,0.6); position: relative;" ng-hide="featuresdata.service_category_id._id==='5629c4763949c780667d5c5c' || featuresdata.service_category_id._id==='5629c4a03949c780667d5c5d' ||  featuresdata.service_category_id._id==='56a9e78bd42aba0fd731b1df' || 
+            featuresdata.service_category_id._id==='5787389761f925afa18240c5' ||
+            featuresdata.service_category_id._id==='578738bc61f925afa18240c6' ||
+            featuresdata.service_category_id._id==='56ab40b8d42aba0fd731b1e4' ||
+            featuresdata.service_category_id._id==='5787386661f925afa18240c4' ||
+            featuresdata.service_category_id._id==='578737d961f925afa18240c3' ||
+             featuresdata.service_category_id._id==='578737b261f925afa18240c2' ||
+             featuresdata.service_category_id._id==='566fdf5d3949c780667d72d5'
+            ">
+                <!-- <div ng-click="changestate(featuresdata)" class="hoverclassFour staff-featurepgpading">
+                    <div class="{{featuresdata.service_category_id.icon}} featurefont featureCntFour">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont1">{{featuresdata.service_category_id.name}}</p>
+                </div> -->
+                <div class='customeCls'>
+                    <div ng-click="changestate(featuresdata)" class="{{featuresdata.service_category_id.icon}} f-size">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont1">{{featuresdata.service_category_id.name}}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- For more than 4 Features  -->
+        <div ng-if="featuresList && featuresCnt >= 5" ng-repeat="featuresdata in featuresListarr" class="features4">
+            <div  class="col col-100 featurePage2 hoverStaff" style="background:rgba(0,0,0,0.6); position: relative;" ng-hide="featuresdata.service_category_id._id==='5629c4763949c780667d5c5c' || featuresdata.service_category_id._id==='5629c4a03949c780667d5c5d' ||  featuresdata.service_category_id._id==='56a9e78bd42aba0fd731b1df' ||
+            featuresdata.service_category_id._id==='5787389761f925afa18240c5' ||
+            featuresdata.service_category_id._id==='578738bc61f925afa18240c6' ||
+            featuresdata.service_category_id._id==='56ab40b8d42aba0fd731b1e4' ||
+            featuresdata.service_category_id._id==='5787386661f925afa18240c4' ||
+            featuresdata.service_category_id._id==='578737d961f925afa18240c3' ||
+             featuresdata.service_category_id._id==='578737b261f925afa18240c2' ||
+             featuresdata.service_category_id._id==='566fdf5d3949c780667d72d5'
+            ">
+                <!-- <div ng-click="changestate(featuresdata)" class="hoverclass staff-featurepgpading">
+                    <div class="{{featuresdata.service_category_id.icon}} featurefont featureCntFive">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont1">{{featuresdata.service_category_id.name}}</p>
+                </div> -->
+                <div class='customeCls'>
+                    <div ng-click="changestate(featuresdata)" class="{{featuresdata.service_category_id.icon}} f-size">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont1">{{featuresdata.service_category_id.name}}</p>
+                </div>
+            </div>
+        </div>
+          <div ng-if="(featuresList && featuresCnt >= 5) && (featuresCnt == 5 || featuresCnt == 7)" class="features4" style="float:right;">
+            <div class="col col-100 featurePage2 hoverStaff" style="background:rgba(0,0,0,0.6); position: relative;">
+                <div class='customeCls'>
+                    <!-- <div  class="f-size">
+                        <span class="staff_feturPgCunt" ng-show="featuresdata.notiCount != undefined" ng-if="featuresdata.slug!='news'">{{featuresdata.notiCount}}</span>
+                    </div>
+                    <p class="featureNameFont1">{{featuresdata.service_category_id.name}}</p> -->
+                </div>
+            </div>
+        </div>
+        <div scroll="false" ng-if="refreshDiv" class="networkDown">
+            <img ng-src="img/NetworkErr.png">
+            <p>We cannot connect to our servers at this time, please check your network connection and try again.
+                <a></a>
+            </p>
+            <div class="ion-ios-refresh-empty refreshIcon" ng-click="features()"></div>
+        </div>
+        </div><br><br>
+    </ion-content>
+    <ion-tabs class="tabs-positive StaffTab tabs-icon-top">
+        <ion-tab title="My Tasks"   badge="tabTaskCount"  ng-click="myTask()"   badge-style="badge-positive staff"  icon="ion-android-checkbox-outline featurefont" >
+        </ion-tab>
+        <ion-tab title="Clear Notifications"    ng-click="goToClearNoti()"   icon="ion-ios-trash" >
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

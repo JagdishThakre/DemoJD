@@ -1,0 +1,37 @@
+<ion-view class="loginDiv signUpBG" hide-nav-bar="true">
+    <ion-content scroll="false" class="full-height" ng-init="predectiveCall()">
+
+            <div class="video-container">
+                <video webkit-playsinline autoplay playsinline muted loop preload="auto">
+                    <source type="video/mp4" src="video/videointro.mp4">
+                </video>
+            </div>
+
+            <div class="login-logo-section" align="center">
+                <img class="leftImg2 login-logo" ng-src="img/placeholderImg.png">
+            </div>
+                 <div class="signUp-bars">
+                    <div class="list list-inset" align="center">
+                        <label class="item item-input login-field">
+                            <!-- <i class="ion-ios-search placeholder-icon login-icon">&nbsp</i> -->
+                            <input class="input-color login-input rmPadngRight" type="text" ng-model="unitData.unit_number" placeholder="Please enter your Unit Number" name="signUpProperyName" ng-blur="popover.hide()" ng-change="filterUnits(unitData.unit_number)" ng-keypress="popover.show($event)">
+                        </label>
+                    </div>
+                </div>
+                 <ion-scroll style="left:19%;width:40%" direction="y" ng-show="showUnitList" class="autoPopulate">
+                <ul class="list">
+                    <li class="item" ng-repeat="unitData in UnitsArray | filter:unitData  | orderBy:natural('unit_number')" ng-click=selectUnitId(unitData)>
+                        {{unitData.unit_number }}
+                    </li>
+                </ul>
+            </ion-scroll>
+                <div  class="signupFooter">
+                    <input type="button" class="button button-block loginbutton" value="Next" ng-click="goToSignUp(unitData)" />
+                    <a ng-click="backToProperyName()">
+                        <span class="login" style="color:white;font-size: 16px;">Back</span>
+                    </a>
+                </div>
+            </div>
+    </ion-content>
+</ion-view>
+

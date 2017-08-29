@@ -1,0 +1,41 @@
+<ion-view cache-view="false" class="loginDiv" ng-controller="HeaderStaffCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Clear Notifications</h1> -->
+        <ion-title style="color:white;">Clear Notifications</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-header-bar class="bar bar-subheader subheadercolor" style="padding:0px;">
+        <ion-toggle  ng-model="selectvalue" class="transparent selectall" ng-change="selectAll(selectvalue)" toggle-class="toggle-balanced"><span class="selectalltext">Select All</span></ion-toggle>
+    </ion-header-bar>
+    <ion-content ng-init="checkNotiData()">
+        <ul ng-repeat="stafClearNotiData in stafClearNotiDatas">
+            <li class="item item-checkbox clearNotiLi" ng-hide="stafClearNotiData.service_category_id._id==='5629c4763949c780667d5c5c' || stafClearNotiData.service_category_id._id==='5629c4a03949c780667d5c5d' ||  stafClearNotiData.service_category_id._id==='56a9e78bd42aba0fd731b1df' || 
+            stafClearNotiData.service_category_id._id==='5787389761f925afa18240c5' ||
+            stafClearNotiData.service_category_id._id==='578738bc61f925afa18240c6' ||
+            stafClearNotiData.service_category_id._id==='56ab40b8d42aba0fd731b1e4' ||
+            stafClearNotiData.service_category_id._id==='5787386661f925afa18240c4' ||
+            stafClearNotiData.service_category_id._id==='578737d961f925afa18240c3' ||
+             stafClearNotiData.service_category_id._id==='578737b261f925afa18240c2'
+            ">
+                <i class="{{stafClearNotiData.service_category_id.icon}} featureNotiIcon"></i>
+                <span class="clearNotiLabel">{{stafClearNotiData.service_category_id.name}}</span>
+                <span class="staffClearNotiFeaturePgCunt">{{stafClearNotiData.notiCount}}</span>
+                <span class="staffClearNotiFeaturePgCuntGray" ng-if="!stafClearNotiData.notiCount">0</span>
+                <label class="checkbox">
+                    <input type="checkbox" class="ClrNoriCheck" ng-model="stafClearNotiData.selected">
+                </label>
+                <label class="checkbox" ng-if="!stafClearNotiData.notiCount">
+                    <input type="checkbox" class="ClrNoriCheckGray" ng-disabled="true" checked>
+                </label>
+            </li>
+        </ul>
+        <div class="clearNotiFooter">
+            <input type="button" class="button button-block loginbutton" value="Submit" ng-disabled="disableClearBtn" ng-click="passClearNotiData()">
+        </div>
+    </ion-content>
+</ion-view>

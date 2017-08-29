@@ -1,0 +1,48 @@
+<ion-view class="loginDiv" cache-view="false" hide-nav-bar="true">
+    <ion-content scroll="false" class="full-height" ng-init="showTcPp=true">
+        <!-- <form ng-submit="login(data)" name="loginfrm" > -->
+
+            <div class="video-container">
+                <video webkit-playsinline autoplay playsinline muted loop preload="auto">
+                    <source type="video/mp4" src="video/videointro.mp4" type='video/mp4; codecs="h.264"'>
+                </video>
+            </div>
+
+            <div class="login-logo-section" align="center">
+                <img class="leftImg2 login-logo" ng-src="img/placeholderImg.png">
+            </div>
+
+            <div class="login-bars">
+                <div class="list list-inset" align="center">
+                    <label class="item item-input login-field">
+                        <i class="icon ion-ios-email placeholder-icon login-icon">&nbsp</i>
+                        <input class="input-color login-input" ng-focus="showTcPp=false" ng-blur="showTcPp=true" type="email" name="email" placeholder="Email" ng-model="data.email" ng-change="emailInRoot(data)">
+                    </label>
+                </div>
+            </div>
+             <div class="login-bars">
+                <div class="list list-inset" align="center">
+                    <label class="item item-input login-field">
+                        <i class="icon ion-ios-locked placeholder-icon login-icon">&nbsp</i>
+                        <input class="input-color login-input" ng-focus="showTcPp=false" ng-blur="showTcPp=true" name="password" type="password" placeholder="Password" ng-model="data.password">
+                    </label>
+                </div>
+            </div>
+            <div style="text-align:center;padding: 0 20%;">
+              <!--   <button  class="button button-block loginbutton"  ng-click="login(data)">Log In</button> -->
+              <button  class="button button-block loginbutton" ng-disabled="!data.email || !data.password" ng-click="login(data)">Log In</button>
+                <a ng-click="forgotpasswordstate()">
+                    <span class="login" style="color:white;font-size: 15px;">Forgot Password?</span>
+                </a>
+                <br>
+                <a ng-click="signUpstate()">
+                    <span class="login" style="color:white;font-size: 15px;">New User? Sign Up Here</span>
+                </a>
+            </div>
+        <!-- </form> -->
+        <div class="tcppDiv">
+            <span ng-if="showTcPp" style="color:white;">By logging into this system, you agree to be bound by and comply with the <span ng-click="opentc()" class="border-bottom" style="color:white;">Terms and Conditions</span> and <span ng-click="openpp()" class="border-bottom" style="color:white;">Privacy Policy</span></span>
+            
+        </div>
+    </ion-content>
+</ion-view>

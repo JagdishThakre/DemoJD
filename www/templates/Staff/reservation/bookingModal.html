@@ -1,0 +1,70 @@
+<div class="modal image-modal" style="background:#2e2e2e;" ng-controller="searchCtrl">
+    <div class="booking-modal-top ">
+        <div class="booking-modal-header left full-width" style="padding:7px;">
+            <h4 style="color:#fff">Reservation Slot Booking</h4>
+        </div>
+        <div class="booking-modal-close">
+            <button class="color button button-clear ion-close-circled pull-right bookingModalCross" ng-click="closeModal()"></button>
+        </div>
+    </div>
+    <div class=" bookTime" style="margin-top:10%">
+        <div class="">
+            <center>
+                <label style="font-size:18px;color:#ffffff;">Select {{rise_unit_singleton}} Number</label> 
+                <div class="item-input-inset" style=" border-radius: 10px;margin-top: 10px;padding: 4.667px;width: 95%;">
+                    <i class="icon ion-ios-search-strong placeholder-icon" style="font-size: 20px; margin: -3px 0 0 -20px;">&nbsp</i>
+                    <label class="item-input-wrapper searchMargin">
+                        <input type="search" style="width:100%;margin-left:10%;float: left;height: 45px;boder-radius:" placeholder="Search {{rise_unit_singleton}} Id" ng-model="searchFilter.unit_number" ng-change="scrollTop(searchFilter.unit_number)">
+                    </label>
+                    <div class="dropdown-btn">
+                        <button class="button icon button-clear ion-chevron-down toggle-btn" ng-click="showToggle()">
+                        </button>
+                    </div>
+                </div>
+            </center>
+            <ion-scroll delegate-handle="locations-scroll" direction="y" class="wide-as-needed">
+                <div style="padding:3%;">
+                    <ion-list ng-show="data.show">
+                        <ion-item ng-repeat="item in items | filter:searchFilter:strict | orderBy:natural('unit_number')" item="item" ng-click="clickedItem1(item)">
+                            {{item.unit_number}}
+                        </ion-item>
+                    </ion-list>
+                </div>
+            </ion-scroll>
+        </div>
+        <div class="timingFromDiv">
+            <p class="selectTimerHeading">Select Time From</p>
+            <ionic-timepicker input-obj="timePickerObject">
+                <button style="margin-top:10px" class="white border-none transparent">
+                    <i class="icon ion-android-time white reservationClockIcon"></i>
+                    <standard-time-meridian etime='timePickerObject.inputEpochTime' class="bookingModalTimeInput"></standard-time-meridian>
+                </button>
+            </ionic-timepicker>
+        </div>
+        <div class="timingArrow">
+            <i class="ion-arrow-down-c" ng-show="timePickerObject.inputEpochTime != timePickerObject1.inputEpochTime"> </i>
+        </div>
+        <div class="timingToDiv">
+            <ionic-timepicker input-obj="timePickerObject1" ng-if="timePickerObject.inputEpochTime != timePickerObject1.inputEpochTime">
+                <p class="selectTimerHeading">Select Time To</p>
+                <i class="icon ion-android-time white reservationClockIcon"></i>
+                <button style="margin-top:10px" class="white border-none transparent padding-none">
+                    <standard-time-meridian etime='timePickerObject1.inputEpochTime' class="bookingModalTimeInput"></standard-time-meridian>
+                </button>
+            </ionic-timepicker>
+        </div>
+        <!--  <div style="margin-top: 10%;">
+        <p class="selectTimerHeading">Note</p>
+        <input type="text" name="reservationNote" ng-model="reservation_note" style="margin: 5% auto;padding:2%;">
+      </div -->
+        <div class="inputbox addWoLabel" ng-show="timePickerObject.inputEpochTime != timePickerObject1.inputEpochTime">
+            <br>
+            <textarea elastic class="inputtext workorder-desc" type="text" name="firstname" ng-model="reservation_note" id="cmt_content" placeholder="Enter a note if needed.." style="text-align:center"></textarea>
+        </div>
+        <div ng-show="timePickerObject.inputEpochTime != timePickerObject1.inputEpochTime">
+            <br>
+            <button class="button button-block bookedButton" ng-click="bookRvst(reservation_note)" ng-disabled="(timePickerObject.inputEpochTime >= timePickerObject1.inputEpochTime) || (searchFilter.unit_number=='')">Book</button>
+            <!-- <button class="button button-block bookedButton" ng-click="bookRvst( )" ng-disabled="(timePickerObject.inputEpochTime >= timePickerObject1.inputEpochTime) || (searchFilter.unit_number=='')">Book</button> -->
+        </div>
+    </div>
+</div>

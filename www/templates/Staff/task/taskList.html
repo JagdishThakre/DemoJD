@@ -1,0 +1,15 @@
+<ion-view class="whiteoverlayforResident" ng-controller="HeaderStaffCtrl">
+    <ion-tabs class="tabs-positive StaffTab tabs-top tabs-icon-top tabs-top">
+        <ion-tab title="High" icon-on="ion-ios-thunderstorm" icon-off="ion-ios-thunderstorm-outline" badge="highCount" class="" href="#/task/taskHighPriority"  on-select="sendPriority(1) ;getMyTskTabHighCount();getMyTskTabMediumCount();getMyTskTabNormalCount()">
+            <ion-nav-view name="highPriority-task"></ion-nav-view>
+        </ion-tab>
+        
+        <ion-tab title="Low" icon-on="ion-ios-rainy" icon-off="ion-ios-rainy-outline" badge="midiumCount" class="" href="#/task/taskMediumPriority" on-select="sendPriority(2);getMyTskTabMediumCount()">
+            <ion-nav-view name="mediumPriority-task"></ion-nav-view>
+        </ion-tab>
+        
+        <ion-tab title="PM" icon-on="ion-ios-partlysunny" icon-off="ion-ios-partlysunny-outline" badge="lowCount" class="" href="#/task/taskNormalPriority" on-select="sendPriority(3);getMyTskTabNormalCount()">
+            <ion-nav-view name="normalPriority-task"></ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

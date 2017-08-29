@@ -1,0 +1,71 @@
+
+	
+     <div class="bookingCnfrmPopup row" ng-if="bookdetails.units_id.unit_number">
+         <div class="col col-33 text-right"><i class="icon ion-ios-home-outline bookingCnfrmFont"></i>
+         </div>
+         <div class="col col-67 text-left">
+         <span class="bookingCnfrmFont">{{bookdetails.units_id.unit_number}}</span>
+         </div>
+     </div>
+    <div class="bookingCnfrmPopup row" ng-if="bookdetails.firstname || bookdetails.lastname">
+        <div class="col col-33 text-right"><i class="icon ion-person bookingCnfrmFont"></i>
+        </div>
+         <div class="col col-67 text-left"><span class="bookingCnfrmFont text-right">{{bookdetails.firstname}} {{bookdetails.lastname}}</span>  </div>
+    </div> 
+    <div class="bookingCnfrmPopup row">
+        <div class="col col-33 text-right"><i class="icon ion-bookmark bookingCnfrmFont"></i>
+        </div>
+         <div class="col col-67 text-left"><span class="bookingCnfrmFont text-right">Booked</span>  </div>
+    </div>      
+	<div class="bookingCnfrmPopup row" ng-if="bookdetails.startTime ">
+        <div class="col col-33 text-right"><i class="icon ion-ios-timer bookingCnfrmFont"></i>
+        </div>
+         <div class="col col-67 text-left">
+            <span class="bookingCnfrmFont">{{bookdetailsFromtime }} <i class="ion-arrow-right-c"></i> {{bookdetailsTotime}}</span>  
+         </div>
+    </div>
+<style>
+.popup-title {
+    color: #000;
+    font-size: 18px;
+    padding: 0;
+}
+.popup-head {
+    border-bottom: 1px solid !important;
+    padding: 15px 10px;
+    text-align: center;
+}
+.popup-buttons {
+    display: flex;
+    flex-direction: row;
+    min-height: 53px;
+    padding: 0px !important;
+}
+.popup-buttons button {
+    background-color: #262626 !important;
+    border: medium none !important;
+    color: white !important;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    width: 90% !important;
+}
+.popup-buttons {
+    display: flex;
+    flex-direction: row;
+    min-height: 40px;
+    padding: 10px;
+}
+.popup-buttons .button {
+    -moz-box-flex: 1;
+    border-radius: 2px;
+    display: block;
+    flex: 1 1 0;
+    line-height: 20px;
+    margin-right: 1px;
+    min-height: 45px;
+}
+
+</style>

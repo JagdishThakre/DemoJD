@@ -1,0 +1,32 @@
+<ion-view view-title="Management" class="whiteoverlayforHome" ng-controller="HeaderCtrl">
+  <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="gobackToHome()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      <ion-title style="color:white;">News Feed</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <ion-content scroll="false" class="" ng-init="subNewsFeeds()">
+    <div class="boxRe">
+      <div ng-if="newsHome > 1" class="col col-100 text-center" ng-repeat="newsfeedSubFeture in newsfeedSubFetures" style="padding:0 !important;" ng-show="newsfeedSubFeture.service_category_id._id==='578737d961f925afa18240c3' || 
+      newsfeedSubFeture.service_category_id._id==='578737b261f925afa18240c2'">
+        <div ng-click="goTab(newsfeedSubFeture.service_category_id)" class="bgColResi">
+          <div class="{{newsfeedSubFeture.service_category_id.icon}} featurefont subDaynamicIcon">
+            <span class="resiUnReadCnt" ng-if="newsfeedSubFeture.notiCount">{{newsfeedSubFeture.notiCount}}</span>
+          </div>
+          <p class="subDaynamicFont">{{newsfeedSubFeture.service_category_id.name}}</p>
+        </div>
+      </div>
+      <div ng-if="newsHome == 1" class="col col-100 text-center" ng-repeat="newsfeedSubFeture in newsfeedSubFetures" style="padding:0 !important;" ng-show="newsfeedSubFeture.service_category_id._id==='578737d961f925afa18240c3' || 
+      newsfeedSubFeture.service_category_id._id==='578737b261f925afa18240c2'">
+        <div ng-click="goTab(newsfeedSubFeture.service_category_id)" class="bgColForOneFetResi">
+          <div class="{{newsfeedSubFeture.service_category_id.icon}} featurefont subDaynamicIcon1">
+            <span class="resiUnReadCnt" ng-if="newsfeedSubFeture.notiCount">{{newsfeedSubFeture.notiCount}}</span>
+          </div>
+          <p class="subDaynamicFont1">{{newsfeedSubFeture.service_category_id.name}}</p>
+        </div>
+      </div>
+  </ion-content>
+  </ion-view>

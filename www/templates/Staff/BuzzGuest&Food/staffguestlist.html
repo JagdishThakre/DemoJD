@@ -1,0 +1,64 @@
+<ion-view cache-view="false" ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Visitors</h1> -->
+        <ion-title style="color:white;">Visitors</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+     <ion-header-bar class="bar bar-subheader subheadercolor">
+        <h1 ng-if="!searching" class="title white right">Guests</h1>
+        <h1 ng-if="searching" class="title white right">Total Records : {{totalrecords}}</h1>
+        <button class="right button button-icon ion-android-search white padding-none" ng-click="showIt(1)" ></button>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefreshguestsListstaff()"></ion-refresher>
+        <div ng-class="{'list poll-section': blur== false ,'list poll-sectionblur': blur == true}" style="border: 0 none;">
+            <div ng-class="{'border-rm':$index==0,resiWoPending:message.service_id.work_order_status==1,resiWoProgress:message.service_id.work_order_status==2,resiWoCompleted:message.service_id.work_order_status==3}" class="item poll-item row notifiDiv1" ng-repeat="message in guestNotify| orderBy:'lastname'" ng-class="{pckgClosed:message.is_closed}" ng-click="goToDetails(message.schedule_id)">
+                <div ng-if="message.profile_img" class="col col-20 item-image notifiImgDiv">
+                    <img ng-if="!showErrorImg" class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-staff':message.guest_id}" src="{{host_url_global+'/' + message.profile_img| small}}" imageonload="generateAvtarOnimageLoadError()">
+                    <div ng-if="showErrorImg" class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-staff':message.guest_id}">
+                        <ionic-letter-avatar data="{{ message.users_id.firstname | limitTo:1}}{{ message.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{message.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                    </div>
+                </div>
+                <div ng-if="!message.profile_img" class="col col-20 item-image notifiImgDiv">
+                    <div class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-staff':message.guest_id}">
+                        <ionic-letter-avatar data="{{ message.firstname | limitTo:1}}{{ message.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{message.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                    </div>
+                </div>
+                <div class="col col-67 notifiMsgDiv">
+                    <span style="" class="col notifiDate">{{message.created | dateformatnotifcation}}</span>
+                    <span class="pckUnitNo">{{message.unit_number}}</span>
+                    <span class="col notifiMsgSpan">
+                        <span style="float: left; ">{{message.firstname}} {{message.lastname}}</span>
+                    </span>
+                    <div class="row guestlist" ng-if="message.phone_no">
+                        <div class="col col-100 ">
+                            <span ng-if="message.phone_no"><i class="icon ion-ios-telephone phoneColor" ></i>  <span  class="phoneFontguest " ng-click="callphone(message.phone_no)">{{message.phone_no | tel}} </span></span>
+                        </div>
+                    </div>
+                    <div class="row guestlist" ng-if="message.email">
+                        <div class="col col-100">
+                            <span ng-if="message.email"><i class="icon ion-email emergencyPhoneColor" ></i>  <span  class="phoneFontguest" ng-click="emailContact(message.email)">{{message.email}} </span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-10 notifiCountDiv">
+                <div class="notifiCircle" ng-if="message.unreadthreadVal > 0">{{message.unreadthreadVal}}</div>
+            </div>
+        </div>
+        </div>
+        <div ng-if="gotresponse">
+            <h4 class="noti" ng-if="msgLength==0"> No results found!</h4>
+        </div>
+        <div class="text-center" ng-show="noMoreItemsAvailable && (page_number != '01' || page_number == '0')">
+            <span> No more guests to load</span>
+        </div>
+        <ion-infinite-scroll ng-if="!noMoreItemsAvailable" immediate-check="false" on-infinite="loadGuest()" distance="3%"></ion-infinite-scroll>
+        <p class="noResiNoti" ng-if="NoNotidata">{{NoNotidata}}</p>
+    </ion-content>
+</ion-view>

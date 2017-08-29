@@ -1,0 +1,48 @@
+<ion-view class="whiteoverlayforHome" ng-controller="HeaderCtrl" class="whiteoverlayforHome">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="backToResidMngmnt()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <ion-title style="color:white;">Management</ion-title>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+  <ion-content ng-init="featureNote();subNewsFeeds()" scroll="false">
+    <div ng-if="newsMangSub == 3" class="col col-100 text-center" style="padding:0 !important;" ng-repeat="subNewsFeatures in newsfeedSubFetures"
+      ng-show="subNewsFeatures.service_category_id._id==='56a9e78bd42aba0fd731b1df' || 
+         subNewsFeatures.service_category_id._id==='56ab40b8d42aba0fd731b1e4'|| 
+         subNewsFeatures.service_category_id._id==='5787386661f925afa18240c4'">
+      <div ng-click="changeNewsFeed(subNewsFeatures.service_category_id)" class="bgColForThreeFetResi">
+        <div class="{{subNewsFeatures.service_category_id.icon}} featurefont subDaynamicIconNews3">
+          <span class="resiUnReadCnt" ng-if="subNewsFeatures.notiCount">{{subNewsFeatures.notiCount}}</span>
+        </div>
+        <p class="subDaynamicFontNews3">{{subNewsFeatures.service_category_id.name}}</p>
+      </div>
+    </div>
+
+    <div ng-if="newsMangSub == 2" class="col col-100 text-center" style="padding:0 !important;" ng-repeat="subNewsFeatures in newsfeedSubFetures"
+      ng-show="subNewsFeatures.service_category_id._id==='56a9e78bd42aba0fd731b1df' || 
+         subNewsFeatures.service_category_id._id==='56ab40b8d42aba0fd731b1e4'|| 
+         subNewsFeatures.service_category_id._id==='5787386661f925afa18240c4'">
+      <div ng-click="changeNewsFeed(subNewsFeatures.service_category_id)" class="bgColResi">
+        <div class="{{subNewsFeatures.service_category_id.icon}} featurefont subDaynamicIconNews3">
+          <span class="resiUnReadCnt" ng-if="subNewsFeatures.notiCount">{{subNewsFeatures.notiCount}}</span>
+        </div>
+        <p class="subDaynamicFontNews3">{{subNewsFeatures.service_category_id.name}}</p>
+      </div>
+    </div>
+
+    <div ng-if="newsMangSub == 1" class="col col-100 text-center" style="padding:0 !important;" ng-repeat="subNewsFeatures in newsfeedSubFetures"
+      ng-show="subNewsFeatures.service_category_id._id==='56a9e78bd42aba0fd731b1df' || 
+         subNewsFeatures.service_category_id._id==='56ab40b8d42aba0fd731b1e4'|| 
+         subNewsFeatures.service_category_id._id==='5787386661f925afa18240c4'">
+      <div ng-click="changeNewsFeed(subNewsFeatures.service_category_id)" class="bgColForOneFetResi">
+        <div class="{{subNewsFeatures.service_category_id.icon}} featurefont subDaynamicIcon1">
+          <span class="resiUnReadCnt" ng-if="subNewsFeatures.notiCount">{{subNewsFeatures.notiCount}}</span>
+        </div>
+        <p class="subDaynamicFont1">{{subNewsFeatures.service_category_id.name}}</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

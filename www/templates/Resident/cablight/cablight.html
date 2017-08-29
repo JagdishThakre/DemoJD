@@ -1,0 +1,26 @@
+<ion-view class="whiteoverlayforHome" ng-controller="HeaderCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">Valet</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+
+    <ion-content class="feature_staff_center">
+        <div class="cablightDiv">
+            <textarea elastic class="cabLight-message" ng-model="cablight.messageBody"></textarea>
+            <div class="button-bar cablight-button-bar">
+                <button class="button cablight-time" style="margin-right: 3%;" ng-click="cabLightOntime(5)"><i class="cablight-btn-icon ion-android-stopwatch"></i><span> 5 Mins</span></button>
+                <button class="button cablight-time" style="margin-right: 3%;" ng-click="cabLightOntime(10)"><i class="cablight-btn-icon ion-android-stopwatch"></i><span>10 Mins</span></button>
+            </div>
+            <div class="button-bar cablight-button-bar">
+                <button class="button cablight-time" style="margin-right: 3%;" ng-click="cabLightOntime(15)"><i class="cablight-btn-icon ion-android-stopwatch"></i><span>15 Mins</span></button>
+                <button class="button cablight-time" style="margin-right: 3%;" ng-click="cabLightOntime(30)"><i class="cablight-btn-icon ion-android-stopwatch"></i><span>30 Mins</span></button>
+                <!-- <button class="button cablight-time" ng-click="cabLightOntime('Now')"><span>Now</span></button> -->
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

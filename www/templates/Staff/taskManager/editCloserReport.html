@@ -1,0 +1,72 @@
+<ion-view cache-view="false" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Edit Closer Report</h1> -->
+        <ion-title style="color:white;">Edit Closer Report</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <div class="whiteoverlay2">
+        <form class="" name="cldwkform" novalidate>
+            <div my-dir>
+                <ion-content class=" paddingside20" style="margin-bottom: 44px;">
+                    <div class="headingtext">
+                        Please fill out the form to close the task
+                    </div>
+                    <div class="inputbox">
+                        <label>Hours/Effort <span class="required">*</span></label>
+                        <ionic-timepicker input-obj="timePickerObject">
+                            <input class="inputtext" ng-model="editTaskDetails1.hours" placeholder="Required Hours for Work " name="time" style=" height: 32px;" readonly>
+                        </ionic-timepicker>
+                    </div>
+                    <div class="inputbox">
+                        <label>Task Details</label>
+                        <textarea elastic class="inputtext workorder-desc" type="text" name="firstname" ng-model="editTaskDetails1.details" id="cmt_content" placeholder="Task Details" id="cmt_content" ng-change="updateEditor()"></textarea>
+                    </div>
+                    <div class="inputbox">
+                        <label>Parts Used</label>
+                        <textarea elastic class="inputtext workorder-desc" type="text" name="firstname" ng-model="editTaskDetails1.tools" id="cmt_content" placeholder="Tools" id="cmt_content" ng-change="updateEditor()"></textarea>
+                    </div>
+                    <div class="inputbox">
+                        <label>Amount <span class="required">*</span></label>
+                        <input class="inputtext costClassBase" name="amount" ng-model="editTaskDetails1.cost" placeholder="Amount" name="priority" ng-pattern="/^[0-9+-]*$/" style="height: 32px;" ng-focus="NumericKeypadShow(true)" readonly>
+                    </div>
+                    <!-- <div class="row">
+              <div class="col col-50">
+                <button class="button button-block icon-left ion-camera" ng-click="getclicked()">Camera</button>
+              </div>
+              <div class="col col-50">
+                <button class="button button-block icon-left ion-image" ng-click="getselect()">Gallery</button>
+              </div>
+            </div> -->
+                    <div class="row">
+                        <div class="col col-50 normalWoCameraButton" ng-click="getclicked()" style="margin-right:5%">
+                            <i class="icon ion-camera"> Camera</i>
+                        </div>
+                        <div class="col col-50 normalWoCameraButton" ng-click="getselect()" style="margin-left:5%">
+                            <i class="icon ion-image"> Gallery</i>
+                        </div>
+                    </div>
+                    <div class="capture-img-section" ng-repeat="gImg in topic.photos track by $index" ng-show="gImg !== undefined">
+                        <i class="icon ion-close-circled right capture-img-remove" ng-click="removeImg($index)">&nbsp</i>
+                        <img class="capture-img" ng-src="{{gImg}}" ng-click="openImageZoom1(topic.photos,$index)">
+                    </div>
+                </ion-content>
+                <ion-numeric-keyboard options="options" ng-if="showNumericKeyboard"></ion-numeric-keyboard>
+                <ion-footer-bar style="padding: 0px;background-color: transparent;" ng-if="!showNumericKeyboard">
+                    <div class="row" style="padding: 0;">
+                        <div class="col col-50" style="padding: 0;">
+                            <button style="padding: 0;margin: 0;height: 44px;" class="button button-full buzzbutton staffbutton buzz-tab0-button3" ng-click="clearclsreq()">Clear</button>
+                        </div>
+                        <div class="col col-50" style="padding: 0;border-left: 1px solid #fff;">
+                            <button style="padding: 0;margin: 0;height: 44px;" class="button button-full buzzbutton staffbutton buzz-tab0-button3" ng-click="sendclsreq(editTaskDetails1)">Submit</button>
+                        </div>
+                    </div>
+                </ion-footer-bar>
+            </div>
+        </form>
+    </div>
+</ion-view>

@@ -1,0 +1,88 @@
+<ion-view view-title="{{rise_property}}" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+    <!-- <ion-nav-buttons side="left">
+    <a class="button button-icon ion-chevron-left headerbuttonStaff" href="#/staffnewsfeeds"></a>
+  </ion-nav-buttons> -->
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="backToGnrlNws()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">News Feed</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-header-bar class="bar bar-subheader subheadercolor ns-feed-subheader_staff">
+        <button ng-show="!searchShow" class="button button-icon ion-android-search left white" ng-click="toggleSearch()"></button>
+        <h1 ng-if="!searchShow" class="title" style="color:white;float: right;">Staff News</h1>
+        <h1 ng-show="searchShow" class="searchBarDiv">
+            <!--  <div style="width: 100%;">
+        <div style="display: inline-block;float: left;width: 90%;">
+          <input class="searchBarInput" type="text" ng-model="search.title" placeholder="Search" ng-change="scrollopt()">
+        </div>
+        <div style=" display: inline-block;width: 10%;">
+          <button ng-if="search.title.length == 0 || search.title == undefined" style="color: #fff;" class="button button-icon ion-ios-close" type="submit" ng-click="toggleSearch()"></button>
+          <button ng-if="search.title.length > 0" style="color: #fff;" class="button button-icon ion-ios-checkmark" type="submit" ng-click="searchResult()"></button>
+        </div>
+      </div> -->
+            <div class="row" style="padding:0px">
+                <div class="col col-80" style="padding:0px">
+                    <input class="searchBarInput" type="text" ng-model="search.title" placeholder="Search" ng-change="scrollopt()">
+                </div>
+                <div class="col col-10" style="padding:0px">
+                    <button ng-if="search.title.length == 0 || search.title == undefined" style="color: #fff;" class="button button-icon ion-ios-close"
+                        type="submit" ng-click="toggleSearch()"></button>
+                    <button ng-if="search.title.length > 0" style="color: #fff;" class="button button-icon ion-ios-checkmark" type="submit" ng-click="searchResult()"></button>
+                </div>
+                <div class="col col-10" style="padding:0px">
+                    <button ng-if="search.title.length > 0" style="color: #fff;" class="button button-icon ion-ios-close" type="submit" ng-click="clearsearchfield()"></button>
+                </div>
+            </div>
+        </h1>
+        <a href="#/staffpostNews">
+            <button href="#/staffpostNews" ng-show="!searchShow" class="button button-icon ion-plus right white"></button>
+        </a>
+    </ion-header-bar>
+    <ion-content class="has-subheader-newsfeed has-header has-subheader" ng-init="changeTab('3','3',true);getStaffDynamicFeature()">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="refreshNews()"></ion-refresher>
+        <ion-list class="list poll-section" style="border: 0 none;" can-swipe="true">
+            <ion-item class="item  poll-item">
+                <div class="list card" ng-repeat="news in news_list" ng-click="showMypost(news)">
+                    <div class="item item-avatar newscard">
+                        <div class="col col-20 item-image notifiImgDiv" ng-if="news.users_id.profile_img">
+                            <img ng-if="!showErrorImg" class="notifiImg" ng-class="{'markStatus-staff':news.users_id.user_type_id == 3 || news.users_id.user_type_id == 2,'markStatus-resi':news.users_id.user_type_id == 4}"
+                                src="{{host_url+'/'+news.users_id.profile_img | thumb}}" imageonload="generateAvtarOnimageLoadError()">
+                            <div ng-if="showErrorImg" class="notifiImg" ng-class="{'markStatus-staff':news.users_id.user_type_id == 3 || news.users_id.user_type_id == 2,'markStatus-resi':news.users_id.user_type_id == 4}"
+                                style="border-radius: 50%; height: 50px; width: 50px;">
+                                <ionic-letter-avatar data="{{ news.users_id.firstname | limitTo:1}}{{ news.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}"
+                                    bkcolor="{{news.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                            </div>
+                        </div>
+                       <div ng-if="news.users_id.profile_img == ''" class="col col-20 item-image notifiImgDiv">
+                            <div ng-class="{'markStatus-staff':news.users_id.user_type_id == 3||news.users_id.user_type_id == 2,'markStatus-resi':news.users_id.user_type_id == 4,}" style="border-radius:50%;width:55px;height:55px;">
+                                <ionic-letter-avatar data="{{ news.users_id.firstname | limitTo:1}}{{ news.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{news.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                            </div>
+                        </div>
+                        <h2 class="newsHeader">{{ news.users_id.firstname}} {{ news.users_id.lastname}}
+                            <span class="newsnotifiCircle" ng-if="news.unreadthreadNewListVal > 0"> {{news.unreadthreadNewListVal}}</span>
+                        </h2>
+                        <p>
+                            <span class="newsHeader"> Posted on {{news.created| dateformatnews}} </span>
+                        </p>
+                    </div>
+                    <div class="item item-body newscard">
+                        <img class="full-image" ng-repeat="gImg in news.images track by $index" ng-show="gImg !== undefined" ng-src="{{host_url+'/'+gImg.url | thumb}}">
+                        <span class="col newsTitle">{{news.title}}</span>
+                        <span class="col text-wrap newsDescription">{{news.content}}</span>
+                    </div>
+                </div>
+                <ion-option-button class="button-calm" ng-click="newsEdit(news)">
+                    <i class="ion-edit" style="font-size:28px;margin-left:1px;"></i>
+                </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="newsDelete(news,$index)">
+                    <i class="ion-ios-trash" style="font-size:28px;margin-left:6px;"></i>
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll immediate-check="false" ng-if="!noMoreItemsAvailable" on-infinite="loadMoreNews()" distance="5%"></ion-infinite-scroll>
+    </ion-content>
+    </ioni-view>

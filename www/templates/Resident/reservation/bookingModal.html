@@ -1,0 +1,98 @@
+<div class="modal image-modal" style="background:#2e2e2e;">
+    <div class="booking-modal-top ">
+        <div class="booking-modal-header left full-width" style="padding:7px;">
+            <h4 style="color:#fff">Reservation Slot Booking</h4>
+        </div>
+        <div class="booking-modal-close">
+            <button class="color button button-clear ion-close-circled pull-right bookingModalCross" ng-click="closeModal()"></button>
+        </div>
+    </div>
+    <!--
+  
+   <div class=" bookTime" style="margin-top:25%">
+      <div class="timingFromDiv">
+     
+
+
+
+        <label class="item item-input preauthlabel">
+            <span>Start Time</span>
+            <span class="editlabel">{{reservation.start_time}}</span>
+            <input class="sinput" mobiscroll-time="datesettings" ng-model="reservation.start_time" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallbackstart(reservation.start_time);">
+            <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+        </label>
+
+       <ionic-timepicker input-obj="timePickerObject">
+          <button style="margin-top:10px" class="white border-none transparent">
+          <i class="icon ion-android-time white reservationClockIcon"></i>
+            <standard-time-meridian etime='timePickerObject.inputEpochTime' class="bookingModalTimeInput"></standard-time-meridian>
+          </button>
+        </ionic-timepicker> 
+      </div>
+      <div class="timingArrow">
+          <i class="ion-arrow-down-c" ng-show="timePickerObject.inputEpochTime != timePickerObject1.inputEpochTime"> </i>
+      </div>
+      <div class="timingToDiv">
+         
+          <ionic-timepicker input-obj="timePickerObject1" ng-if="timePickerObject.inputEpochTime != timePickerObject1.inputEpochTime" >
+              <p class="selectTimerHeading">Select Time To</p>
+                 <i class="icon ion-android-time white reservationClockIcon"></i>
+                    <button style="margin-top:10px" class="white border-none transparent padding-none">
+                        <standard-time-meridian etime='timePickerObject1.inputEpochTime' class="bookingModalTimeInput"></standard-time-meridian>
+                    </button>
+          </ionic-timepicker> 
+
+          <label class="item item-input preauthlabel">
+                <span>End Time</span>
+                <span class="editlabel">{{reservation.end_time}}</span>
+                <input class="sinput" mobiscroll-time="datesettings" ng-model="reservation.end_time" style="background-color: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.1); border: none; background: none;" ng-change="timePickerCallbackend(reservation.end_time);">
+                <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+            </label>
+
+      </div>
+
+
+       <div class="inputbox addWoLabel" ng-show="timePickerObject.inputEpochTime != timePickerObject1.inputEpochTime">
+           <br>
+          <textarea elastic class="inputtext workorder-desc" type="text" name="firstname" ng-model="reservation_note" id="cmt_content" placeholder="Enter a note if needed.." style="text-align:center"></textarea>
+       </div>
+
+           <div ng-show="timePickerObject.inputEpochTime != timePickerObject1.inputEpochTime">
+               <br>
+                <button class="button button-block bookedButton" ng-click="bookRvst(reservation_note)">Book</button>
+        
+           </div>
+   </div> -->
+
+
+
+
+    <form name="bookform" mobiscroll-form="bookformsettings" style="display:none">
+
+        <div class="mbsc-form-group">
+
+            <div class="mbsc-form-group-title">Enter Information</div>
+
+            <label class="item item-input booktimelabel">Start Time
+                <input class="sinput" mobiscroll-time="starttimesettings" ng-model="reservation.start_time" mobiscroll-instance="starttime" style="background-color: rgba(0, 0, 0, 0.1); color: white; border: none; background: none;" required>
+                    <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+            </label>
+            
+            <label class="item item-input booktimelabel">End Time
+                <input class="sinput" mobiscroll-time="endtimesettings" ng-model="reservation.end_time" mobiscroll-instance="endtime" style="background-color: rgba(0, 0, 0, 0.1); color: white; border: none; background: none;" required>
+                <i class="icon mediumcalresi ion-clock placeholder-icon"></i>
+            </label>
+
+            <label>
+                <textarea name="note" ng-model="reservation_note" placeholder="Enter a note to staff if needed"></textarea>
+            </label>
+
+        </div>
+
+        <div class="mbsc-form-group">
+            <button class="mbsc-btn-block md-sg-btn" ng-click="bookRvst(reservation_note)" ng-disabled="bookform.$invalid">Book</button>
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,27 @@
+<ion-view cache-view="false" ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="gobackStaffFeature()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Visitors</h1> -->
+        <ion-title style="color:white;">Visitors</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content scroll="false">
+<!--     ng-class="{'newRequestStaffgreen':green,'newRequestStaffred':red,'newRequestStaff': !green && !red}"
+ -->        <div class="subPageStaff">
+            <div class="newRequestStaff" ng-style="QRcolor" ng-click="chooseentry()">
+                <i class="icon ion-compose textSub"></i>
+                <span class="subText">New Request</span>
+            </div>
+            <div class="existingRequestStaff" ng-style="QRcolor" ng-click="firstpagechngnoti()">
+                <i class="icon ion-android-notifications-none textSub1"></i>
+                <span class="subText1">Existing Requests</span>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+
+newRequestStaff

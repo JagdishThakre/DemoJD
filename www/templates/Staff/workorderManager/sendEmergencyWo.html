@@ -1,0 +1,23 @@
+<ion-view ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+  <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Emergency Work Order</h1> -->
+        <ion-title style="color:white;">Emergency Work Order</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+        <ion-content  ng-init="headerPage()">
+        <form name="emwork" novalidate >
+        <div style="padding-left:25px;padding-right:25px">
+         <textarea class="emoBox" ng-model="woClear.text" placeholder="Description" ng-model="woClear.text" required></textarea> 
+         <div class="button-bar" style="margin-top:5%; ">
+                  <a class="button" style="background-color: #1d1c18 !important; color: white;" ng-click="clearemw(woClear.text)">Clear</a>
+                  <a class="button" style="background-color: #1d1c18 !important; color: white;" ng-click="sendemw(woClear.text)" ng-disabled="emwork.$invalid">Send</a>  
+        </div>
+        </div>
+        </form>
+        </ion-content>
+</ion-view>

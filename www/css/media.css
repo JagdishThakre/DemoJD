@@ -1,0 +1,1149 @@
+@media screen and (orientation:portrait) {
+    .firstpagestaff{
+        margin-top: 45%;
+    }
+    .buzzSelect{
+        margin-top: 30%;
+    }
+    .firstpageresi{
+      margin-top:40% !important;
+    }
+    .emoBox{
+      margin-top:25%;
+    }
+    .changepwd{
+      padding-top:25%;
+    }
+    .login-logo-section {
+      margin-top: 20%;
+    }
+    .login-logo{
+        max-width: 50% !important;
+    }
+    .featurefont{
+        /*font-size: 500%;*/
+        font-size: 90px;
+    }
+    .wopage{
+        margin-top:18%;
+    }
+    .woFrstPgResi {
+    margin-top: 40%;
+    }
+}
+@media screen and (orientation:landscape) {
+    .firstpagestaff{
+        margin-top: 15%;
+    }
+    .buzzSelect{
+        margin-top: 5%;
+    }
+    .firstpageresi{
+      margin-top:16% !important;
+    }
+    .emoBox{
+      margin-top:8%;
+    }
+    .changepwd{
+     padding-top:0%;
+    }
+    .login-logo-section {
+      margin-top: 0%;
+    }
+    .login-logo{
+        max-width: 30% !important;
+    }
+    .featurefont{
+        font-size: 350%;
+    }
+    .wopage{
+        margin-top:2%;
+    }
+    .woFrstPgResi {
+    margin-top: 20%;
+    }
+
+}
+
+
+/***** 
+    Media Css for 768*1024 
+    iPad Mini/iPad 
+*****/
+
+/****Potrati****/
+@media all and (min-width: 768px) and (max-width: 1023px) {
+    /***feature page start***/
+    .featurefont {
+    font-size: 650%;
+    }
+    .featureNameFont{
+       font-size: 20px;
+       line-height: 25px;
+    }
+    .featurePage {
+        padding: 0px 0px 0px 90px;
+    }
+    /***feature page end***/
+    /***New/Existing Request Page***/
+    .firstpagestaff {
+        margin-top: 32%;
+    }
+    .firstpagestaff {
+        margin: 55% 10% 10%;
+    }
+    /*select unit id box*/
+    .buzzSelect {
+        margin-top: 25%;
+    }
+    .buzzSelect i {
+        left: 10%;
+    }
+    .unitBoxPlaceholder {
+        font-size: 25px;
+        margin: -5px 0 0 -27px;
+    }
+    .buzzSelect {
+        margin-left: 130px;
+        margin-right: 130px;
+    }
+    .card {
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    .custcardforstaff {
+        margin-top: 26%;
+    }
+    /*Staff notification Listing start*/
+    .col-20 {
+        max-width: 13%;
+    }
+    .notifiCountDiv {
+        margin-left: 70px;
+    }
+    .retrivedTimeThrdPg{
+        margin-left: 100px;
+    }
+    /*Staff notification Listing Ends*/
+    /*Reservation media css Start*/
+    .bookedItemCircle{
+        float: right;margin-top: -6%;
+    }
+    .nopadding{
+        padding: 0px;
+    }
+    /*Reservation media css ends*/
+    .contactDistance {
+        margin-left: 100px;
+    }
+
+    /***
+    User Type:Resident;
+    Start Point
+    ***/
+    /*Normal Workorder*/
+    .normalFormPadding{
+        padding: 0 50px;
+    }
+     .firstpageresi {
+        margin-top: 45% !important;
+        padding-left: 85px;
+        padding-right: 85px;
+    }
+
+    .staffDashBoard {
+    bottom: 0%;
+}
+}
+
+
+
+/****Landscape****/
+
+@media all and (min-width: 1024px) and (orientation:landscape) {
+    /***feature page start***/
+    .featurefont {
+    font-size: 650%;
+    }
+    .featureNameFont{
+       font-size: 20px;
+       line-height: 25px;
+    }
+    .featurePage {
+        padding: 0px 0px 0px 90px;
+    }
+    /***feature page end***/
+    /***New/Existing Request Page***/
+    .firstpagestaff {
+        margin-top: 32%;
+    }
+    .firstpagestaff {
+        margin: 20% 10% 10%;
+    }
+    /*select unit id box*/
+    .buzzSelect {
+        margin-top: 25%;
+    }
+    .buzzSelect i {
+        left: 10%;
+    }
+    .unitBoxPlaceholder {
+        font-size: 25px;
+        margin: -5px 0 0 -27px;
+    }
+    .buzzSelect {
+        margin-left: 250px;
+        margin-right: 250px;
+    }
+    .card {
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    .custcardforstaff {
+        margin-top: 26%;
+    }
+    /*Staff notification Listing start*/
+    .col-20 {
+        max-width: 13%;
+    }
+    .notifiCountDiv {
+        margin-left: 70px;
+    }
+    .retrivedTimeThrdPg{
+        margin-left: 100px;
+    }
+    /*Staff notification Listing Ends*/
+    /*Reservation media css*/
+    .bookedItemCircle{
+        float: right;margin-top: -4.5%;
+    }
+    .nopadding{
+        padding: 0px;
+    }
+    /*Reservation media css ends*/
+    .contactDistance {
+        margin-left: 100px;
+    }
+    .login-logo-section {
+        margin-top: 64px;
+    }
+    .workorderMargin{
+        margin-top: 6%;
+    }
+    /***
+    User Type:Resident;
+    Start Point
+    ***/
+    /*Normal Workorder*/
+    .normalFormPadding{
+        padding: 0 50px;
+    }
+    .firstpageresi {
+        margin-top: 30% !important;
+        padding-left: 85px;
+        padding-right: 85px;
+    }
+}
+
+/***** 
+    Media Css for 768*1024 Ends
+    iPad Mini/iPad 
+*****/
+
+/***** 
+    Media Css for 2048 start
+    iPad Mini/iPad Landscape
+*****/
+@media all and (min-width: 2048px) and (orientation:landscape) {
+    /*Title Font*/
+    .bar .title {
+        font-size: 20px;
+    }
+
+    /***feature page start***/
+    .featurefont {
+    font-size: 800%;
+    }
+    .resi-featurepgpading{
+    padding: 5px;
+    margin-left: 100px;
+    margin-right: 100px;
+    }
+    .featureNameFont{
+       font-size: 20px;
+       line-height: 45px;
+    }
+    .featurePage {
+        padding: 0px 0px 0px 220px;
+    }
+    /***feature page end***/
+    /***New/Existing Request Page***/
+    .firstpagestaff {
+        margin-top: 32%;
+    }
+    .firstpagestaff {
+        margin: 41% 10% 10%;
+    }
+    /*select unit id box*/
+    .buzzSelect {
+        margin-top: 25%;
+    }
+    .buzzSelect i {
+        left: 10%;
+    }
+    .unitBoxPlaceholder {
+        font-size: 25px;
+        margin: -5px 0 0 -27px;
+    }
+    .buzzSelect {
+        margin-left: 130px;
+        margin-right: 130px;
+    }
+    .card {
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    .custcardforstaff {
+        margin-top: 26%;
+    }
+    /*Staff notification Listing start*/
+    .col-20 {
+        max-width: 5%;
+    }
+    .notifiCountDiv {
+        margin-left: 0px;
+    }
+    .retrivedTimeThrdPg{
+        margin-left: 100px;
+    }
+    /*Staff notification Listing Ends*/
+    /*Reservation media css Start*/
+    .bookedItemCircle{
+        float: right;margin-top: -6%;
+    }
+    .nopadding{
+        padding: 0px;
+    }
+    /*Reservation media css ends*/
+    .contactDistance {
+        margin-left: 100px;
+    }
+
+    /***
+    User Type:Resident;
+    Start Point
+    ***/
+    /*Normal Workorder*/
+    .normalFormPadding{
+        padding: 0 50px;
+    }
+     .firstpageresi {
+        margin-top: 45% !important;
+        padding-left: 200px;
+    padding-right: 200px;
+    }
+    .cablightDiv {
+     margin-top: 5%;
+    padding-left: 180px;
+    padding-right: 180px;
+    }
+    /*Notification Listing*/
+    .notifiDate {
+        font-size: 12px;
+        height: 15%;
+        line-height: 1;
+        margin-top: 1%;
+        padding: 0;
+        text-align: center;
+        width: 100%;
+    }
+    .notifiMsgSpan {
+        display: inline-block;
+        font-size: 15px;
+        padding: 0;
+    }
+    .notifiMsgTextSpan {
+        color: #bebebe;
+        font-size: 13px;
+        height: auto;
+        line-height: 14px;
+        padding: 0;
+    }
+    /*.detailsMainDiv {
+    background: #1a1a1a none repeat scroll 0 0;
+    border-bottom: 1px solid #6e6e6e;
+    color: #fff;
+    margin: 25px 400px 0;
+    padding: 10px;
+    }*/
+    .detailRetrivedImage {
+        border-right: 2px solid #424242;
+        padding: 10px !important;
+    }
+    .detailRetrivedName{
+      margin-left: 15px;margin-top: -13px;
+    }
+    .detailRetrivedMsg{
+      margin-left: 15px !important;
+    }
+}
+
+
+/***** 
+    Media Css for 1536×2048 start
+    iPad Mini/iPad Landscape Ends 
+*****/
+
+
+/***** 
+    Media Css for 1536×2048 
+    iPad Mini/iPad Potrait Start
+*****/
+
+
+
+
+@media all and (min-width: 1536px) and (max-width: 2047px) {
+    /***feature page start***/
+    .featurefont {
+    font-size: 800%;
+    }
+    .resi-featurepgpading{
+    padding: 5px;
+    margin-left: 100px;
+    margin-right: 100px;
+    }
+    .featureNameFont{
+       font-size: 20px;
+       line-height: 45px;
+    }
+    .featurePage {
+        padding: 0px 0px 0px 90px;
+    }
+    /***feature page end***/
+    /***New/Existing Request Page***/
+    .firstpagestaff {
+        margin-top: 32%;
+    }
+    .firstpagestaff {
+        margin: 41% 10% 10%;
+    }
+    /*select unit id box*/
+    .buzzSelect {
+        margin-top: 25%;
+    }
+    .buzzSelect i {
+        left: 10%;
+    }
+    .unitBoxPlaceholder {
+        font-size: 25px;
+        margin: -5px 0 0 -27px;
+    }
+    .buzzSelect {
+        margin-left: 130px;
+        margin-right: 130px;
+    }
+    .card {
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    .custcardforstaff {
+        margin-top: 26%;
+    }
+    /*Staff notification Listing start*/
+    .col-20 {
+        max-width: 7%;
+    }
+    .notifiCountDiv {
+        margin-left: 70px;
+    }
+    .retrivedTimeThrdPg{
+        margin-left: 100px;
+    }
+    /*Staff notification Listing Ends*/
+    /*Reservation media css Start*/
+    .bookedItemCircle{
+        float: right;margin-top: -6%;
+    }
+    .nopadding{
+        padding: 0px;
+    }
+    /*Reservation media css ends*/
+    .contactDistance {
+        margin-left: 100px;
+    }
+
+    /***
+    User Type:Resident;
+    Start Point
+    ***/
+    /*Normal Workorder*/
+    .normalFormPadding{
+        padding: 0 50px;
+    }
+     .firstpageresi {
+        margin-top: 45% !important;
+        padding-left: 200px;
+    padding-right: 200px;
+    }
+    .cablightDiv {
+     margin-top: 5%;
+    padding-left: 180px;
+    padding-right: 180px;
+    }
+    /*Notification Listing*/
+    .notifiDate {
+        font-size: 11px;
+        height: 15%;
+        line-height: 1;
+        margin-top: 1%;
+        padding: 0;
+        text-align: center;
+        width: 100%;
+    }
+    .notifiMsgSpan {
+        display: inline-block;
+        font-size: 15px;
+        padding: 0;
+    }
+    .notifiMsgTextSpan {
+        color: #bebebe;
+        font-size: 13px;
+        height: auto;
+        line-height: 14px;
+        padding: 0;
+    }
+}
+
+
+
+@media all and (min-width: 320px) and (max-width: 359px) {
+    .tcppDiv {
+    bottom: 7%;
+    color: black;
+    font-size: 12px;
+    line-height: 133%;
+    margin-left: 5%;
+    margin-right: 5%;
+    position: absolute;
+}
+    /***feature page start***/
+    .featurefont {
+        /*font-size: 350%;*/
+        font-size: 550%;
+    }
+    .featurePage {
+        float: left;
+        height: 100px;
+        line-height: 16px;
+        margin-top: 4%;
+        padding: 7px 7px 7px 36px;
+        width: 46%;
+    }
+    .notifiMsgTextSpan {
+        color: #bebebe;
+        font-size: 11px;
+        height: auto;
+        line-height: 13px;
+        padding: 0;
+    }
+    .notifiMsgSpan {
+        display: inline-block;
+        font-size: 12px;
+        padding: 0;
+    }
+    .review-height {
+        font-size: 12px;
+        line-height: 22px;
+    }
+    .featurePgCunt {
+        background-color: #e4322b;
+        border-radius: 100%;
+        color: #fff;
+        font-size: 12px;
+        font-weight: bold;
+        height: 30px;
+        margin-left: 5px;
+        padding: 7px 0 0 !important;
+        position: absolute;
+        text-align: center;
+        width: 30px;
+    }
+    .login-logo-section{
+        margin-top: 20% !important;
+    }
+}
+/*For iPhone 4s landcape-mode*/
+@media all and (min-width: 479px) and (orientation:landscape) {
+    .login-bars {
+        background-color: #3b3d3e;
+        border: medium none;
+        border-radius: 8px !important;
+        color: white;
+        height: 45px;
+        margin: 5%;
+        margin-top: 0px;
+        opacity: 0.8;
+        width: 90%;
+        margin-bottom: 5px;
+    }
+
+}
+/* 02-01-2017 */
+@media all and (min-height: 320px) and (orientation: landscape){
+    .featurePage4{
+        height: 73vh;
+    }
+    .featureCntOne{
+        margin-top: 11%;
+        color: white;
+    }
+    .featureCntTwo{
+        margin-top: 3%;
+        color: white;
+    }
+    .featureCntThree{
+        margin-top: 0;     
+        color: white;
+    }
+    .featureCntFour{
+        margin-top: 5%;
+        color:white;
+    }
+    .featureCntFive{
+        margin-top: 0;     
+        color: white;
+    }
+    .hoverResiclass:hover {
+        background-color: #e4322b;
+        cursor: pointer;
+        height: 26vh;
+    }
+    .hoverResiclassFour:hover {
+        background-color: #e4322b;
+        cursor: pointer;
+        height: 30vh;
+    }
+    .hoverResiclassThree:hover {
+        background-color: #e4322b;
+        cursor: pointer;
+        height: 26vh;
+    }
+    .hoverResiclassTwo:hover {
+        background-color: #e4322b;
+        cursor: pointer;
+        height: 28.7vh;
+    }
+    .hoverResiclassOne:hover {
+        background-color: #e4322b;
+        cursor: pointer;
+        height: 63vh;
+    }
+    .hoverclass:hover {
+        background-color: #58b9cc;
+        cursor: pointer;
+        color: #fff;
+        height: 25.7vh;
+    }
+    .hoverclassOne:hover {
+        background-color: #58b9cc;
+        cursor: pointer;
+        color: #fff;
+        height: 62.7vh;
+    }
+    .hoverclassTwo:hover {
+        background-color: #58b9cc;
+        cursor: pointer;
+        color: #fff;
+        height: 28.7vh;
+    }
+    .hoverclassThree:hover {
+        background-color: #58b9cc;
+        cursor: pointer;
+        color: #fff;
+        height: 25.7vh;
+    }
+    .hoverclassFour:hover {
+        background-color: #58b9cc;
+        cursor: pointer;
+        color: #fff;
+        height: 30vh;
+    }
+}
+
+@media all and (min-height: 361px) and (orientation: landscape){
+    .featurePage1 {
+        height: 38vh;
+    }
+    .featurePage3{
+        /*height: 38vh !important;*/
+        height: 38vh;
+    }
+    .featurePage4{
+        height: 78.5vh;
+    }
+    .featureCntOne{
+        margin-top: 15%;
+        color: white;
+    }
+    .featureCntTwo{
+        margin-top: 3%;
+        color: white;
+    }
+    .featureCntThree{
+        margin-top: 1%;     
+        color: white;
+    }
+    .featureCntFour{
+        margin-top: 7%;
+        color:white;
+    }
+    .featureCntFive{
+        margin-top: 1%;     
+        color: white;
+    }
+    .hoverResiclass:hover {
+        background-color: #e4322b;
+        cursor: pointer;
+        height: 26vh;
+    }
+    .hoverResiclassFour:hover {
+        background-color: #e4322b;
+        cursor: pointer;
+        height: 32vh;
+    }
+    .hoverResiclassThree:hover {
+        background-color: #e4322b;
+        cursor: pointer;
+        height: 26vh;
+    }
+    .hoverResiclassTwo:hover {
+        background-color: #e4322b;
+        cursor: pointer;
+        height: 31vh;
+    }
+    .hoverResiclassOne:hover {
+        background-color: #e4322b;
+        cursor: pointer;
+        height: 66vh;
+    }
+    .hoverclass:hover {
+        background-color: #58b9cc;
+        cursor: pointer;
+        color: #fff;
+        height: 26vh;
+    }
+    .hoverclassOne:hover {
+        background-color: #58b9cc;
+        cursor: pointer;
+        color: #fff;
+        height: 66.7vh;
+    }
+    .hoverclassTwo:hover {
+        background-color: #58b9cc;
+        cursor: pointer;
+        color: #fff;
+        height: 31.7vh;
+    }
+    .hoverclassThree:hover {
+        background-color: #58b9cc;
+        cursor: pointer;
+        color: #fff;
+        height: 25.7vh;
+    }
+    .hoverclassFour:hover {
+        background-color: #58b9cc;
+        cursor: pointer;
+        color: #fff;
+        height: 32vh;
+    }
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px)  { /* STYLES GO HERE */
+    .subText {
+        top: 40%;
+        left: 20%;
+    }
+    .subText1 {
+        top: 55%;
+        left: 32%;
+    }
+    .bgColForThreeFet {
+        height: 30.4vh;
+        margin-bottom: 3px;
+    }
+    .subDaynamicIconNews3 {
+        top: 15%;
+    }
+    .subDaynamicFontNews3 {
+        top: 20%;
+    }
+    .customeCls {
+        top: 20%;
+    }
+}
+
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 627px)  { /* STYLES GO HERE */
+    .subText {
+        top: 40%;
+        left: 23%;
+    }
+    .subText1 {
+        top: 53%;
+        left: 34%;
+    }
+    .bgColForThreeFet {
+        height: 30.6vh;
+    }
+    .subDaynamicIconNews3 {
+        top: 18%;
+    }
+    .subDaynamicFontNews3 {
+        top: 22%;
+    }
+    .customeCls1 {
+        top: 40%;
+    }
+}
+
+
+@media only screen 
+and (min-device-width : 360px) 
+and (max-device-width : 640px)  { /* STYLES GO HERE */
+    .subPageStaff .newRequestStaff .textSub {
+        top: 30%;
+    }
+    .subText {
+        top: 36%;
+        left: 23%;
+    }
+    .subPageStaff .existingRequestStaff .textSub1 {
+        top: 62%;
+    }
+    .subText1 {
+        top: 54%;
+        left: 34%;
+    }
+    .bgColForThreeFet {
+        height: 31vh;
+    }
+    .customeCls {
+        top: 36%;
+    }
+    .customeCls3 {
+        top: 25%;
+    }
+}
+
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px)  { /* STYLES GO HERE */
+    .subPageStaff .newRequestStaff .textSub {
+        top: 33%;
+    }
+    .subPageStaff .newRequestResi .textSub {
+        top: 33%;
+    }
+    .subText {
+        top: 42%;
+        left: 26%;
+    }
+    .subPageStaff .existingRequestStaff .textSub1 {
+        top: 64%;
+    }
+    .subPageStaff .existingRequestResi .textSub1 {
+        top: 64%;
+    }
+    .subText1 {
+        top: 54%;
+        left: 35%;
+    }
+    .subDaynamicIcon {
+        top: 30%;
+    }
+    .subDaynamicFont {
+        top: 32%;
+    }
+    .bgColForThreeFet {
+        height: 31vh;
+        margin-bottom: 5px;
+    }
+    .subDaynamicIconNews3 {
+        top: 21%;
+    }
+    .subDaynamicFontNews3 {
+        top: 26%;
+    }
+    .bgColForThreeFet {
+        height: 31vh;
+        margin-bottom: 5px;
+    }
+}
+
+@media only screen 
+and (max-device-width : 480px) 
+and (min-device-width : 320px)  
+and (orientation : landscape)  { /* STYLES GO HERE */
+    .subPageStaff .newRequestStaff .textSub{
+        top: 12%;
+        left: 46%;
+        font-size: 55px;
+    }
+    .subPageStaff .newRequestResi .textSub{
+        top: 12%;
+        left: 46%;
+        font-size: 55px;
+    }
+    .subText {
+        top: 35%;
+        left: 31%;
+    }
+    .subPageStaff .existingRequestStaff .textSub1 {
+        font-size: 55px;
+        top: 55%;
+        left: 46%;
+    }
+    .subPageStaff .existingRequestResi .textSub1 {
+        font-size: 55px;
+        top: 55%;
+        left: 46%;
+    }
+    .subText1 {
+        top: 50%;
+        left: 38%;
+    }
+    .staffUnReadCnt {
+        font-size: 10px;
+        min-height: 29px;
+        min-width: 30px;
+    }
+    .bgColForThreeFet {
+        height: 28.1vh !important;
+        margin-bottom: 3px !important;
+    }
+    .subDaynamicFontNews3 {
+        top: 12%;
+    }
+    .subDaynamicIconNews3 {
+        top: 12%;
+    }
+    .bgColForThreeFetResi {
+        height: 28vh;
+        margin-bottom: 4px;
+    }
+    .customeCls {
+        top: 20%;
+    }    
+    .featurePage1:nth-child(odd) {
+        height: 35vh;
+        margin-bottom: 4px;
+    }
+    .featurePage2:nth-child(odd) {
+        height: 22.7vh;
+        margin-bottom: 4px;
+    }
+}
+
+@media only screen 
+and (min-device-width : 568px) 
+and (min-device-width : 320px)  
+and (orientation : landscape)  { /* STYLES GO HERE */
+    .subPageStaff .newRequestStaff .textSub{
+        top: 12%;
+        left: 46%;
+        font-size: 55px;
+    }
+    .subPageStaff .newRequestResi .textSub{
+        top: 12%;
+        left: 46%;
+        font-size: 55px;
+    }
+    .subText {
+        top: 35%;
+        left: 35%;
+    }
+    .subPageStaff .existingRequestStaff .textSub1 {
+        font-size: 55px;
+        top: 55%;
+        left: 46%;
+    }
+    .subPageStaff .existingRequestResi .textSub1 {
+        font-size: 55px;
+        top: 55%;
+        left: 46%;
+    }
+    .subText1 {
+        top: 50%;
+        left: 40%;
+    }
+    .bgColForThreeFet {
+        height: 28.4vh;
+        margin-bottom: 4px;
+    }
+    .subDaynamicIconNews3 {
+        top: 10%;
+    }
+    .subDaynamicFontNews3 {
+        top: 12%;
+    }
+    .bgColResi {
+        height: 42.6vh;
+        margin-bottom: 4px;
+    }
+    .subDaynamicFontResi {
+        top: 25%;
+    }
+    .subDaynamicIconResi {
+        top: 20%;
+    }
+    .bgColForThreeFetResi {
+        height: 28vh;
+        margin-bottom: 4px;
+    }
+    .bgCol {
+        height: 42.2vh;
+    }
+    .customeCls {
+        /*top: 20%;*/
+        top: 18%;
+    }    
+    /*.featurePage1:nth-child(odd) {
+        height: 35vh;
+        margin-bottom: 4px;
+    }*/
+    .featurePage2:nth-child(odd) {
+        height: 22.7vh;
+        margin-bottom: 4px;
+    }
+}
+@media only screen 
+and (min-device-width : 667px) 
+and (min-device-width : 375px)  
+and (orientation : landscape)  { 
+    .bgColForThreeFet {
+        height: 28.7vh;
+    }
+    .bgColResi{
+        height: 44vh;    
+    }
+    .bgColForThreeFetResi {
+        height: 29.2vh;
+        margin-bottom: 4px;
+    }
+    .featurePage2:nth-child(odd) {
+        height: 24.4vh;
+        margin-bottom: 4px;
+    }
+    .customeCls {
+        top: 30%;
+    }
+}
+
+@media only screen 
+and (min-device-width : 736px) 
+and (min-device-width : 414px)  
+and (orientation : landscape)  { 
+    .subText {
+        left: 36.5%;
+    }
+    .subText1 {
+        left: 41%;
+    }
+    
+    .bgColForThreeFet {
+        height: 29vh;
+        margin-bottom: 5px;
+    }
+    .bgColResi{
+        height: 44vh;    
+    }
+    .featurePage2:nth-child(odd) {
+        height: 25.2vh;
+        margin-bottom: 4px;
+    }
+}
+
+@media only screen 
+and (min-device-width : 640px) 
+and (max-device-height : 360px)  
+and (orientation : landscape)  { 
+    .bgColForThreeFet {
+        height: 29vh;
+    }
+    .subDaynamicIconNews3 {
+        top: 15%;
+    }
+    .subDaynamicFontNews3 {
+        top: 20%;
+    }
+    .bgCol {
+        height: 44vh;
+    }
+    .subDaynamicIcon {
+        top: 26%;
+    }
+    .subDaynamicFont {
+        top: 30%;
+    }
+    .bgColResi{
+        height: 44vh;    
+    }
+    .bgColForThreeFetResi {
+        height: 29vh;
+        margin-bottom: 4px;
+    }
+    /*.customeCls {
+        top: 16%;
+    }*/
+    .featurePage2:nth-child(odd) {
+        height: 23.7vh;
+        margin-bottom: 5px;
+    }
+}
+
+@media only screen and (max-device-width: 1024px) and (min-device-width: 768px){
+.bgCol {
+    height: 47.4vh;
+    margin-bottom: 8px;
+}
+.subDaynamicFontNews3 {
+    top: 30%;
+}
+.subDaynamicIconNews3 {
+    top: 25%;
+}
+.bgColResi{
+    height: 47.4vh;
+    margin-bottom: 8px;    
+}
+.bgColForThreeFetResi {
+    height: 31.5vh;
+    margin-bottom: 7px;
+}
+}
+@media only screen and (max-device-width: 1024px) and (min-device-width: 768px){
+.bgColForThreeFet {
+    height: 31.4vh;
+    margin-bottom: 7px;
+}
+.subDaynamicFontNews3 {
+    top: 25%;
+}
+.subDaynamicIconNews3 {
+    top: 20%;
+}
+.featurePage2:nth-child(odd) {
+    height: 29.8vh;
+}
+    .customeCls {
+        top: 32%;
+    }
+}

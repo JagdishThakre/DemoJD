@@ -1,0 +1,39 @@
+<ion-view cache-view="false" ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+	<ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Package Delivery</h1> -->
+        <ion-title style="color:white;">Package Delivery</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+	<ion-header-bar class="bar bar-subheader subheadercolor">
+		<h1 class="title buzzHeader">Enter Package Name</h1>
+		<button style="margin-top: -7px;" class="button white right button-icon ion-ios-camera padding-none buzzIcon" ng-click="getclicked()"></button>
+	</ion-header-bar>
+	<ion-content  scroll="true">
+		<div>
+			<div class="item item-input buzzlist" ng-repeat="item in wordList">
+				<input ng-change="someMethod(item.word,$index)" type="text" ng-model="item.word" placeholder="Package {{$index+1}}">
+				<i class="ion-close" ng-class="{'disabled': wordList.length == $index+1}" style="cursor:pointer;" ng-click="removeBuzz($index)"></i>
+			</div>
+		</div>
+		<br>
+		<div class="capture-img-section" ng-repeat="gImg in GuestNameObject.imgURI track by $index" ng-show="gImg !== undefined">
+			<i class="icon ion-close-circled right capture-img-remove" ng-click="removeImg(gImg)">&nbsp</i>
+			<img class="capture-img" ng-src="{{gImg}}" ng-click="openImageZoom1(GuestNameObject.imgURI,$index)">
+		</div>
+	</ion-content>
+	<ion-footer-bar style="padding: 0px;background-color: transparent;">
+            <div class="row" style="padding: 0;">
+                <div class="col col-50" style="padding: 0;">
+		<button style="padding: 0;margin: 0;height: 44px;" class="button button-full buzzbutton staffbutton buzz-tab0-button3" ng-click="buzzlistcancel()">Back</button>
+                </div>
+                <div class="col col-50" style="padding: 0;border-left: 1px solid #fff;">
+		<button style="padding: 0;margin: 0;height: 44px;" class="button button-full buzzbutton staffbutton buzz-tab0-button3" ng-click="showData(2)">Next</button>
+                </div>
+            </div>
+	</ion-footer-bar>
+</ion-view>

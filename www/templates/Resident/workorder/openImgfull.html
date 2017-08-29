@@ -1,0 +1,6 @@
+<div class="modal image-modal whiteoverlayforHome">
+    <button class="button button-clear ion-close-circled pull-right" style="font-size:32px;z-index:100;" ng-click="closeModal()"></button>
+  <ion-scroll zooming="true" direction="xy" delegate-handle="zoom-pane" class="zoom-pane" min-zoom="1" scrollbar-x="false" scrollbar-y="false" style="height:100%; width:100%;text-align:center;position: absolute;left: 0; top: 0;right: 0;bottom: 0;">
+    <img ng-src="{{imageSrc}}" class="full-image-zoom">
+  </ion-scroll>
+</div>

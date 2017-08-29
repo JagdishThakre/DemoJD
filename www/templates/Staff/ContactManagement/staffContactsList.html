@@ -1,0 +1,61 @@
+<ion-view class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="gobackStaffFeature()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title white">Contacts</h1> -->
+         <ion-title style="color:white;">Contacts</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-header-bar class="bar bar-subheader subheadercolor" style="background-color:#040404">
+        <h1 class="searchBarDivcontact">
+    <div style="width: 100%;">
+      <div class="left" style="display: inline-block;width: 100%;">
+            <label class="item item-input serachfield" style="width: 90%;">
+                <i class="placeholder-icon ion-ios-search-strong ">&nbsp</i>
+                <input class="searchBarInput color" type="text" ng-model="search.units_id.unit_number" placeholder="Start Typing..." ng-change="onTap(search.units_id.unit_number)">
+            </label>
+            <a  class="button button-icon ion-ios-close clearButton" ng-click="clearContactSearch()"></a>        
+      </div>
+    </div>
+    </h1>
+    </ion-header-bar>
+    
+    <ion-content >
+        <div class="list poll-section StaffUserContactListing" style="border: 0 none;">
+        <div ng-if="gotresponse==true">
+         <h4 class="noti" ng-if="(contactListing | filter:search.units_id.unit_number).length ==0" >No matched contacts found !</h4>
+         </div>
+            <div class="item poll-item row notifiDiv1" ng-repeat="message in contactListing | filter:search.units_id.unit_number">
+                <!-- <div class="col col-20 item-image notifiImgDiv" ng-click="staffContactsDetails(message)">
+                    <img class="notifiImg markStatus-staff" src="{{host_url_global+'/' + message.profile_img }}" onerror="this.src='img/placeholderImg.png'">
+                </div> -->
+                <div ng-if="message.profile_img" class="col col-20 item-image notifiImgDiv" ng-click="staffContactsDetails(message)">
+                    <img ng-if="!showErrorImg" class="notifiImg markStatus-staff" src="{{host_url_global+'/' + message.profile_img }}" imageonload="generateAvtarOnimageLoadError()">
+
+                    <div ng-if="showErrorImg" class="notifiImg markStatus-staff">
+                        <ionic-letter-avatar data="{{ message.firstname | limitTo:1}}{{ message.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{message.colour}}" shape="round" charcount="2"></ionic-letter-avatar>    
+                    </div>
+                </div>
+                <div ng-if="message.profile_img == ''" class="col col-20 item-image notifiImgDiv" ng-click="staffContactsDetails(message)">
+                    <div class="notifiImg markStatus-staff">
+                        <ionic-letter-avatar data="{{ message.firstname | limitTo:1}}{{ message.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{message.colour}}" shape="round" charcount="2"></ionic-letter-avatar>    
+                    </div>
+                </div>
+                <div class="col col-80 notifiMsgDiv">
+                    <div class="col notifiMsgSpan" style="top: 5px;margin-top: 8px;">
+                        <span style="float: left; ">{{message.firstname}} {{message.lastname}}</span>
+                        <span style="float: right;">{{message.units_id.unit_number}}</span>
+                    </div>
+                    <div class="col">
+                        <span ng-if="message.phone_no" ng-click="callresi(message.phone_no)"><i class="icon ion-ios-telephone phoneColor" ></i>  <span  class="phoneFont">{{message.phone_no | tel}} </span></span>
+                        <span ng-if="message.emergency_contact" class="contactDistance" ng-click="callresi(message.emergency_contact)"><i class="icon ion-ios-telephone emergencyPhoneColor"></i>  <span class="phoneFont">{{message.emergency_contact | tel}}</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

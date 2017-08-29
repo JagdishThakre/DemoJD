@@ -1,0 +1,39 @@
+<ion-view cache-view="false" hide-nav-bar="true" class="whiteoverlayforHome welcomeScreen"  animation="slide-left-right">
+  <ion-content ng-controller="HomeCtrl" scroll="false" class="full-height panel-animated">          
+    <div class="list text-center" ng-init="userCheck();startCountDown()">
+      <div class="image_wrapper_homepage text-center image_wrapper" ng-if="profileImg">
+        <!-- <img class="markStatus-staff"  ng-src="{{srcImage || host_url_global+'/'+profileImg}}" onerror="this.src='img/placeholderImg.png'"> -->
+        <img ng-src="{{srcImage || host_url_global+'/'+profileImg}}" onerror="this.src='img/placeholderImg.png'">
+      </div>
+      <div class="image_wrapper_homepage text-center image_wrapper imgCircle" ng-if="profileImg == ''">
+          <ionic-letter-avatar data="{{ firstName | limitTo:1}}{{ lastName.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{bgColour}}" shape="round" charcount="2"></ionic-letter-avatar>
+      </div> 
+      <div class="welcome">{{greet}} {{firstName}}</div>
+      <center><ion-spinner class="welcome_spinner" icon="dots"></ion-spinner></center>
+    </div>
+  </ion-content>
+  <style>
+    .spinner svg {
+      height: 60px;
+      width: 105px;
+      margin-left: 2%;
+    }
+    /*.spinner {
+      fill: #444;
+      stroke: #444;
+    }*/
+    .spinner{
+      fill: white;
+      stroke: white;
+    }
+    .panel-animated {
+  -webkit-animation: fadeIn 3.5s;
+  -moz-animation: fadeIn 3.5s;
+  animation: fadeIn 3.5s;
+}
+.chat-item.ng-enter {
+    -webkit-animation: fadeInLeft 5s;
+    animation: fadeInLeft 5s;
+}
+  </style>
+</ion-view>

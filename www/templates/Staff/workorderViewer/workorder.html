@@ -1,0 +1,39 @@
+<ion-view cache-view="false" ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <ion-title style="color:white;">Workorders</ion-title>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+  <ion-content scroll="false" class="feature_staff_center" ng-init="getWoList()">          
+    <!-- <div class="col col-100 wopage" ng-repeat="featuresdata in featuresData1" ng-init="featureNote1()">
+      <div ng-click="changestate(featuresdata.slug,featuresdata._id,featuresdata.notiCount)" class="hoverclass staff-featurepgpading workorderMargin">
+        <div class="{{featuresdata.icon}} featurefont">
+          <span class="staff_feturPgCunt" ng-show ="featuresdata.notiCount != undefined">{{featuresdata.notiCount}}</span>
+        </div>
+        <p class="featureNameFont">{{featuresdata.name}}</p>
+      </div>
+    </div> -->
+    <div class="boxRe">
+      <div  class="col col-100" ng-repeat="featuresdata in featuresData1" ng-init="featureNote1()" style="padding:0 !important;" ng-if="featuresData1.length == 1">
+        <div ng-click="changestate(featuresdata.slug,featuresdata._id,featuresdata.notiCount)" class="bgColForOneFet">
+          <div class="{{featuresdata.icon}} featurefont subDaynamicIcon1">
+            <span class="staffUnReadCnt" ng-show ="featuresdata.notiCount != undefined">{{featuresdata.notiCount}}</span>
+          </div>
+          <p class="subDaynamicFont1">{{featuresdata.name}}</p>
+        </div>
+      </div>
+      <div  class="col col-100" ng-repeat="featuresdata in featuresData1" ng-init="featureNote1()" style="padding:0 !important;" ng-if="featuresData1.length > 1">
+        <div ng-click="changestate(featuresdata.slug,featuresdata._id,featuresdata.notiCount)" class="bgCol">
+          <div class="{{featuresdata.icon}} featurefont subDaynamicIcon">
+            <span class="staffUnReadCnt" ng-show ="featuresdata.notiCount != undefined">{{featuresdata.notiCount}}</span>
+          </div>
+          <p class="subDaynamicFont">{{featuresdata.name}}</p>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

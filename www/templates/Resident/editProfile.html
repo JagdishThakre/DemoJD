@@ -1,0 +1,142 @@
+<ion-view cache-view="false" ng-controller="HeaderCtrl" class="whiteoverlayforHome">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="gofeature()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">My Profile</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-content ng-init="callProfile();checkIfNewUser();getfeatures();">
+        <div class="image_wrapper text-center" style="margin-top:5%">
+            <div ng-if="userDetailsProfile.profile_img">
+                <img class="markStatus-resi" ng-src="{{srcImage || host_url_global+'/'+userDetailsProfile.profile_img}}" onerror="this.src='img/placeholderImg.png'">
+            </div>
+            <div ng-if="userDetailsProfile.profile_img == ''" class="markStatus-resi imgCircle" style="border-radius: 50%;height: 155px;width: 155px;margin: 0 auto;">
+                <ionic-letter-avatar data="{{ userDetailsProfile.firstname | limitTo:1}}{{ userDetailsProfile.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{userDetailsProfile.bgColor}}" shape="round" charcount="2"></ionic-letter-avatar>
+            </div>
+            <!-- <div ng-if="userDetailsProfile.profile_img == ''" class="markStatus-resi editPrfText" ng-style="color">
+                <span>LA</span>
+            </div>profilePicCameraIcon1
+            <i class="icon ion-camera" ng-click="editphoto()"></i> -->
+            <i class="icon ion-camera" ng-class="{'profilePicCameraIcon': profileImg == true,'profilePicCameraIcon1': profileImg == false}" ng-click="editphoto()"></i>
+        </div>
+        <form name="whiteimg_form" novalidate>
+            <div class="blackoverlay">
+                <div class="whiteimg">
+                    <div>
+                        <span class="padding whitetext">First Name <span class="ClosedTxtClr">*</span></span>
+                        <br>
+                        <span ng-show="!activeName">  
+                            <span class="padding whitetext">{{userDetailsProfile.firstname}}</span>
+                            <span>
+                                <a class=" button-assertive edit-class" ng-click="edit('firstname'); ">Edit</a>
+                            </span>
+                        </span>
+                        <span ng-show="activeName">
+                            <span>
+                                <input class='form-control textpading' name="whiteimg.firstname" ng-model='userDetailsProfile.firstname' ng-minlength="1" type='text' required>
+                            </span>
+                        </span>
+                        <hr>
+                    </div>
+                    <div>
+                        <span class="padding whitetext">Last Name <span class="ClosedTxtClr">*</span></span>
+                        <br>
+                        <span ng-show="!activelName">  
+                            <span class="padding whitetext">{{userDetailsProfile.lastname}}</span>
+                            <span>
+                                <a class=" button-assertive edit-class" ng-click="edit('lastname'); " >Edit</a>
+                            </span>
+                        </span>
+                        <span ng-show="activelName">
+                            <span>
+                                <input class='form-control textpading' name="whiteimg.lastname" ng-model='userDetailsProfile.lastname' ng-minlength="1" type='text' required>
+                            </span>
+                        </span>
+                        <hr>
+                    </div>
+                    <div>
+                        <span class="padding whitetext">Email <span class="ClosedTxtClr">*</span></span>
+                        <br>
+                        <span ng-show="!activeEmail">  
+                            <span class="padding whitetext">{{userDetailsProfile.email}}</span>
+                            <span>
+                                <a class=" button-assertive edit-class" ng-click="edit('email'); " >Edit</a>
+                            </span>
+                        </span>
+                        <span ng-show="activeEmail">
+                            <span>
+                                <input class='form-control textpading' name="whiteimg.email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" ng-model='userDetailsProfile.email' type='email' required>
+                            </span>
+                        </span>
+                        <hr>
+                    </div>
+                    <div>
+                        <span class="padding whitetext">Phone Number <span class="ClosedTxtClr">*</span></span></br>
+                            <span ng-show="!activeNumber">  
+                                <span class="padding whitetext">{{userDetailsProfile.phone_no | tel}}</span>
+                                <span>
+                                    <a class=" edit-class" ng-click="edit('phone_no'); ">Edit</a>
+                                </span>
+                            </span>
+                        <span ng-show="activeNumber">
+                            <span> 
+                                <input phone-input class='form-control textpading' ng-model='userDetailsProfile.phone_no' type='text' ng-minlength="10" required>
+                            </span>
+                        </span>
+                        <hr>
+                    </div>
+                    <div>
+                        <span class="padding whitetext">Alternate Number</span>
+                        <br>
+                        <span ng-show="!activeEmernumber">  
+                            <span class="padding whitetext">{{userDetailsProfile.emergency_contact | tel}}</span>
+                            <span>
+                                <a class=" button-assertive edit-class" ng-click="edit('emergency_contact');" >Edit</a>
+                            </span>
+                        </span>
+                        <span ng-show="activeEmernumber">
+                            <td> 
+                                <input phone-input class='form-control textpading' ng-model='userDetailsProfile.emergency_contact' type='tel'>
+                            </td>
+                        </span>
+                        <hr>
+                    </div>
+                    <div ng-show="!activeUN">
+                        <span class="padding whitetext">{{rise_unit_singleton}} Number</span>
+                        <br>
+                        <span>  
+                            <span class="padding whitetext">{{userDetailsProfile.unit_number}}</span>
+                        </span>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="row" style="padding: 0;">
+                            <div class="col col-50" style="padding: 0;">
+                                <!-- <button style="padding: 0;margin: 0;height: 44px;" class="button button-full buzzbutton staffbutton buzz-tab0-button3" ng-disabled="isEnabled"
+                                    ng-click="cancelUser()">Cancel</button> -->
+                                <button style="padding: 0;margin: 0;height: 44px;" class="button button-full buzzbutton staffbuttonnew buzz-tab0-button3" ng-click="goback()">Cancel</button>
+                            </div>
+                            <div class="col col-50" style="padding: 0;border-left: 1px solid #fff;">
+                                <button style="padding: 0;margin: 0;height: 44px;" class="button button-full buzzbutton staffbuttonnewgreen buzz-tab0-button4" ng-disabled="whiteimg_form.$invalid" ng-click="update(userDetailsProfile)">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </form>
+    </ion-content>
+    <!-- <ion-footer-bar style="padding: 0px;background-color: transparent;">
+        <div class="row" style="padding: 0;">
+            <div class="col col-50" style="padding: 0;">
+                <button style="padding: 0;margin: 0;height: 44px;" class="button button-full buzzbutton staffbutton buzz-tab0-button3" ng-disabled="isEnabled" ng-click="cancelUser()">Cancel</button>
+            </div>
+            <div class="col col-50" style="padding: 0;border-left: 1px solid #fff;">
+                <button style="padding: 0;margin: 0;height: 44px;" class="button button-full buzzbutton staffbutton buzz-tab0-button4" ng-disabled="whiteimg.$invalid" ng-click="update(userDetailsProfile)">Save</button>
+            </div>
+        </div>
+    </ion-footer-bar> -->
+</ion-view>

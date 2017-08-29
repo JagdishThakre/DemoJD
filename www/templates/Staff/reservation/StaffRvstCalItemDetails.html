@@ -1,0 +1,48 @@
+<ion-view style="background:#202020" ng-controller="HeaderStaffCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Reservation Details</h1> -->
+          <ion-title style="color:white;">Reservation Details</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+<ion-content class="feature_staff_center">
+  <div>
+    <div class="marginTop3">
+            <img class="item_img" ng-src="{{host_url_global+'/'+ detailItem.amenity_img}}" ng-click="openModal(detailItem.amenity_img)" onerror="this.src='img/no-image.jpg'">
+    </div>
+    <div class="resiItemDiv marginTop3">                
+                  <div class="color marginBottom">
+                    <span class="marginTop3 bold">{{detailItem.name}}</span>
+                  </div>
+                
+                <div class="border-bottom" >
+                    <span class="color fontSize15">Maximum time allowed: </span> 
+                    <span class="itemFontColor">{{detailItem.max_time_allowed}} minutes</span>
+                </div>
+                <div class="border-bottom" ng-if="detailItem.cost_per_hour">
+                    <span class="color fontSize15 colorRed">Hourly Price: </span> 
+                    <span class="itemFontColor colorRed"><i class="icon ion-social-usd"></i> {{detailItem.cost_per_hour}}<span class="itemFontColor colorRed">/hr</span></span>
+                </div>
+                <div class="border-bottom" ng-if="detailItem.additional_flat_price">
+                    <span class="color fontSize15 colorRed">Additional Flat Price: </span> 
+                    <span class="itemFontColor colorRed"><i class="icon ion-social-usd"></i> {{detailItem.additional_flat_price}}<!-- <span class="itemFontColor colorRed">/hr</span> --></span>
+                </div>
+                <div>
+                  <span class="color fontSize15" ng-if="detailItem.description">Description: </span>
+                  <span style="line-height:16px" class="itemFontColor" >{{detailItem.description}}</span>
+                </div>
+    </div>            
+    <div style="padding: 5px;">
+        <button class="button button-block itemBookBtn" ng-click="bookCalenderitem()">
+                  Book Now
+        </button>
+    </div>
+  </div>
+
+</ion-content>
+
+</ion-view>

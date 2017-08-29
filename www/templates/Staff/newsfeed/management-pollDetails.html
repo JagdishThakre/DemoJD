@@ -1,0 +1,49 @@
+<ion-view view-title="Management" ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+  <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">News Feed</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <ion-content class="whiteoverlayforstaff" style="pading-left:20px;" ng-init="getPollDetails()">
+    <div class="poll-statistic" ng-if="!isStatistics">
+      <div class="card" style="margin: 2%;">
+        <div class="item item-divider timerhead">
+          <i class="ion-ios-alarm-outline"></i>
+          <span>{{poll_details.created |  dateformatdetails}}</span>
+        </div>
+        <div class="item item-text-wrap">
+          <p class="review-height pollsQues">{{poll_details.questions}}</p>
+        </div>
+        <div class="col inputbox newspst poll padder-normal full-width">
+           <label class="checkbox full-width" ng-repeat="opt in poll_details.options" ng-show="!poll_details.is_multiple">
+            <!--  <input type="radio" name="poll-ans" class="poll-ans" ng-model="data.poll_vote" value="{{opt._id}}"> -->
+             <input type="radio" name="poll-ans" class="poll-ans" ng-model="poll_vote"  ng-change="checkfiled(poll_vote)" value="{{opt._id}}">
+             <span>{{opt.answer}}</span>
+           </label>
+           <label class="full-width inline-block" ng-repeat="opt in multiOption" ng-show="poll_details.is_multiple">
+             <input type="checkbox" class="poll_multi_choice_input" ng-model="opt.isChecked"><span>{{opt.answer}}</span>
+           </label>
+        </div>
+        <div class="item item-divider timerhead">
+          {{poll_details.users_id.firstname+" "+poll_details.users_id.lastname}}
+        </div>
+      </div>
+      <div class="row responsive-sm">
+        <div class=" col text-right padder-normal">
+          <button class="button black-btn full-width" ng-click="submitPollAnswer()">Submit</button>
+        </div>
+      </div>
+    </div>
+    <div class="" ng-if="isStatistics">
+      <div class="item item-text-wrap staticQuestionHeader">
+        <p class="review-height pollsQues">{{staticQuestion}}</p>
+      </div>
+      <div class="hc-pie" items="statisticsData" ng-model="staticQuestion"></div>
+    </div>
+
+  </ion-content>
+</ioni-view>

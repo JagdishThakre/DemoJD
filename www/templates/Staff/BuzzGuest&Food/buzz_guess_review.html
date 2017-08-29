@@ -1,0 +1,53 @@
+<ion-view cache-view="false" ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+  <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Visitors</h1> -->
+        <ion-title style="color:white;">Visitors</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <div class="bar bar-subheader subheadercolor">
+    <h1 class="title buzzHeader">Send Notification</h1>
+  </div>
+  <ion-content style="pading-left:20px;">
+
+    <div class="card custcardforstaff">
+      <div class="item item-divider timerhead">
+        <i class="icon ion-clock white"></i>
+        <span>{{date | date:"MM/dd/yyyy 'at' h:mma"}}</span>
+      </div>
+      <div class="item item-text-wrap">
+        <span class="review-height">{{subjectToGuest}}</span>
+        <br>
+        <span class="review-height">{{messageToGuest}}</span>
+        <ol class="review-height">
+          <li ng-repeat="name in guestNames track by $index">{{$index+1}}. {{name}}</li>
+        </ol>
+        <img class="image-border1" ng-repeat="gImg in guestImages " ng-show="gImg !== undefined" ng-src="{{gImg}}" ng-click="openModal(gImg)">
+      </div>
+      <div class="item item-divider timerhead">
+        {{staffName}}
+      </div>
+    </div>
+
+
+
+  </ion-content>
+<!--  <ion-footer-bar style="padding :0;height:35px">
+    <button class="button button-small buzzbutton staffbutton buzz-tab0-button3" ng-click="buzzrevcancel()">Back</button>
+    <button class="button button-small buzzbutton staffbutton buzz-tab0-button4" ng-click="sendData()">Send</button>
+  </ion-footer-bar>-->
+<ion-footer-bar style="padding: 0px;background-color: transparent;">
+            <div class="row" style="padding: 0;">
+                <div class="col col-50" style="padding: 0;">
+		<button style="padding: 0;margin: 0;height: 44px;" class="button button-full buzzbutton staffbutton buzz-tab0-button3" ng-click="buzzrevcancel()">Back</button>
+                </div>
+                <div class="col col-50" style="padding: 0;border-left: 1px solid #fff;">
+		<button style="padding: 0;margin: 0;height: 44px;" class="button button-full buzzbutton staffbutton buzz-tab0-button3" ng-click="sendData()">Send</button>
+                </div>
+            </div>
+	</ion-footer-bar>
+</ion-view>

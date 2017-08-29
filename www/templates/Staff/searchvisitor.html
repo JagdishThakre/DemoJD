@@ -1,0 +1,82 @@
+<ion-modal-view class="ion-nifty-modalshort" ng-controller="HeaderStaffCtrl">
+    <div class="ion-modal-content-custom">
+        <ion-content class="padding" scroll="true">
+            <h5 class="scolor">Search Criteria</h5>
+            <!--   <button class="button button-full button-positive" ng-click="closeModal()">Close Modal</button> -->
+            <form>
+                <div class="row">
+                    <div class="col col-50">
+                        <div>
+                            <label class="item item-input" style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;">
+                                <input class="sinput" type="search" placeholder="{{rise_unit_singleton}} Number" ng-model="searchFilter.unit_number" ng-change="scrollTop(searchFilter.unit_number)" ng-click="showToggle()">
+                                <button class="tasktype">
+                                    <i class="icon mediumcal ion-ios-arrow-down placeholder-icon"></i>
+                                </button>
+                            </label>
+                            <div class="card-wrapper" ng-if="data.show" style="height:190px">
+                                <div class="card custom-card">
+                                    <ion-list class="darklist">
+                                        <ion-item ng-repeat="item in items | filter:searchFilter:strict | orderBy:natural('unit_number')" item="item" ng-click="clickedItem1(item)">
+                                            {{item.unit_number}}
+                                        </ion-item>
+                                    </ion-list>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col col-50">
+                        <div>
+                            <label class="item item-input" style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;margin-top:2px;">
+                                <input class="sinput" type="text" placeholder="Service Id" ng-model="serviceid">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="item item-input" style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;margin:0% 3% 0% 3%;" ion-datetime-picker date ng-model="datevalue" ng-change="changeformat(datevalue,'');">
+                        <input class="sinput" type="text" placeholder="Start Date" ng-model="startdate" readonly style="background: none;
+">
+                        <i class="icon mediumcal ion-calendar placeholder-icon"></i>
+                    </label>
+                </div>
+                <br>
+                <div>
+                    <label class="item item-input" style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;margin:0% 3% 0% 3%;" ion-datetime-picker date ng-model="endvalue" ng-change="changeformat('',endvalue);">
+                        <input class="sinput" type="text" ng-model="enddate" placeholder="End Date" value="{{enddate| date: 'yyyy-MM-dd h:mm a'}}" readonly style="background: none;
+">
+                        <i class="icon mediumcal ion-calendar placeholder-icon"></i>
+                    </label>
+                </div>
+                <div class="row">
+                <div class="col col-50">
+                    <label class="item item-input" style="background: transparent;border:none">
+                    <span ng-click="resize();">
+                        <multiselect header-text="Created By" allow-empty='false' value-property="id" text="Created By" items="cityLocation" value-changed="onValueChanged(value)">
+                        </multiselect>
+                        </span>
+
+
+                        <button class="tasktype">
+                            <i class="icon mediumcal ion-ios-arrow-down placeholder-icon"></i>
+                        </button>
+                    </label>
+                </div>
+            </div> 
+         <div class="row">
+                <div class="col col-50"></div>
+                <div class="col col-50">
+                   <!--  <button class="tasktype" ng-click="reset('package')"><span class="clearBtn">Reset</span></button> --> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <button class="tasktype" ng-click="clearAll(searchFilter);"><span class="clearBtn">Clear All</span></button>
+                   
+                </div>
+            </div>
+                <br>
+                <br>
+                <div class="row">
+                    <button class="cancelBtnReservsearch" ng-click="closeModal()">Cancel</button>&nbsp;
+                    <button class="confirmBtnReserv" ng-click="searchdata(searchFilter,serviceid,startdate,enddate)">Submit</button>
+                </div>
+        </ion-content>
+    </div>
+</ion-modal-view>

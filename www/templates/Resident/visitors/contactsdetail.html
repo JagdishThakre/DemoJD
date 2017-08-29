@@ -1,0 +1,40 @@
+<div class="modal image-modal">
+    <ion-pane>
+        <ion-header-bar class="bar-dark">
+            <h1 class="title">Pick Contacts</h1>
+            <button class="button" ng-click="choosecontactdata()">Choose</button>
+        </ion-header-bar>
+        <ion-content>
+            <div class="button-bar">
+                <a ng-click="toggledetails(1);" class="button button-assertive">Phone</a>
+                <a ng-click="toggledetails(2);" class="button button-assertive">Email</a>
+            </div>
+            <div class="row">
+                <div class="col col-25">
+                </div>
+                <div class="col col-50" style="text-align: center;">
+                    <img class="contimg" ng-src="img/male.png">
+                    <h3>{{contact.displayName}}</h3>
+                </div>
+                <div class="col col-25">
+                </div>
+            </div>
+            <div class="list">
+                <a ng-show="showphone" class="item item-divider" ng-repeat="phone in phonedetail.phone" ng-click="guestinfo(phone.value,1)" style="padding:5%;background:transparent;">
+                    <span ng-if="phone.value">{{phone.type | titleCase}} : {{phone.value}}&nbsp;&nbsp; 
+                    <i ng-if="phone.value == guest.phonenumber" class="icon ion-checkmark-round"></i></span>
+                </a>
+                <a ng-show="showemail" class="item item-divider" ng-repeat="email in emaildetail.email" ng-click="guestinfo(email.value,2)" style="padding:5%;background:transparent;">
+                    <span ng-if="email.value">{{email.type | titleCase}} : {{email.value}}&nbsp;&nbsp;
+                    <i ng-if="email.value == guest.email" class="icon ion-checkmark-round"></i></span>
+                </a>
+            </div>
+        </ion-content>
+    </ion-pane>
+</div>
+<style>
+.item.activated {
+    background-color: #2b2e34;
+    color: #fff;
+}
+</style>

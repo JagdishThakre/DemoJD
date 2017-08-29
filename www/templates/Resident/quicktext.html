@@ -1,0 +1,9 @@
+<ion-popover-view style="max-height: 33% !important;width: 80%; top: 371.983px !important;">
+        <ion-content id="cmt_content1">
+          <div class="list">
+            <a class="item text-wrap" ng-repeat="replyed in replyMsgs  | orderBy: 'order'" ng-click="setPromptText(replyed.message)" >
+              {{replyed.message }}
+            </a>
+          </div>
+        </ion-content>
+</ion-popover-view>

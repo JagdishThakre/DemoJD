@@ -1,0 +1,81 @@
+<ion-view cache-view="false" class="whiteoverlayforHome" ng-controller="HeaderCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">Normal Work Order</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+
+    <ion-content style="background:black";>
+        <div ng-init="predectiveCall()">
+
+            <form name="nwform" mobiscroll-form="woformsettings" style="display:none">
+
+                <div class="mbsc-form-group">
+
+                    <div class="mbsc-form-group-title">Basic Information</div>
+
+                    <label>Location
+                        <input type="text" ng-model="wodata.location" placeholder="Enter the location" name="location" ng-blur="popover.hide()" ng-change="compareText(wodata.location)" ng-keyup="popover.show($event)" required>
+                    </label>
+
+                    <label>Problem
+                        <input type="text" name="problem" ng-model="problem" placeholder="Enter the problem" required>
+                    </label>
+
+                    <label>Description
+                        <textarea name="firstname" ng-model="description" placeholder="Enter the description"></textarea>
+                    </label>
+
+                    <label>Do you have a pet?
+                        <span class="mbsc-desc">Staff will be careful around your loved one</span>
+                        <input type="checkbox" data-role="switch" mobiscroll-switch ng-model="choice"/>
+                    </label>
+
+
+                    <label>Do you need a quote?
+                        <span class="mbsc-desc">Staff can provide you an estimate before actual work</span>
+                        <input type="checkbox" data-role="switch" mobiscroll-switch ng-model="estimate"/>
+                    </label>
+
+
+                    <label>Permission to enter?
+                        <span class="mbsc-desc">Does staff have permission to enter for this workorder?</span>
+                        <input type="checkbox" data-role="switch" mobiscroll-switch ng-model="permission"/>
+                    </label>
+
+                    <label >
+                        <textarea name="firstname" ng-show="permission" ng-model="note" placeholder="Enter the entry note"></textarea>
+                    </label>
+
+                </div>
+
+                <div class="mbsc-form-group">
+
+                    <div class="mbsc-btn-group-justified">
+                        <button data-icon="empty icon ion-ios-camera" ng-click="getclicked()">Camera</button>
+                        <button data-icon="empty icon ion-image" ng-click="getselect()">Gallery</button>
+                    </div>
+
+                    <div class="capture-img-section" ng-repeat="gImg in GuestNameObject track by $index" ng-show="gImg !== undefined">
+                        <i class="icon ion-close-circled right capture-img-remove" ng-click="removeImg(gImg)">&nbsp</i>
+                        <img class="capture-img" ng-src="{{gImg}}" ng-click="openImageZoom1(GuestNameObject,$index)">
+                    </div>
+
+                </div>
+
+
+                <div class="mbsc-form-group">
+                    <button class="mbsc-btn-block md-sg-btn" ng-click="sendnw(wodata.location,problem,description,choice,estimate,permission,note)" ng-disabled="nwform.$invalid">Submit Workorder</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </ion-content>
+
+</ion-view>

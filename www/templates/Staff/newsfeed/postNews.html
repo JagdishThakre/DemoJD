@@ -1,0 +1,54 @@
+<ion-view view-title="Management" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+  <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">News Feed</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <form class="" name="newsform" novalidate>
+    <ion-content class="addWoBg" ng-init="getStaffDynamicFeature()">
+      <div class="m-t-small padder-normal">
+        <div class="inputbox">
+          <label class="full-width newsLable">Title
+            <span class="required">*</span>
+          </label>
+          <input class="inputtext" ng-model="topic.title" type="text" placeholder="Topic" name="topic" required>
+        </div>
+        <div class="inputbox">
+          <label class="newsLable">Descriptions:</label>
+          <textarea elastic class="inputtext workorder-desc" ng-model="topic.description" placeholder="Enter a Description"></textarea>
+        </div>
+        <div class="inputbox newspst" ng-repeat="showStaffCheckBox in showStaffCheckBoxes">
+           <label class="checkbox left half-width newsLable" ng-if="showStaffCheckBox.service_category_id._id=='5787389761f925afa18240c5'">
+             <input type="radio" name="catRadio" ng-model="news.category" value="4">
+             General
+           </label>
+           
+           <label class="checkbox right half-width newsLable" ng-if="showStaffCheckBox.service_category_id._id=='578738bc61f925afa18240c6'">
+             <input type="radio" name="catRadio" ng-model="news.category" value="3">
+             Market Place
+           </label>
+        </div>
+        <div class="row">
+                <div class="col col-50 normalWoCameraButton" ng-click="getclicked()" style="margin-right:5%">
+                  <i class="icon ion-camera"> Camera</i>
+                </div>
+                <div class="col col-50 normalWoCameraButton" ng-click="getselect()" style="margin-left:5%">
+                  <i class="icon ion-image" > Gallery</i>
+                </div>
+        </div>
+        <div class="capture-img-section" ng-repeat="gImg in topic.photos track by $index" ng-show="gImg !== undefined">
+    			<i class="icon ion-close-circled right capture-img-remove" ng-click="removeImg($index)">&nbsp</i>
+    			<img class="capture-img" ng-src="{{gImg}}" ng-click="openImageZoom1(topic.photos,$index)">
+    		</div>
+      </div>
+    </ion-content>
+    <ion-footer-bar class="bar bar-footer padding-none">
+      <button class="button danger-btn" ng-click="cancelNews()">Cancel</button>
+      <button class="button black-btn news-send-btn" ng-click="submitNews()" ng-disabled="newsform.$invalid">Send</button>
+    </ion-footer-bar>
+  </form>
+  </ioni-view>

@@ -1,0 +1,40 @@
+<ion-view class="whiteoverlayforResident" ng-controller="HeaderStaffCtrl">
+    <ion-tabs class="tabs-positive StaffTab tabs-top tabs-icon-top taskMngrTab">
+        <ion-tab title="High" icon-on="ion-ios-thunderstorm" icon-off="ion-ios-thunderstorm-outline" class="taskMngrHigh"
+            href="#/taskManger/taskMangerHighPriority" on-select="sendPriority(1);">
+            <ion-nav-view name="taskMngrHighPriority"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="Low" icon-on="ion-ios-rainy" icon-off="ion-ios-rainy-outline" class="" href="#/taskManger/taskMangerMediumPriority"
+            on-select="sendPriority(2);">
+            <ion-nav-view name="taskMngrMediumPriority"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="PM" icon-on="ion-ios-partlysunny" icon-off="ion-ios-partlysunny-outline" class="" href="#/taskManger/taskMangerNormalPriority"
+            on-select="sendPriority(3);">
+            <ion-nav-view name="taskMngrNormalPriority"></ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>
+
+<!--
+<ion-view class="whiteoverlayforResident" ng-controller="HeaderStaffCtrl">
+    <ion-tabs class="tabs-positive StaffTab tabs-top tabs-icon-top taskMngrTab">
+        <ion-tab title="High" icon-on="ion-ios-thunderstorm" icon-off="ion-ios-thunderstorm-outline" badge="highCount" class="taskMngrHigh"
+            href="#/taskManger/taskMangerHighPriority" on-select="sendPriority(1);getMyTskManagerTabHighCount();getMyTskManagerTabMediumCount();getMyTskManagerTabNormalCount()">
+            <ion-nav-view name="taskMngrHighPriority"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="Low" icon-on="ion-ios-rainy" icon-off="ion-ios-rainy-outline" badge="midiumCount" class="" href="#/taskManger/taskMangerMediumPriority"
+            on-select="sendPriority(2);getMyTskManagerTabMediumCount
+        ()">
+            <ion-nav-view name="taskMngrMediumPriority"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="PM" icon-on="ion-ios-partlysunny" icon-off="ion-ios-partlysunny-outline" badge="lowCount" class="" href="#/taskManger/taskMangerNormalPriority"
+            on-select="sendPriority(3);getMyTskManagerTabNormalCount()">
+            <ion-nav-view name="taskMngrNormalPriority"></ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>
+-->

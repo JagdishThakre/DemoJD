@@ -1,0 +1,31 @@
+<ion-view  ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+     <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="gobackpckgdetails()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">Signature</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <ion-content class="whiteoverlayforstaff" scroll="false" style="background-color:#2E2E2E;">
+
+        <div style="width:100%;text-align:center;">
+        <canvas id='signatureCanvas'  style='border: 1px solid black;height:inherit; background-color:white;' placeholder="Signature" ng-model="canvas"></canvas>    
+        </div>
+        <div class="row gap" style="margin:2%;padding-right: 25px;text-align:center; margin-top: 5px;font-size:30px;color:white;">
+                 <span class="col col-100" >Signature for {{unitnumber}}</span> 
+               
+        </div>
+  </ion-content>
+<ion-footer-bar style="padding: 0px;background-color: transparent;">
+            <div class="row" style="padding: 0;">
+                <div class="col col-50" style="padding: 0;">
+        <button style="padding: 0;margin: 0;height: 44px;" class="button button-full button-assertive cancel" ng-click="clearCanvas()">Clear</button>
+                </div>
+                <div class="col col-50" style="padding: 0;border-left: 1px solid #fff;">
+        <button style="padding: 0;margin: 0;height: 44px;" class="button button-full button-balanced ok" ng-click="saveCanvas()">Send</button>
+                </div>
+            </div>
+    </ion-footer-bar>
+</ion-view>

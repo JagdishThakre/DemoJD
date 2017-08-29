@@ -1,0 +1,26 @@
+<ion-view cache-view="false" ng-controller="HeaderCtrl" class="whiteoverlayforHome">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+        </ion-nav-buttons>
+        <ion-nav-title>
+            <h1 class="title" style="color:white;">{{heading}}</h1>
+        </ion-nav-title>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+        </ion-nav-buttons>
+
+
+
+  <ion-content ng-init="headerPage()" scroll="false">
+    <div class="firstpageresi">
+      <!-- <button class="button button-block firtpagebuttonResi " ng-click="sendRequestpage()">
+          <i class="icon ion-compose left marginleft5"></i>
+          <span>Type Notification</span>
+      </button> -->
+      <button class="button button-block firtpagebuttonResi " ng-click="callRequest()">
+        <i class="icon ion-ios-telephone left marginleft5"></i>
+        <span>Call for Help</span>
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

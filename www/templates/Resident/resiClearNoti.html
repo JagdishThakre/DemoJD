@@ -1,0 +1,44 @@
+<ion-view cache-view="false" ng-controller="HeaderCtrl" class="whiteoverlayforHome">
+    <ion-nav-buttons side="left">
+        <div ng-click="goback()">
+            <button class="button button-icon ion-chevron-left headerbuttonmenu" nav-direction="enter"></button>
+        </div>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">Clear Notifications</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+     <ion-header-bar class="bar bar-subheader subheadercolor" style="padding:0px;">
+        <ion-toggle ng-model="selectvalue" class="transparent selectall" ng-change="selectAll(selectvalue)" toggle-class="toggle-balanced"><span class="selectalltext">Select All</span></ion-toggle>
+    </ion-header-bar>
+    <ion-content ng-init="checkResiNotiData()">
+        <ul ng-repeat="clearNotiLabel in clearNotiLabels">
+            <li class="item item-checkbox clearNotiLi"  ng-hide="clearNotiLabel.service_category_id._id==='5629c4763949c780667d5c5c' || clearNotiLabel.service_category_id._id==='5629c4a03949c780667d5c5d' ||  clearNotiLabel.service_category_id._id==='56a9e78bd42aba0fd731b1df' || 
+            clearNotiLabel.service_category_id._id==='5787389761f925afa18240c5' ||
+            clearNotiLabel.service_category_id._id==='578738bc61f925afa18240c6' ||
+            clearNotiLabel.service_category_id._id==='56ab40b8d42aba0fd731b1e4' ||
+            clearNotiLabel.service_category_id._id==='5787386661f925afa18240c4' ||
+            clearNotiLabel.service_category_id._id==='578737d961f925afa18240c3' ||
+             clearNotiLabel.service_category_id._id==='578737b261f925afa18240c2' || 
+             clearNotiLabel.service_category_id.parent_id==='5629c4143949c780667d5c5b'
+            ">
+                <i class="{{clearNotiLabel.service_category_id.icon}} featureNotiIcon"></i>
+                <span class="clearNotiFeaturePgCunt" >{{clearNotiLabel.notiCount}}</span>
+                <span class="showNoNotiGray" ng-if="!clearNotiLabel.notiCount">0</span>
+                <p class="clearNotiLabel">{{clearNotiLabel.service_category_id.name}} </p>
+                <label class="checkbox" >
+                    <input type="checkbox"   class="ClrNoriCheck" ng-model="clearNotiLabel.selected">
+                </label>
+                <label class="checkbox" ng-if="!clearNotiLabel.notiCount">
+                    <input type="checkbox"   class="ClrNoriCheckGray"  ng-disabled="true" checked>
+                </label>
+            </li>
+        </ul>
+        </ion-list>
+        <div class="clearNotiFooter" >
+            <input type="button" class="button button-block loginbutton" ng-disabled="disableClearBtn" value="Submit" ng-click="passClearNotiData()">
+        </div>
+    </ion-content>
+</ion-view>

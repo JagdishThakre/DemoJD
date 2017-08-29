@@ -1,0 +1,79 @@
+<ion-view view-title="Management" id="userMessagesView" class="whiteoverlayforHome" ng-controller="HeaderCtrl" ng-init="loadtaskView()">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonmenu" ng-click="goback()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <ion-title style="color:white;">News Feed</ion-title>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+  <ion-content style="background: #000;" ng-init="loadConversation()">
+    <div class="" ng-repeat="(key, value) in conversationList | groupBy: 'createdDate'">
+      <div class="sortdate">
+        <label>{{key}}</label>
+      </div>
+      <ion-list class="list poll-section" style="border: 0 none;" can-swipe="true">
+        <ion-item ng-repeat="retreiveTxt in value track by $index" class="comment-item" ng-show="retreiveTxt.length!=0 && !retreiveTxt.is_deleted">
+          <div class="row retrivedTextDetailsPg">
+            <div>
+              <div ng-if="retreiveTxt.users_id.profile_img" style="border-right: 2px solid #424242;padding: 5px !important;">
+                <img ng-if="!showErrorImg" style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3||retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4,}"
+                  ng-src="{{host_url_global+'/'+retreiveTxt.users_id.profile_img}}" imageonload="generateAvtarOnimageLoadError()">
+
+                <div ng-if="showErrorImg" class="noProfileImg" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3||retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4,}"
+                  style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;">
+                  <ionic-letter-avatar data="{{ retreiveTxt.users_id.firstname | limitTo:1}}{{ retreiveTxt.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}"
+                    bkcolor="{{retreiveTxt.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                </div>
+              </div>
+              <div ng-if="retreiveTxt.users_id.profile_img == ''" style="border-right: 2px solid #424242;padding: 5px !important;">
+                <div class="noProfileImg" ng-class="{'markStatus-staff':retreiveTxt.users_id.user_type_id == 3||retreiveTxt.users_id.user_type_id == 2,'markStatus-resi':retreiveTxt.users_id.user_type_id == 4,}"
+                  style="margin-top: 1px; border-radius: 50%; height: 55px; width: 55px;">
+                  <ionic-letter-avatar data="{{ retreiveTxt.users_id.firstname | limitTo:1}}{{ retreiveTxt.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}"
+                    bkcolor="{{retreiveTxt.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                </div>
+              </div>
+            </div>
+            <div class="col col-75">
+              <div class="col pad0 text-right" style="margin-top: -3px;font-size: 10px;">
+                <i class="ion-clock"></i>
+                <span>{{retreiveTxt.created| date:"h:mma"}}</span>
+              </div>
+              <div class="col pad0" style="margin-left: 2px;margin-top: -13px;">
+                <span class="retrivedtext_Name">{{retreiveTxt.users_id.firstname}} &nbsp{{retreiveTxt.users_id.lastname}}</span>
+              </div>
+              <div class="col pad0 retrive-textmsg-section" style="margin-left: 2px;">
+                <span class="retrivedtext_Msg text-wrap" ng-bind-html="retreiveTxt.comment | htmlize"></span>
+                <div class="text-wrap" style="margin-top:10px">
+                  <img class="comment-image" ng-if="retreiveTxt.images.length > 0" ng-repeat="image in retreiveTxt.images track by $index"
+                    ng-src="{{host_url_global+'/'+image.url}}" ng-click="openImageZoom(retreiveTxt.images,$index)" />
+                </div>
+              </div>
+              <div class="" ng-if="activeUser == retreiveTxt.users_id._id">
+                <ion-option-button class="edit-swipe-btn" ng-click="editPrivateComment(retreiveTxt._id,retreiveTxt.comment,2)">
+                  <i class="ion-edit" style="font-size:26px;margin-left:1px;"></i>
+                </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="deletePrivateComment(retreiveTxt._id,2)">
+                  <i class="ion-ios-trash" style="font-size:26px;margin-left:6px;"></i>
+                </ion-option-button>
+              </div>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+  <ion-footer-bar class="message-footer" keyboard-attach style="background:#000;">
+    <label class="item-input-wrapper">
+      <textarea id="cmt_content" class="replay-msg" type="text" placeholder="Type your message here" ng-model="replyObj.replytext" msd-elastic style="width:100%;" maxlength="1500"></textarea>
+    </label>
+    <div class="footer-btn-wrap">
+      <button class="button button-icon icon ion-android-send footer-btn resi-btn-color" ng-if="replyObj.replytext!=undefined"
+        ng-show="replyObj.replytext.length!=0" ng-click="marketplaceUnitComment(2)">
+      </button>
+      <button class="button button-icon icon ion-camera footer-btn resi-btn-color" ng-show="replyObj.replytext.length == 0" ng-click="openAttachmentmarketPlace(2)">
+      </button>
+    </div>
+  </ion-footer-bar>
+</ion-view>

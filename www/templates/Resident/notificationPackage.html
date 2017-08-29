@@ -1,0 +1,61 @@
+<ion-view  cache-view="false"  ng-controller="HeaderCtrl" class="whiteoverlayforHome">
+    <ion-nav-buttons side="left">
+    <div ng-click="goback()" >       
+        <button class="button button-icon ion-chevron-left headerbuttonmenu"  nav-direction="enter" ></button>
+    </div>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <ion-title style="color:white;">{{headertext}}</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonmenu" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-header-bar>
+        <h1 class="title" style="color:white;">Notifications</h1>
+    </ion-header-bar>
+    <ion-content ng-init="getNotifyList();getNotificationstaff">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        <div class="list poll-section" style="border: 0 none;">
+            <div ng-class="{'border-rm':$index==0}" class="item poll-item row notifiDiv1" ng-repeat="message in existingNotify| orderBy:sortComment:true" ng-class="{pckgClosed:message.is_closed}" ng-click="getNotificationthread(message)" >
+                <!-- <div class="col col-20 item-image notifiImgDiv">
+                    <img class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-resi':message.users_id.user_type_id == 4}" src="{{host_url_global+'/' + message.users_id.profile_img}}" onerror="this.src='img/placeholderImg.png'">
+                </div> -->
+                <div ng-if="message.users_id.profile_img" class="col col-20 item-image notifiImgDiv">
+                    <img ng-if="!showErrorImg" class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-resi':message.users_id.user_type_id == 4}" src="{{host_url_global+'/' + message.users_id.profile_img | thumb}}" imageonload="generateAvtarOnimageLoadError()">
+
+                    <div ng-if="showErrorImg" class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-resi':message.users_id.user_type_id == 4}">
+                        <ionic-letter-avatar data="{{ message.users_id.firstname | limitTo:1}}{{ message.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{message.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                    </div>
+                </div>
+                <div ng-if="message.users_id.profile_img == ''" class="col col-20 item-image notifiImgDiv">
+                    <div class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-resi':message.users_id.user_type_id == 4}">
+                        <ionic-letter-avatar data="{{ message.users_id.firstname | limitTo:1}}{{ message.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{message.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                    </div>
+                </div>
+                <div class="col col-67 notifiMsgDiv">
+                    <span>
+                        <span style="" class="col notifiDate">{{message.created | dateformatnotifcation}}</span>
+                        <!-- <span class="pckUnitNo">{{message.units_id.unit_number}}</span> -->
+                    </span>
+                    <span class="col notifiMsgSpan">
+                        <span style="float: left; ">{{message.users_id.firstname}} {{message.users_id.lastname}}</span>
+                        <span class="pull-right" ng-if="message.service_id.is_signed == true" style="color: green; margin-right: -20%;">Picked Up</span>
+                        <span class="pull-right" ng-if="message.service_id.is_signed == false" style="color: red; margin-right: -20%;"ng-if="notifythread.is_signed == false">Not Picked Up</span>
+                    </span>
+                    <span class="col text-wrap notifiMsgTextSpan">{{message.message | truncate:65}}</span>
+                </div>
+                <div class="col col-10 notifiCountDiv">
+                    <div class="notifiCircle" ng-if="message.unreadthreadVal > 0">{{message.unreadthreadVal}}</div>
+                </div>
+            </div>
+        </div>
+         <div ng-if="gotresponse">
+       <h4 class="noti" ng-if="msgLength==0"> No results found!</h4>
+       </div>
+         <div class="text-center" ng-show="noMoreItemsAvailable && (page_number != '01' || page_number == '0')"> 
+                    <span> No more notifications to load</span>
+        </div>
+             <ion-infinite-scroll   ng-if="!noMoreItemsAvailable" immediate-check="false"  on-infinite="loadMore()"  distance="3%"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>
+

@@ -1,0 +1,89 @@
+<ion-view cache-view="false" ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome" ng-init="showresponsedata();">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Package Delivery</h1> -->
+        <ion-title style="color:white;">Package Delivery</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <form class="" name="nwform" novalidate>
+        <ion-content class="addWoBg" style="padding:1%;">
+            <div class="row">
+                <div class="col col-100">
+                    <label class="item item-input" style="background: transparent;border-bottom: 1px solid #fff !important; border-top: none; border-left: none;border-right: none;">
+                        <input class="sinput" type="search" placeholder=" Search {{rise_unit_singleton}} Number" ng-model="searchFilter.unit_number" ng-change="scrollTop(searchFilter.unit_number)" ng-click="showToggle()" required>
+                        <button class="tasktype">
+                            <i class="icon mediumcal ion-ios-arrow-down placeholder-icon"></i>
+                        </button>
+                    </label>
+                    <div class="input-label resilabel" ng-show="searchFilter.unit_number">
+                        {{rise_unit_singleton}}  Number
+                    </div>
+                    <ion-scroll delegate-handle="locations-scroll" direction="y" class="wide-as-needed">
+                        <div style="padding:3%;">
+                            <ion-list ng-show="data.show">
+                                <ion-item ng-repeat="item in items | filter:searchFilter:strict | orderBy:natural('unit_number')" item="item" ng-click="clickedItem1(item);getresidentlist(item._id);">
+                                    {{item.unit_number}}
+                                </ion-item>
+                            </ion-list>
+                        </div>
+                    </ion-scroll>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-100" ng-show="searchFilter.unit_number">
+                    <label class="{{(searchFilter.unit_number)?'item item-input item-select selectresi':'item item-input item-select selectresidisable'}}">
+                        <div class="input-label resilabel">
+                            {{rise_property}}
+                        </div>
+                        <div class="{{(searchFilter.unit_number)?'selectParent':'selectParentdisable'}}">
+                            <select class="resiname" ng-disabled="!searchFilter.unit_number" ng-model="resident.name" type="search" required>
+                                <option ng-if="!resident.name" value="" selected="selected">Choose</option>
+                                <option ng-if="!resident.name && showunregisterresi" value="unregister_ resident" selected="selected">Unregister {{rise_property}}</option>
+                                <option ng-if="resident.name" value="{{resident.name}}" selected="selected">{{resident.name}}</option>
+                                <option ng-repeat="resident in residentlist track by $index" value="{{resident.firstname}} {{resident.lastname}}">{{resident.firstname}} {{resident.lastname}}</option>
+                            </select>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-100" ng-show="resident.name">
+                    <label class="{{(resident.name)?'item item-input item-select selectresi':'item item-input item-select selectresidisable'}}">
+                        <div class="input-label resilabel">
+                            Carrier
+                        </div>
+                        <div class="{{(resident.name)?'selectParent':'selectParentdisable'}}">
+                            <select class="resiname" ng-disabled="!resident.name" ng-model="resident.carrier" required>
+                                <option value="" selected="selected">Choose</option>
+                                <option value="Amazon">Amazon</option>
+                                <option value="UPS">UPS</option>
+                                <option value="USPS">USPS</option>
+                                <option value="FedEx">FedEx</option>
+                                <option value="General">General</option>
+                            </select>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <br>
+            <!--  <div class="capture-img-section" ng-repeat="gImg in GuestNameObject.imgURI track by $index" ng-show="gImg !== undefined">
+                <i class="icon ion-close-circled right capture-img-remove" ng-click="removeImg(gImg)">&nbsp</i>
+                <img class="capture-img" ng-src="{{gImg}}" ng-click="openImageZoom1(GuestNameObject.imgURI,$index)">
+            </div> -->
+        </ion-content>
+    </form>
+    <ion-footer-bar style="padding: 0px;background-color: transparent;">
+        <div class="row" style="padding: 0;">
+            <div class="col col-50" style="padding: 0;">
+                <button style="padding: 0;margin: 0;height: 44px;" class="button button-full cancelBtnReservsearch" ng-click="goback()">Back</button>
+            </div>
+            <div class="col col-50" style="padding: 0;border-left: 1px solid #fff;">
+                <button ng-disabled="nwform.$invalid" style="padding: 0;margin: 0;height: 44px;" class="button button-full confirmBtnReserv" ng-click="editpackage(resident)">Send</button>
+            </div>
+        </div>
+    </ion-footer-bar>
+</ion-view>

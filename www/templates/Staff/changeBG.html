@@ -1,0 +1,28 @@
+<ion-view cache-view="false" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <ion-title style="color:white;">Change Background</ion-title>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+  <ion-content class="blackBg">
+    <div ng-repeat="img in BGImages">
+      <div class="row">
+        <div class="col">
+          <img showonload="{{img.propert_imgP}}" src="img/image-loading.gif" style="width: 100%;height: 100%;">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button button-positive setbackgroundbtn" ng-click="setImage(img)">
+            Set as Background
+          </button>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

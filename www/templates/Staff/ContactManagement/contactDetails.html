@@ -1,0 +1,46 @@
+<ion-view cache-view="false" id="userMessagesView" ng-controller="HeaderStaffCtrl" class="thread-border">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Contact Details</h1> -->
+        <ion-title style="color:white;">Contact Details</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <ion-content style="background:#000;color:#fff"> 
+<div class="contactMainDiv">   
+                <div class="contactHorizontal" style="text-align:center" ng-if="contactImg">
+                    <img ng-if="!showErrorImg" class="contactImg markStatus-resi" src="{{host_url_global+'/' + contactImg}}" imageonload="generateAvtarOnimageLoadError()">
+
+                    <div ng-if="showErrorImg" class="contactImg prfImg" ng-class="{'markStatus-staff':userTypeId == 3|| userTypeId == 2,'markStatus-resi':userTypeId == 4,}" style="margin-left: auto; margin-right: auto; display: block;">
+                        <ionic-letter-avatar data="{{ firstName | limitTo:1}}{{ contactLastName.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{bgcolor}}" shape="round" charcount="2"></ionic-letter-avatar>
+                    </div>
+                </div>
+                <div class="contactHorizontal" ng-if="contactImg == ''">
+                    <div class="contactImg prfImg" ng-class="{'markStatus-staff':userTypeId == 3|| userTypeId == 2,'markStatus-resi':userTypeId == 4,}" style="margin-left: auto; margin-right: auto; display: block;">
+                        <ionic-letter-avatar data="{{ firstNamel | limitTo:1}}{{ contactLastName.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{bgcolor}}" shape="round" charcount="2"></ionic-letter-avatar>
+                    </div>
+                </div>
+                <div class="contactHorizontal">
+                    <span class="contactTitle">Name:</span>
+                    <span class="contactInfo">{{firstNamel}} {{contactLastName}}</span>
+                </div>
+                <div class="contactHorizontal" ng-if="userTypeId == 4">
+                    <span class="contactTitle">{{rise_unit_singleton}} No:</span>
+                    <span class="contactInfo">{{contactUnitNo}}</span>
+                </div>
+                <div class="contactHorizontal">
+                    <span class="contactTitle">Phone No:</span>
+                    <span class="contactInfo" ng-click="callresi(contactPhoneNo)">{{contactPhoneNo | tel}}</span>
+                </div>
+                <div class="contactHorizontal" ng-if="contactEmgno" ng-hide="contactEmgno== 'undefined'">
+                    <span class="contactTitle">Alternate No:</span>
+                    <span class="contactInfo" ng-click="callresi(contactEmgno)">{{contactEmgno | tel}}</span>
+                </div>     
+    </div>     
+                    
+  </ion-content>
+ 
+</ion-view>

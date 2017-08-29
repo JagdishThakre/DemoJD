@@ -1,0 +1,43 @@
+<ion-view ng-controller="HeaderStaffCtrl" class="whiteoverlayforHome">
+  <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">Visitors</h1> -->
+        <ion-title style="color:white;">Visitors</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+  <ion-content ng-controller="searchCtrl" scroll="false">
+    <div class="buzzSelect">
+      <center>
+        <label class="selectLabel">Select {{rise_unit_singleton}} Number</label>
+        <div class="item-input-inset unitTextBox">
+          <i class="icon ion-ios-search-strong placeholder-icon unitBoxPlaceholder">&nbsp</i>
+          <label class="item-input-wrapper searchMargin">
+            <input type="search" style="width:100%;margin-left:10%;float: left;height: 45px;" placeholder="Search {{rise_unit_singleton}} Id" ng-model="searchFilter.unit_number" ng-change="scrollTop(searchFilter.unit_number)">
+          </label>
+          <div class="dropdown-btn">
+            <button class="button icon button-clear ion-chevron-down toggle-btn" ng-click="showToggle()">
+            </button>
+          </div>
+        </div>
+      </center>
+      <ion-scroll delegate-handle="locations-scroll" direction="y" class="wide-as-needed">
+        <div style="padding:3%;">
+          <ion-list ng-show="data.show">
+            <ion-item ng-repeat="item in items | filter:searchFilter:strict | orderBy:natural('unit_number')" item="item" ng-click="clickedItem(item)">
+              {{item.unit_number}}
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-scroll>
+      <div class="row " style="margin-top: 15px;">
+        <button class="col button button-small buzzbutton staffbutton buzz-tab0-button2" ng-click="leavePage()">Cancel</button>
+        <button class="col button button-small buzzbutton staffbutton  buzz-tab0-button1" ng-click="takePicture(1);">Next</button>
+        <p>&nbsp;</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

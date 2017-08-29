@@ -1,0 +1,120 @@
+ <ion-view class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="gobackStaffFeature()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">My Tasks</h1> -->
+        <ion-title style="color:white;">My Tasks</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-header-bar class="bar bar-subheader subheadercolor">
+        <h1 ng-if="!searching" class="title white right">Notification</h1>
+        <h1 ng-if="searching" class="title white right">Total Records : {{totalrecords}}</h1>
+        <h1 ng-show="show" class="searchBarDiv">
+    <div style="width: 100%;">
+      <div class="left" style="display: inline-block;width: 90%;">
+       <!--  <input class="searchBarInput" type="text"   ng-model="search1.unit_number" placeholder="Search" ng-change="scrollopt(search1.unit_number)"> -->
+      </div>
+      <div style=" display: inline-block;width: 10%;">
+     <!--    <button style="color: #fff;" class="button button-icon ion-ios-close"  type="submit" ng-click="showIt(0)"></button> -->
+      </div>
+    </div>
+    </h1>
+        <button class="right button button-icon ion-android-search white padding-none" ng-click="showIt(1)"></button>
+    </ion-header-bar>
+    <ion-content class="has-header has-subheader" delegate-handle="mainScroll" on-scroll="getscollposition()">
+        <div style="padding:0%;">
+            <ion-list ng-show="data.show">
+                <div>
+                    <ion-item ng-repeat="item in items | filter:search1.unit_number:strict" item="item" ng-click="searchUsingService(item)" class="unit">
+                        {{item.unit_number}}
+                    </ion-item>
+                    <ion-item ng-show="(items | filter:search1).length == 0" item="item" class="unit">
+                        No results found
+                    </ion-item>
+                </div>
+            </ion-list>
+        </div>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="refreshMyTaskList()"></ion-refresher>
+        <div ng-class="{'list poll-section': blur== false ,'list poll-sectionblur': blur == true}" style="border: 0 none;">
+            <div ng-class="{'border-rm':$index==0,tskComplteStaff:message.tasks_id.task_status==2,taskIsProgressStaff:message.tasks_id.task_status==1,taskIsClosedStaff:message.tasks_id.task_status==3}" class="item poll-item taskMngrLstContainer row notifiDiv1" ng-repeat="message in messages| orderBy:created" ng-class="{pckgClosed:message.is_closed}" ng-click="taskDetails(message)">
+                <!-- <div class="col col-20 item-image notifiImgDivTaskMngr">
+                    <img class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-resi':message.users_id.user_type_id == 4}" src="{{host_url_global+'/' + message.users_id.profile_img| thumb}}" onerror="this.src='img/placeholderImg.png'">
+                </div> -->
+                <div ng-if="message.users_id.profile_img" class="col col-20 item-image notifiImgDivTaskMngr">
+                    <img ng-if="!showErrorImg" class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-resi':message.users_id.user_type_id == 4}" src="{{host_url_global+'/' + message.users_id.profile_img| thumb}}" imageonload="generateAvtarOnimageLoadError()">
+
+                    <div ng-if="showErrorImg" class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-resi':message.users_id.user_type_id == 4}">
+                        <ionic-letter-avatar data="{{ message.users_id.firstname | limitTo:1}}{{ message.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{message.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                    </div>
+                </div>
+                <div ng-if="message.users_id.profile_img == ''" class="col col-20 item-image notifiImgDivTaskMngr">
+                    <div class="notifiImg" ng-class="{'markStatus-staff':message.users_id.user_type_id == 3 || message.users_id.user_type_id == 2,'markStatus-resi':message.users_id.user_type_id == 4}">
+                        <ionic-letter-avatar data="{{ message.users_id.firstname | limitTo:1}}{{ message.users_id.lastname.trim().split(' ').pop() | limitTo:1 }}" bkcolor="{{message.users_id.colour}}" shape="round" charcount="2"></ionic-letter-avatar>
+                    </div>
+                </div>
+                <div class="col col-60 notifiMsgDiv">
+                    <span style="" class="col notifiDate">{{message.created }}  <span style="float: right;">{{message.units_id.unit_number}}</span></span>
+                    <span class="col notifiMsgSpan">
+                        
+
+
+                     <span class="col text-wrapTaskManagerList notifiMsgTextSpan" ng-if="message.tasks_id.task_type==1">
+                        <span class="taskMngrListMainHead">Task Type:</span> Work Task
+                        <span class="right notifiCircleTaskList " style="float: right;" ng-if="message.unreadthreadVal > 0">{{message.unreadthreadVal}}</span>
+                    </span>
+                    <span class="col text-wrapTaskManagerList notifiMsgTextSpan" ng-if="message.tasks_id.task_type==2">
+                        <span class="taskMngrListMainHead">Task Type: </span> Estimate Task
+                        <span class="right notifiCircleTaskList " style="float: right;" ng-if="message.unreadthreadVal > 0">{{message.unreadthreadVal}}</span>
+                    </span>
+
+
+                   
+                        
+                        <!-- <span style="float: left;">Task Title:{{message.tasks_id.title | truncate:17}} 
+                                             </span> -->
+                    <!-- <span class="col text-wrapTaskManagerList notifiMsgTextSpan" ng-if="message.tasks_id.task_type==1">
+                        <span class="taskMngrListHead">Task Type:</span> Work Task
+                    </span>
+                    <span class="col text-wrapTaskManagerList notifiMsgTextSpan" ng-if="message.tasks_id.task_type==2">
+                        <span class="taskMngrListHead">Task Type: </span> Estimate Task
+                    </span> -->
+                        
+
+                         <span class="col text-wrapTaskManagerList notifiMsgTextSpan">
+                        <span class="taskMngrListHead">Task Title :</span>
+                         {{message.tasks_id.title | truncate:17}} 
+                                 <span ng-if="message.tasks_id.is_completed==false && message.tasks_id.task_status==1" class="right taskProgressText" style="float: right;">In progress</span>
+                    <span class="right taskCompletedText" ng-if="message.tasks_id.task_status==2" style="float: right;">Completed</span>
+                    <span class="right taskClosedText" ng-if="message.tasks_id.task_status==3" style="float: right;">Closed</span>
+                    </span>
+
+                    
+                    </span>
+                    <span class="col text-wrapTaskManagerList notifiMsgTextSpan">
+                        <span class="taskMngrListHead">Assigned To:</span>
+                         {{message.tasks_id.assigned_to.firstname}} {{message.tasks_id.assigned_to.lastname}}
+
+                    </span>
+                    <span class="col text-wrapTaskManagerList notifiMsgTextSpan">
+                        <span class="taskMngrListHead">Finish Before Date: </span>
+                    {{message.tasks_id.finish_before}}
+                    <!-- <span class="right notifiCircleTaskList " style="float: right;" ng-if="message.unreadthreadVal > 0">{{message.unreadthreadVal}}</span> --></span>
+                    <span ng-if="message.tasks_id.task_status==2" class="col text-wrapTaskManagerList notifiMsgTextSpan">
+                        <span class="taskMngrListHead">Task Complete Date: </span>
+                        {{message.tasks_id.task_complete_date}}
+                    </span>
+                    <span ng-if="message.tasks_id.task_status==3" class="col text-wrapTaskManagerList notifiMsgTextSpan">
+                        <span class="taskMngrListHead">Task Closed Date: </span>        {{message.tasks_id.task_close_date}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" ng-show="noMoreItemsAvailable && (page_number != '01' || page_number == '0')">
+            <span> No more notifications to load</span>
+        </div>
+        <ion-infinite-scroll immediate-check="false" ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="5%"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

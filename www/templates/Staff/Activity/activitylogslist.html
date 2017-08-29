@@ -1,0 +1,86 @@
+<ion-view class="whiteoverlayforHome" cache-view="false" ng-controller="HeaderStaffCtrl">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback('1')"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <!-- <h1 class="title" style="color:white;">{{headerSpec}}</h1> -->
+        <ion-title style="color:white;">Activities</ion-title>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+    </ion-nav-buttons>
+    <ion-header-bar class="bar bar-subheader subheadercolor ns-feed-subheader_staff">
+        <button class="left button button-icon ion-android-search white padding-none" ng-click="showFilter(1)"></button>
+        <!-- <button ng-show="!searchShow" class="button button-icon ion-android-search left white" ng-click="toggleSearch()"></button> -->
+        <h1 ng-if="!searching" class="title" style="color:white;float: right;">Staff Activity</h1>
+        <!-- <h1 ng-if="!searching" class="title white right">Notifications</h1> -->
+        <h1 ng-if="searching" class="title white right">Total Records : {{totalrecords}}</h1>
+        <h1 ng-show="searchShow" class="searchBarDiv">
+
+            <div class="row" style="padding:0px">
+                <div class="col col-80" style="padding:0px">
+                    <input class="searchBarInput" type="text" ng-model="search.title" placeholder="Search" ng-change="scrollopt()">
+                </div>
+                <div class="col col-10" style="padding:0px">
+                    <button ng-if="search.title.length == 0 || search.title == undefined" style="color: #fff;" class="button button-icon ion-ios-close"
+                        type="submit" ng-click="toggleSearch()"></button>
+                    <button ng-if="search.title.length > 0" style="color: #fff;" class="button button-icon ion-ios-checkmark" type="submit" ng-click="searchResult()"></button>
+                </div>
+                <div class="col col-10" style="padding:0px">
+                    <button ng-if="search.title.length > 0" style="color: #fff;" class="button button-icon ion-ios-close" type="submit" ng-click="clearsearchfield()"></button>
+                </div>
+            </div>
+        </h1>
+
+        <a href="javascript:void(0)" ng-click="goToAddActivity();">
+            <button ng-show="!searchShow" class="button button-icon ion-plus right white"></button>
+        </a>
+    </ion-header-bar>
+    <ion-content class="has-subheader-newsfeed has-header has-subheader" ng-init="changeTab('4','3',false);getStaffDynamicFeature()">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getList(10,1, true)"></ion-refresher>
+        <ion-list class="list poll-section" style="border: 0 none;text-align: center;color: white;" can-swipe="true">
+            <ion-item class="item  poll-item" ng-show="activities.length == 0" style="width: auto;">
+                No activities <br><br>
+            </ion-item>
+        </ion-list>
+
+        <ion-list class="list poll-section" style="border: 0 none;" can-swipe="true" ng-show="activities.length != 0">
+            <ion-item class="item  poll-item" ng-repeat="activity in activities" ng-click="showMyactivityDetails(activity)">
+                <div class="profile-img-section">
+                    <div style="width: 50px;" ng-if="activity.created_by.profile_img == undefined || activity.created_by.profile_img == null">
+                        <div class="markStatus-staff" style="border-radius:50%;width:55px;height:55px;">
+                            <ionic-letter-avatar data="{{activity.created_by.firstname | limitTo :1}}{{activity.created_by.lastname | limitTo :1}}" bkcolor="#2c3e50"
+                                shape="round" charcount="2"></ionic-letter-avatar>
+                        </div>
+                    </div>
+                    <div style="width: 50px;" ng-if="activity.created_by.profile_img != undefined && activity.created_by.profile_img != null">
+                        <img ng-src="{{srcImage || host_url_global+'/'+activity.created_by.profile_img }}" onerror="this.src='img/placeholderImg.png'"
+                            class="markStatus-staff" style="border-radius:50%;width:55px;height:55px;">
+                    </div>
+                </div>
+                <div>
+                    <div class="poll-date notifiDate" style=" margin-left: -25px;">
+                        <span for="">{{activity.created| dateformat}}</span>
+                    </div>
+                    <div>
+                        <span class="poll-author text-wrap notifiMsgSpan" style="width: 55%;text-transform: capitalize;">{{activity.created_by.firstname}} {{activity.created_by.lastname}}</span>
+                        <span class="poll-author text-wrap notifiMsgSpan" style="float: right; float: right; margin: 0px; padding-right: 13px;">
+                            <span style="color: red !important;" ng-show="activity.type == 2">Incident</span>
+                        <span style="color: green !important;" ng-show="activity.type == 1">Normal</span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="poll-author text-wrap notifiMsgSpan" style="width: 55%;">{{activity.title}}</span>
+                    </div>
+                    <div class="text-wrap notifiMsgTextSpan" style="padding-left:83px;">{{activity.content | truncate:65}}</div>
+                    <div class="notifiCountTabPage" ng-show="activity.count && activity.count > 0" style="    margin: 0;padding: 2% 6%;">
+                        <div class="notifiCircleTab">{{activity.count}}</div>
+                    </div><br>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll immediate-check="false" ng-if="!noMoreItemsAvailable" on-infinite="loadMoreList()" distance="5%"></ion-infinite-scroll>
+        <div class="text-center" ng-show="noMoreItemsAvailable && (page_number != '01' || page_number == '0') && (activities.length != 0)"
+            style="    color: white; background: rgba(1,1,1,0.4);"><br><span> No more activities to load</span><br><br></div>
+    </ion-content>
+</ion-view>

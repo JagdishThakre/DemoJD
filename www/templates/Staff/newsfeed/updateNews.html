@@ -1,0 +1,49 @@
+<ion-view view-title="Management" class="whiteoverlayforHome" ng-controller="HeaderStaffCtrl">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-chevron-left headerbuttonStaff" ng-click="goback()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <ion-title style="color:white;">News Feed</ion-title>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-home headerbuttonStaff" ng-click="showActionsheet()"></button>
+  </ion-nav-buttons>
+  <form class="" name="newsform" novalidate>
+    <ion-content ng-init="loadNewsEdit()">
+      <div class="m-t-small padder-normal">
+        <div class="inputbox">
+          <label class="full-width">Title
+          <span class="required">*</span>
+        </label>
+          <input class="inputtext" ng-model="topic.title" type="text" placeholder="Topic" name="topic" required>
+        </div>
+        <div class="inputbox">
+          <label>Descriptions:</label>
+          <textarea elastic class="inputtext workorder-desc" ng-model="topic.description" placeholder="Descriptions"></textarea>
+        </div>
+        <div class="row">
+          <div class="col col-50">
+            <button class="button button-block icon-left ion-camera" ng-click="getclicked()">Camera</button>
+          </div>
+          <div class="col col-50">
+            <button class="button button-block icon-left ion-image" ng-click="getselect()">Gallery</button>
+          </div>
+        </div>
+        <div class="image-border2" ng-repeat="gImg in topic.existinImages track by $index" ng-if="gImg != undefined" ng-show="gImg != undefined">
+          <img style="display: inline-block;float: left;height: 100%;width: 100%;" ng-src="{{host_url+'/'+gImg.url}}" ng-click="openModal(host_url+'/'+gImg.url)">
+          <i style="margin-top: -120%;width: 17%;display: inline-flex;float: right;font-size: 23px;" class="icon ion-close-circled"
+            ng-click="deleteImg($index,gImg._id)">&nbsp</i>
+        </div>
+        <div class="image-border2" ng-repeat="image in topic.photos track by $index" ng-if="image != undefined" ng-show="image != undefined">
+          <img style="display: inline-block;float: left;height: 100%;width: 100%;" ng-src="{{image}}" ng-click="openModal(image)">
+          <i style="margin-top: -120%;width: 17%;display: inline-flex;float: right;font-size: 23px;" class="icon ion-close-circled"
+            ng-click="removeImg($index)">&nbsp</i>
+        </div>
+      </div>
+    </ion-content>
+    <ion-footer-bar class="bar bar-footer padding-none">
+      <button class="button danger-btn" ng-click="goback()">Cancel</button>
+      <button class="button black-btn news-send-btn" ng-click="UpdateNews()" ng-disabled="newsform.$invalid">Update</button>
+    </ion-footer-bar>
+  </form>
+  </ioni-view>
